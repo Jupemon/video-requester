@@ -5,22 +5,15 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Signin from './Components/Signin/Signin';
-import Register from './Components/Register/Register';
+import { GoogleLogin } from 'react-google-login';
 import Home from './Components/Home/Home';
 import ViewProfile from './Components/ViewProfile/ViewProfile';;
 
 function App() {
   return (<Router>
     <Switch>
-    <Route path="/signin">
-      <Signin />
-    </Route>
     <Route path="/viewprofile">
       <ViewProfile />
-    </Route>
-    <Route path="/register">
-      <Register />
     </Route>
     <Route path="/">
       <Home />
