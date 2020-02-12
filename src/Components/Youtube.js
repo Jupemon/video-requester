@@ -18,7 +18,8 @@ class Youtube extends Component {
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
         else { // if script already exists, load video directly
-            console.log("script has not been loaded")
+            console.log("script alraedy loaded")
+            this.loadVideo();
         }
 
     }

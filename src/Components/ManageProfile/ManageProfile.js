@@ -3,11 +3,12 @@ import {Button, Container, Col, Row, Jumbotron, Card} from 'react-bootstrap/';
 import './ManageProfile.css';
 import Youtube from '../Youtube';
 import VideoRequest from '../VideoRequest';
+import RequestInfo from '../RequestsInfo';
 
 class ManageProfile extends Component {
     state = { 
         amountOfBoxes : [],
-        renderedBoxes : ["242"],
+        renderedBoxes : ["xb3YBX0_IN4", ],
         data : false
      }
 
@@ -15,7 +16,7 @@ class ManageProfile extends Component {
      testFunc = () => {
          console.log("ire")
          let renderedBoxes = this.state.renderedBoxes;
-         renderedBoxes.push("hom")
+         renderedBoxes.push("GhHBrlCMJBI")
          this.setState({renderedBoxes : renderedBoxes})
      }
 
@@ -23,10 +24,32 @@ class ManageProfile extends Component {
 
         const data = {
             userName : "Jupemon",
-            videoRequests : ["please make a video of you dancing in a santa costume", "Make a video of your hopping"],
-            fulfilledRequests : [{
-                request : "please hop around", videoUrl : "Https.yourube.aeiothaeoi"
-            }]
+            videoRequests : [{
+              title : "Create a promotial video",
+              description : "I own a business and need some promotial video for it",
+              videoId : "nWoQ9SZBhWs",
+            },
+            {
+              title: "I need a cat video",
+              description : "I own a cat clinic and need promotial video for it",
+              videoId : ""
+            },            {
+              title: "I want a funny video",
+              description : "I dont care what you film, make me a funny video",
+              videoId : ""
+            },            {
+              title: "Green screen effect",
+              description : "I am a movie maker, i need a green screen explosion effect",
+              videoId : ""
+            },            {
+              title: "Restoraunt promotial video",
+              description : "I own a restoraunt, can you create a video about it",
+              videoId : ""
+            },            {
+              title: "I own a cafee place, please create promo for it",
+              description : "I own a caffe place and need promotial video for it",
+              videoId : ""
+            },]
         } // data which is gotten from database
         this.setState({data : data})
     }
@@ -46,7 +69,7 @@ class ManageProfile extends Component {
   <div className="headline">
   <h1>{data.userName}</h1>
   <p>
-    Basic info about jupemon
+    Basic info about {data.userName}
   </p>
   <p>
     <Button onClick={() => {this.testFunc()}} variant="info">Learn more</Button>
@@ -57,14 +80,10 @@ class ManageProfile extends Component {
   </Row>
   <Row>
   <Col>
-  <Jumbotron>
-  <h1>Video Requests</h1>
-  <p>Max video requests</p>
-  <Button>5/25</Button>
-</Jumbotron>
+  <RequestInfo />
   </Col>
-  {this.state.renderedBoxes.map(box => {
-      return (<Col> <VideoRequest /></Col>)
+  {this.state.data.videoRequests.map(vidReq => {
+      return (<Col> <VideoRequest description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
   })}
   </Row>
 </Container>
