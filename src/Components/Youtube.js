@@ -39,6 +39,7 @@ class Youtube extends Component {
     onPlayerReady = (event) => {
         event.target.a.width = "100%";
         console.log("player is ready to play")
+        this.props.videoRequestLoaded()
     }
 
 

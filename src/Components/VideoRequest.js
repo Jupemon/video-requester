@@ -15,7 +15,6 @@ class VideoRequest extends Component {
         console.log("video id exists")
          this.setState({videoId : this.props.videoId, videoLoaded : true})
        }
-      
      }
 
      checkValidUrl = (ytlink) => { // checks if youtube link is valid, returns the video id if it is
@@ -28,20 +27,26 @@ class VideoRequest extends Component {
       }
      }
 
-     loadVideoUrl = (videoUrl) => { // checks if video url is valid and loads video if it is
+     loadVideoUrl = (videoUrl) => { 
+       // checks if video url is valid and loads video if it is
       this.checkValidUrl(videoUrl) ? this.loadVideo(this.checkValidUrl(videoUrl)) : this.setState({linkInfo : "not valid youtube link"})
+
+      // check if video with the same url already exists
+      this.props.checkDublicateVideoUrl()
+
     }
 
     loadVideo = (videoId) => { // load youtube video from videourl
       console.log(videoId)
       this.setState({videoId : videoId, videoLoaded : true,})
+      this.props.countUnfinishedRequests()
       console.log("loading video")
     }
 
     render() { 
         return ( <div>
             <Card bg={this.state.videoLoaded ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
-            {this.state.videoLoaded ? <Youtube id={this.state.videoId}/> :   <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
+            {this.state.videoLoaded ? <Youtube videoRequestLoaded={this.props.videoRequestLoaded} id={this.state.videoId}/> :   <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>
   <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
   <p>{this.state.linkInfo}</p>

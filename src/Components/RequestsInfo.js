@@ -18,10 +18,9 @@ class RequestInfo extends Component {
   <Card.Body>
     <Card.Title><h1>Video Requests</h1></Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      Here you will get all your video requests which you have 
     </Card.Text>
-    <div>Hello world</div>
+    <div><h2>{this.props.unfinishedRequests} unfilled video requests</h2></div>
   </Card.Body>
 </Card>
         </div> );

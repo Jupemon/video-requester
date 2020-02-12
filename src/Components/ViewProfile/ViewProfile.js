@@ -20,7 +20,7 @@ class ViewProfile extends Component {
         const { loadedProfile, loadingProfile } = this.state
         if (loadedProfile) {
             return (<div>
-                {loadingProfile ? "loading" : "list all of the current video requests from" + loadedProfile.name}
+                {loadingProfile ? "loading" : "allows making new video requests and list all of the current video requests from" + loadedProfile.name}
                 
             </div>)
         }
