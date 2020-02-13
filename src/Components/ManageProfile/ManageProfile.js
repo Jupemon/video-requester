@@ -48,13 +48,18 @@ class ManageProfile extends Component {
      }
 
     checkDublicateVideoUrl = (vUrl) => { // called by videorequest component, checks if videourl with that name already exists
-      //const videoRequests = this.state.data.videoRequests
+      const videoRequests = this.state.data.videoRequests
+      const value = videoRequests.find(i => {
+        return i.videoId === vUrl
+      })
+      return value === undefined ? true : false
       console.log("checks dublicates")
     }
 
 
     youtubeLoaded = () => {
       console.log("youtube iframe api loaded");
+
       this.setState({loadingContent : false})
     }
 
@@ -93,7 +98,7 @@ class ManageProfile extends Component {
             },            {
               title: "I own a cafee place, please create promo for it",
               description : "I own a caffe place and need promotial video for it",
-              videoId : ""
+              videoId : "d_qFKYebJHE"
             },]
         } // data which is gotten from database
         let renderedVideoRequests = this.state.renderedVideoRequests

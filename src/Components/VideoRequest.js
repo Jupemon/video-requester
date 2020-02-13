@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Button} from 'react-bootstrap';
 import Youtube from './Youtube.js'
+import Info from './Info.js';
 
 class VideoRequest extends Component {
     state = { 
@@ -14,6 +15,10 @@ class VideoRequest extends Component {
        if (this.props.videoId.length > 0) { // checks if video request is already fulfilled
         console.log("video id exists")
          this.setState({videoId : this.props.videoId, videoLoaded : true})
+       }
+       
+       if (this.props.viewOnly) { // checks if you are managin or viewing video requests
+        console.log("view only component")
        }
      }
 
@@ -32,7 +37,7 @@ class VideoRequest extends Component {
       this.checkValidUrl(videoUrl) ? this.loadVideo(this.checkValidUrl(videoUrl)) : this.setState({linkInfo : "not valid youtube link"})
 
       // check if video with the same url already exists
-      this.props.checkDublicateVideoUrl()
+      console.log(this.props.checkDublicateVideoUrl())
 
     }
 
@@ -46,7 +51,7 @@ class VideoRequest extends Component {
     render() { 
         return ( <div>
             <Card bg={this.state.videoLoaded ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
-            {this.state.videoLoaded ? <Youtube videoRequestLoaded={this.props.videoRequestLoaded} id={this.state.videoId}/> :   <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
+            {this.state.videoLoaded ? <Youtube videoRequestLoaded={this.props.videoRequestLoaded} id={this.state.videoId}/> : this.props.viewOnly? <Info />: <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>
   <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
   <p>{this.state.linkInfo}</p>
