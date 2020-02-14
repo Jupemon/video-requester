@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { Jumbotron, Spinner, Row, Col, Container } from 'react-bootstrap';
 import RequestInfo from '../RequestsInfo';
 import VideoRequest from '../VideoRequest';
+import CreateRequest from './CreateRequest';
 
 class ViewProfile extends Component {
     state = { 
         data : false,
         loadingProfile : false,
         profileFound : false
+     }
+
+     createVideoRequest = () => {
+       console.log("send video request to backend ")
      }
 
 
@@ -22,7 +27,7 @@ class ViewProfile extends Component {
         const data = { // placeholder data, the real data will be from database
             userName : "jupemon",
             videoRequests : [{
-              title : "Create a promotial video",
+              title : "Create a promotial video for a lets",
               description : "I own a business and need some promotial video for it",
               videoId : "nWoQ9SZBhWs",
             },
@@ -100,6 +105,9 @@ class ViewProfile extends Component {
                 <Row>
                 <Col>
                 <RequestInfo unfinishedRequests={this.state.unfinishedRequests}/>
+                </Col>
+                <Col>
+                <CreateRequest />
                 </Col>
                 {this.state.data.videoRequests.map(vidReq => {
                     return (<Col> <VideoRequest viewOnly={true} checkDublicateVideoUrl={this.checkDublicateVideoUrl} videoRequestLoaded={this.videoRequestLoaded} countUnfinishedRequests={this.countUnfinishedRequests} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)

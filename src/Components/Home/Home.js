@@ -6,13 +6,21 @@ import { Jumbotron, Button } from 'react-bootstrap';
 class Home extends Component {
 
     state = { 
-        loggedIn : true,
+        loggedIn : false,
 
      }
 
-     logIn = () => { // login happens checks if user already exists in the database, create a new profile if not
+     logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
         console.log("login success");
-        this.setState({loggedIn : true})
+        console.log(googleUser);
+        /*
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());*/
+
         
      }
 
@@ -24,10 +32,9 @@ class Home extends Component {
         if (!this.state.loggedIn) {
             return ( <div>
                 <Jumbotron>
-  <h1>Hello, world!</h1>
+  <h1>Requstenator</h1>
   <p>
-    This is a simple hero unit, a simple jumbotron-style component for calling
-    extra attention to featured content or information.
+  Create and sell custom video content for companies!
   </p>
   <p>
   <LoginButton logInFailure={this.logInFailure} logIn={this.logIn}/>

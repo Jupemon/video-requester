@@ -3,9 +3,9 @@ import {GoogleLogin} from 'react-google-login';
 
 const LoginButton = (props) => { // handles the google login 
     return (<GoogleLogin
-        clientId="317396825022-qi6q964ae2t2mv5vbg3eg9lu32hkuba5.apps.googleusercontent.com"
+        clientId={process.env.REACT_APP_CLIENT_ID}
         buttonText="Login"
-        onSuccess={() => {props.logIn()}}
+        onSuccess={(googleUser) => {props.logIn(googleUser)}}
         onFailure={() => {props.logInFailure()}}
         cookiePolicy={'single_host_origin'}
       />)
