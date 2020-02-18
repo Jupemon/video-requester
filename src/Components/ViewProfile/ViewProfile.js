@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { Jumbotron, Spinner, Row, Col, Container } from 'react-bootstrap';
 import RequestInfo from '../RequestsInfo';
-import VideoRequest from '../VideoRequest';
+import VideoRequest from '../VideoRequest/VideoRequest';
 import CreateRequest from './CreateRequest';
 
 class ViewProfile extends Component {
     state = { 
+        creatingVideoRequest : false,
         data : false,
         loadingProfile : false,
         profileFound : false
      }
 
-     createVideoRequest = () => {
+     createVideoRequest = (title, description) => {
+       this.setState({creatingVideoRequest : true})
        console.log("send video request to backend ")
+       console.log(title, description)
      }
 
 
@@ -107,7 +110,7 @@ class ViewProfile extends Component {
                 <RequestInfo unfinishedRequests={this.state.unfinishedRequests}/>
                 </Col>
                 <Col>
-                <CreateRequest />
+                <CreateRequest creatingVideoRequest={this.state.creatingVideoRequest} createVideoRequest={this.createVideoRequest}/>
                 </Col>
                 {this.state.data.videoRequests.map(vidReq => {
                     return (<Col> <VideoRequest viewOnly={true} checkDublicateVideoUrl={this.checkDublicateVideoUrl} videoRequestLoaded={this.videoRequestLoaded} countUnfinishedRequests={this.countUnfinishedRequests} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)

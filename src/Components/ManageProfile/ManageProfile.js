@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Container, Col, Row, Jumbotron, Card, Spinner} from 'react-bootstrap/';
 import './ManageProfile.css';
-import Youtube from '../Youtube';
-import VideoRequest from '../VideoRequest';
+import VideoRequest from '../VideoRequest/VideoRequest';
 import RequestInfo from '../RequestsInfo';
 
 class ManageProfile extends Component {
@@ -46,16 +45,6 @@ class ManageProfile extends Component {
        this.setState({renderedVideoRequests, loadingIndex})
 
      }
-
-    checkDublicateVideoUrl = (vUrl) => { // called by videorequest component, checks if videourl with that name already exists
-      const videoRequests = this.state.data.videoRequests
-      const value = videoRequests.find(i => {
-        return i.videoId === vUrl
-      })
-      return value === undefined ? true : false
-      console.log("checks dublicates")
-    }
-
 
     youtubeLoaded = () => {
       console.log("youtube iframe api loaded");
@@ -140,7 +129,7 @@ class ManageProfile extends Component {
   <RequestInfo unfinishedRequests={this.state.unfinishedRequests}/>
   </Col>
   {this.state.data.videoRequests.map(vidReq => {
-      return (<Col> <VideoRequest checkDublicateVideoUrl={this.checkDublicateVideoUrl} videoRequestLoaded={this.videoRequestLoaded} countUnfinishedRequests={this.countUnfinishedRequests} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
+      return (<Col> <VideoRequest userName={data.userName} videoRequestLoaded={this.videoRequestLoaded} countUnfinishedRequests={this.countUnfinishedRequests} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
   })}
   </Row>
 </Container>
