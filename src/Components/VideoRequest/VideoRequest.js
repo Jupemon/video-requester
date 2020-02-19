@@ -5,7 +5,7 @@ import Info from './Info.js';
 
 class VideoRequest extends Component {
     state = { 
-      loadingData : true,
+      loadingData : false,
       videoLoaded : false,
       videoId : "",
       linkInfo : "Insert a youtube video link here",
@@ -33,7 +33,9 @@ class VideoRequest extends Component {
       }
      }
 
-     fulfillRequest = () => { // once valid url send a requst to backend
+     fulfillRequest = (videoId) => { // once valid url send a requst to backend
+      let { linkInfo } = this.state.linkInfo;
+      this.setState({loadingData : true})
       console.log("sending request")
       console.log(this.props.userName)
       fetch("http://localhost:3001/fulfillrequest", {
@@ -42,7 +44,7 @@ class VideoRequest extends Component {
           'Content-Type' : "application/json"
         },
         body : JSON.stringify({
-          videoUrl : this.state.videoId,
+          videoId : videoId,
           username : this.props.userName
           
         })
@@ -54,14 +56,23 @@ class VideoRequest extends Component {
         }
         else {
           console.log("something went wrong with the request")
+          linkInfo = "Something went "
+          
         }
+        this.setState({loadingData : false})
+      })
+      .catch(er => {
+        console.log(er)
+        linkInfo = "Unable to connect to server"
+        this.setState({loadingData : false, linkInfo})
       })
      }
 
      loadVideoUrl = (videoUrl) => {  // validate url
-      const isValid = this.checkValidUrl(videoUrl)
+      const isValid = this.checkValidUrl(videoUrl) // contains false if not valid url, contains the valid url otherwise
       if (isValid) {
-        this.loadVideo(isValid)
+        this.fulfillRequest(isValid)
+        //this.loadVideo(isValid)
       }
       else {
         this.setState({linkInfo : "not valid youtube link"})
@@ -87,7 +98,6 @@ class VideoRequest extends Component {
   <div style={{position:"absolute", right:"80px", top:"175px"}}>
   <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
   <p>{this.state.linkInfo}</p>
-  <button onClick={()=> {this.fulfillRequest()}}>Testing button</button>
   </div>
   </div>}
 
