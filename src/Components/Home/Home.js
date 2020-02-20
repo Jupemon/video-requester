@@ -6,21 +6,16 @@ import { Jumbotron, Button } from 'react-bootstrap';
 class Home extends Component {
 
     state = { 
+        isLoading : false,
         loggedIn : false,
         errorInfo : ""
      }
 
      logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
-        console.log("login success");
-        console.log(googleUser); // get data from this and send it to server
 
-        const email = googleUser.Qt.zu
-        const firstName = googleUser.Qt.IW
-        const lastName = googleUser.Qt.IU;
+        this.setState({isLoading : true})
+
         const token_id = googleUser.tokenId;
-
-        console.log(email, firstName, lastName)
-        console.log("id token", googleUser.tokenId)
 
         fetch("http://localhost:3001/signin", {
             method : "POST",
@@ -32,21 +27,24 @@ class Home extends Component {
               
             })
           }).then(res => {
-            if (res.status === 200) {
-              res.json().then(data => {
-                console.log("data is here", data)
-              })
+            if (res.status === 200) { // user alredy exists
+              this.setState({loggedIn : true})
+            }
+            else if (res.status === 201) { // new user created
+              this.setState({loggedIn : true})
             }
             else {
               console.log("no bueno status is not 200 ok")
               this.setState({errorInfo : "Something went wrong while signin in"})
-            }
-            this.setState({loadingData : false})
+            }  
           })
           .catch(er => {
             console.log(er)
             this.setState({errorInfo : "Couldn't connect to the server"})
             console.log("yo man, there is an error connecting to server")
+          })
+          .finally(() => {
+            this.setState({isLoading : false})
           })
         //this.setState({loggedIn : true})
         /*const name = googleUser
@@ -68,7 +66,7 @@ class Home extends Component {
   Create and sell custom video content for companies!
   </p>
   <p>
-  <LoginButton logInFailure={this.logInFailure} logIn={this.logIn}/>
+  <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
   </p>
   <p style={{color:"red"}}>{this.state.errorInfo}</p>
 </Jumbotron>
