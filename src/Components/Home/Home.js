@@ -8,7 +8,8 @@ class Home extends Component {
     state = { 
         isLoading : false,
         loggedIn : false,
-        errorInfo : ""
+        errorInfo : "",
+        data : false
      }
 
      logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
@@ -28,10 +29,15 @@ class Home extends Component {
             })
           }).then(res => {
             if (res.status === 200) { // user alredy exists
-              this.setState({loggedIn : true})
+              res.json().then(data => {
+                this.setState({loggedIn : true, data : data})
+              })
             }
             else if (res.status === 201) { // new user created
-              this.setState({loggedIn : true})
+              res.json().then(data => {
+                console.log(data)
+                this.setState({loggedIn : true, data : data})
+              })
             }
             else {
               console.log("no bueno status is not 200 ok")
@@ -63,7 +69,7 @@ class Home extends Component {
                 <Jumbotron>
   <h1>Requstenator</h1>
   <p>
-  Create and sell custom video content for companies!
+  Create and sell custom video content for your audience!
   </p>
   <p>
   <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
@@ -74,7 +80,7 @@ class Home extends Component {
         }
         else if (this.state.loggedIn) {
             return <div>
-                <ManageProfile />
+                <ManageProfile data={this.state.data}/>
             </div>
         }
     }

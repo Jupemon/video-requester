@@ -13,14 +13,6 @@ class ManageProfile extends Component {
         data : false
      }
 
-
-     testFunc = () => {
-         console.log("ire")
-         let renderedBoxes = this.state.renderedBoxes;
-         renderedBoxes.push("GhHBrlCMJBI")
-         this.setState({renderedBoxes : renderedBoxes})
-     }
-
      countUnfinishedRequests = () => { // counts how many video requests are unfulfilled from data
       const videoRequests =  this.state.data.videoRequests
       var count = 0;
@@ -90,9 +82,8 @@ class ManageProfile extends Component {
               videoId : "d_qFKYebJHE"
             },]
         } // data which is gotten from database
-        let renderedVideoRequests = this.state.renderedVideoRequests
-        renderedVideoRequests.push(data.videoRequests[0])
-        this.setState({data : data, renderedVideoRequests})
+        console.log(this.props.data, "DATA GOTTEN FROM HOME COMPONENT")
+        this.setState({data :data })
     }
 
     render() { 
