@@ -23,7 +23,7 @@ class RequestInfo extends Component {
     <Card.Text>
       The price for a custom clip is : 5e
     </Card.Text>
-    <div><h2>{this.props.unfinishedRequests} unfilled video requests</h2></div>
+    <div><h2>{this.props.unfinishedRequests}/20 unfilled video requests</h2></div>
   </Card.Body>
 </Card>
         </div> );

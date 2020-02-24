@@ -9,81 +9,40 @@ class ManageProfile extends Component {
         loadingContent : true,
         loadingIndex : 0,
         unfinishedRequests : 0,
-        renderedVideoRequests : [],
         data : false
      }
 
-     countUnfinishedRequests = () => { // counts how many video requests are unfulfilled from data
-      const videoRequests =  this.state.data.videoRequests
-      var count = 0;
-      for(var i = 0; i < videoRequests.length; ++i){
-        if(!videoRequests[i].videoId.length > 0)
-        count++;
-      }
-      this.setState({unfinishedRequests : count})
-     }
-
-     videoRequestLoaded = () => { // fires once an video request component has been fully loaded
-       console.log("component loaded, render the next") // render the next component
-       let loadingIndex = this.state.loadingIndex;
-       const videoRequests = this.state.data.videoRequests
-       let renderedVideoRequests =  this.state.renderedVideoRequests;
-
-       if (videoRequests[loadingIndex] !== undefined) {
-        renderedVideoRequests.push(videoRequests[loadingIndex])
-        loadingIndex++;
-       }
-
-       this.setState({renderedVideoRequests, loadingIndex})
-
-     }
-
-    youtubeLoaded = () => {
+    youtubeLoaded = () => { // fires once youtube script is loaded
       console.log("youtube iframe api loaded");
 
       this.setState({loadingContent : false})
     }
 
-    componentDidMount() { // gets user data from database
+    loadYoutube = () => { // loads youtube script
 
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-    
-        window.onYouTubeIframeAPIReady = this.youtubeLoaded; // once youtube video is done loading call loadvideo function
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
 
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        const data = { // placeholder data, the real data will be from database
-            userName : "Jupemon",
-            videoRequests : [{
-              title : "Create a promotial video",
-              description : "I own a business and need some promotial video for it",
-              videoId : "nWoQ9SZBhWs",
-            },
-            {
-              title: "I need a cat video",
-              description : "I own a cat clinic and need promotial video for it",
-              videoId : "-5tHiZACxbI"
-            },            {
-              title: "I want a funny video",
-              description : "I dont care what you film, make me a funny video",
-              videoId : ""
-            },            {
-              title: "Green screen effect",
-              description : "I am a movie maker, i need a green screen explosion effect",
-              videoId : ""
-            },            {
-              title: "Restoraunt promotial video",
-              description : "I own a restoraunt, can you create a video about it",
-              videoId : ""
-            },            {
-              title: "I own a cafee place, please create promo for it",
-              description : "I own a caffe place and need promotial video for it",
-              videoId : "d_qFKYebJHE"
-            },]
-        } // data which is gotten from database
-        console.log(this.props.data, "DATA GOTTEN FROM HOME COMPONENT")
-        this.setState({data :data })
+      window.onYouTubeIframeAPIReady = this.youtubeLoaded; // once youtube video is done loading call loadvideo function
+
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    parseVideoRequests = (videoRequests) => {
+      return videoRequests.map(vr => {
+        return JSON.parse(vr)
+      })
+    }
+
+    componentDidMount() { // loads youtube & parse data
+        let data = this.props.data
+        this.loadYoutube()
+        data.videorequests = this.parseVideoRequests(this.props.data.videorequests)
+        
+        // data which is gotten from database
+        console.log(data, "parsed data")
+        this.setState({data : data})
     }
 
     render() { 
@@ -107,9 +66,9 @@ class ManageProfile extends Component {
   <Col>
   <Jumbotron>
   <div className="headline">
-  <h1>{data.userName}</h1>
+  <h1>{data.firstname}</h1>
   <p>
-    Basic info about {data.userName}
+    Basic info about {data.firstname}
   </p>
   </div>
 </Jumbotron>
@@ -119,8 +78,8 @@ class ManageProfile extends Component {
   <Col>
   <RequestInfo unfinishedRequests={this.state.unfinishedRequests}/>
   </Col>
-  {this.state.data.videoRequests.map(vidReq => {
-      return (<Col> <VideoRequest userName={data.userName} videoRequestLoaded={this.videoRequestLoaded} countUnfinishedRequests={this.countUnfinishedRequests} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
+  {this.state.data.videorequests.map(vidReq => {
+      return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
   })}
   </Row>
 </Container>

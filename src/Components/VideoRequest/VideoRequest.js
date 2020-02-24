@@ -5,6 +5,7 @@ import Info from './Info.js';
 
 class VideoRequest extends Component {
     state = { 
+      requestFulfilled : false,
       loadingData : false,
       videoLoaded : false,
       videoId : "",
@@ -12,13 +13,12 @@ class VideoRequest extends Component {
      }
 
 
-     componentDidMount() {
-       if (this.props.videoId.length > 0) { // checks if video request is already fulfilled
-        console.log("video id exists")
-         this.setState({videoId : this.props.videoId, videoLoaded : true})
+     componentDidMount() { // check if component is view only & check if request already fulfilled
+       if (this.props.videoId) {
+         this.setState({videoId : this.props.videoId, requestFulfilled : true})
        }
        
-       if (this.props.viewOnly) { // checks if you are managin or viewing video requests
+       if (this.props.viewOnly) { // checks if you are fulfilling or viewing video requests
         console.log("view only component")
        }
      }
@@ -33,11 +33,10 @@ class VideoRequest extends Component {
       }
      }
 
-     fulfillRequest = (videoId) => { // once valid url send a requst to backend
+     sendData = (videoId) => { // Send a post request to backend
       let { linkInfo } = this.state.linkInfo;
       this.setState({loadingData : true})
       console.log("sending request")
-      console.log(this.props.userName)
       fetch("http://localhost:3001/fulfillrequest", {
         method : "POST",
         headers : {
@@ -45,21 +44,22 @@ class VideoRequest extends Component {
         },
         body : JSON.stringify({
           videoId : videoId,
-          username : this.props.userName
+          token_id : window.localStorage.getItem("token_id"),
+          requestId : this.props.requestId
           
         })
       }).then(res => {
-        if (res.status === 200) {
+        if (res.status === 201) { // data was accepted, world peace is achieved
           res.json().then(data => {
-            console.log("data", data)
+            this.fulfillRequest(videoId)
           })
         }
         else {
           console.log("something went wrong with the request")
-          linkInfo = "Something went "
+          linkInfo = "Something went wrong"
           
         }
-        this.setState({loadingData : false})
+        this.setState({loadingData : false, linkInfo : linkInfo})
       })
       .catch(er => {
         console.log(er)
@@ -68,11 +68,11 @@ class VideoRequest extends Component {
       })
      }
 
-     loadVideoUrl = (videoUrl) => {  // validate url
+     loadVideoUrl = (videoUrl) => {  // validate youtube video URL
       const isValid = this.checkValidUrl(videoUrl) // contains false if not valid url, contains the valid url otherwise
       if (isValid) {
-        this.fulfillRequest(isValid)
-        //this.loadVideo(isValid)
+        this.sendData(isValid)
+        
       }
       else {
         this.setState({linkInfo : "not valid youtube link"})
@@ -80,17 +80,14 @@ class VideoRequest extends Component {
 
     }
 
-    loadVideo = (videoId) => { // load youtube video from videourl
-      console.log(videoId)
-      this.setState({videoId : videoId, videoLoaded : true,})
-      this.props.countUnfinishedRequests()
-      console.log("loading video")
+    fulfillRequest = (videoId) => { // load youtube video & called dataRequest is ok
+      this.setState({requestFulfilled : true, videoId : videoId})
     }
 
     render() { 
         return ( <div>
-            <Card bg={this.state.videoLoaded ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
-            {this.state.videoLoaded ? <Youtube videoRequestLoaded={this.props.videoRequestLoaded} id={this.state.videoId}/> : this.props.viewOnly? <Info />: this.state.loadingData ? <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
+            <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
+            {this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: this.state.loadingData ? <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>
   <div>Loading</div>
   </div>

@@ -31,12 +31,14 @@ class Home extends Component {
             if (res.status === 200) { // user alredy exists
               res.json().then(data => {
                 this.setState({loggedIn : true, data : data})
+                window.localStorage.setItem('token_id', token_id)
               })
             }
             else if (res.status === 201) { // new user created
               res.json().then(data => {
                 console.log(data)
                 this.setState({loggedIn : true, data : data})
+                window.localStorage.setItem('token_id', token_id)
               })
             }
             else {
