@@ -23,45 +23,36 @@ class ViewProfile extends Component {
        console.log("howd")
      }
 
-    componentDidMount () {
-
-      console.log("mounting", window.location.hash); // does a get requets with hash to see if there is 
-
-        const data = { // placeholder data, the real data will be from database
-            userName : "jupemon",
-            videoRequests : [{
-              title : "Create a promotial video for a lets",
-              description : "I own a business and need some promotial video for it",
-              videoId : "nWoQ9SZBhWs",
-            },
-            {
-              title: "I need a cat video",
-              description : "I own a cat clinic and need promotial video for it",
-              videoId : ""
-            },            {
-              title: "I want a funny video",
-              description : "I dont care what you film, make me a funny video",
-              videoId : ""
-            },            {
-              title: "Green screen effect",
-              description : "I am a movie maker, i need a green screen explosion effect",
-              videoId : ""
-            },            {
-              title: "Restoraunt promotial video",
-              description : "I own a restoraunt, can you create a video about it",
-              videoId : ""
-            },            {
-              title: "I own a cafee place, please create promo for it",
-              description : "I own a caffe place and need promotial video for it",
-              videoId : ""
-            },]
-        } // data which is gotten from database
-        if ("#" + data.userName === window.location.hash) {
-          console.log("user found")
-          this.setState({profileFound : true})
+     getProfile = (userId) => {
+       console.log("am i happeninig?")
+      fetch(`http://localhost:3001/getprofile/${userId}`).then(r => {
+        if (r.status === 200) {
+          r.json().then(data => {
+            
+            data = this.parseData(data)
+            console.log("this was gotten", data)
+            this.setState({data : this.parseData(data)})
+          })
         }
-        this.setState({data : data})
+        else { // profile not found
+          console.log("something went wrong")
+        }
+      })
     }
+
+    parseData = (arr) => { // fix this once you get back
+      return arr.map(vr => {
+        return JSON.parse(vr)
+      })
+    }
+
+    componentDidMount () {
+      const userId = window.location.hash.slice(1)
+      console.log("mounting", userId); // does a get requets with hash to see if there is 
+      this.getProfile(userId)
+      
+    }
+
     render() { 
         const { loadingProfile, data, profileFound } = this.state
         if (loadingProfile) {

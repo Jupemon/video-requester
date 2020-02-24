@@ -76,7 +76,7 @@ class ManageProfile extends Component {
   </Row>
   <Row>
   <Col>
-  <RequestInfo unfinishedRequests={this.state.unfinishedRequests}/>
+  <RequestInfo unfinishedRequests={this.state.data.unfinishedRequests} videoPrice={this.state.data.videoPrice}/>
   </Col>
   {this.state.data.videorequests.map(vidReq => {
       return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
