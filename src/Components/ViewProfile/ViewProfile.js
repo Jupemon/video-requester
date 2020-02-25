@@ -6,21 +6,19 @@ import CreateRequest from './CreateRequest';
 
 class ViewProfile extends Component {
     state = { 
+        requestPrice : 0,
+        unfinishedRequests : 0,
         creatingVideoRequest : false,
         data : false,
+        userId : "",
         loadingProfile : false,
         profileFound : false
      }
 
-     createVideoRequest = (title, description) => {
+     createVideoRequest = (title, description) => { // creates another video request, called by createRequest component
        this.setState({creatingVideoRequest : true})
        console.log("send video request to backend ")
        console.log(title, description)
-     }
-
-
-     videoRequestLoaded = () => {
-       console.log("howd")
      }
 
      getProfile = (userId) => {
@@ -31,7 +29,7 @@ class ViewProfile extends Component {
             
             data = this.parseData(data)
             console.log("this was gotten", data)
-            this.setState({data : this.parseData(data)})
+            this.setState({data : data, profileFound : true, userId : userId})
           })
         }
         else { // profile not found
@@ -40,7 +38,7 @@ class ViewProfile extends Component {
       })
     }
 
-    parseData = (arr) => { // fix this once you get back
+    parseData = (arr) => { // parse received videorequests
       return arr.map(vr => {
         return JSON.parse(vr)
       })
@@ -98,13 +96,13 @@ class ViewProfile extends Component {
                 </Row>
                 <Row>
                 <Col>
-                <RequestInfo unfinishedRequests={this.state.unfinishedRequests}/>
+                <RequestInfo unfinishedRequests={this.state.unfinishedRequests} requestPrice={this.state.requestPrice}/>
                 </Col>
                 <Col>
-                <CreateRequest creatingVideoRequest={this.state.creatingVideoRequest} createVideoRequest={this.createVideoRequest}/>
+                <CreateRequest userId={this.state.userId}/>
                 </Col>
-                {this.state.data.videoRequests.map(vidReq => {
-                    return (<Col> <VideoRequest viewOnly={true} checkDublicateVideoUrl={this.checkDublicateVideoUrl} videoRequestLoaded={this.videoRequestLoaded} countUnfinishedRequests={this.countUnfinishedRequests} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
+                {this.state.data.map(vidReq => {
+                    return (<Col> <VideoRequest viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
                 })}
                 </Row>
               </Container>
