@@ -6,7 +6,7 @@ import CreateRequest from './CreateRequest';
 
 class ViewProfile extends Component {
     state = { 
-        requestPrice : 0,
+        requestPrice : "Free",
         unfinishedRequests : 0,
         creatingVideoRequest : false,
         data : false,

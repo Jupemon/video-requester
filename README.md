@@ -1,4 +1,8 @@
 
+## Blog
+
+I wrote a blog post regarding this project : https://jupemon.blogspot.com/2020/02/video-requester-application.html
+
 ## VideoRequester App (Unfinished)
 
-App which allows youtubers to create and sell custom videoclips to their audience. The app will work similarly to Cameo but is designed for youtubers. I will write a more detailed description of the project to my blog once i have a working build. 
+currently working on this, read my blog if you want to learn more...
