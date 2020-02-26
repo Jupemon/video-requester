@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card, Button} from 'react-bootstrap';
 import Youtube from './Youtube.js'
 import Info from './Info.js';
+import './VideoRequest.css'
 
 class VideoRequest extends Component {
     state = { 
@@ -12,7 +13,6 @@ class VideoRequest extends Component {
       linkInfo : "Insert a youtube video link here",
      }
 
-
      componentDidMount() { // check if component is view only & check if request already fulfilled
        if (this.props.videoId) {
          this.setState({videoId : this.props.videoId, requestFulfilled : true})
@@ -21,6 +21,11 @@ class VideoRequest extends Component {
        if (this.props.viewOnly) { // checks if you are fulfilling or viewing video requests
         console.log("view only component")
        }
+       this.props.componentRendered()
+     }
+
+     componentWillAppear() {
+       console.log("appearance")
      }
 
      checkValidUrl = (ytlink) => { // checks if youtube link is valid, returns the video id if it is
@@ -85,7 +90,7 @@ class VideoRequest extends Component {
     }
 
     render() { 
-        return ( <div>
+        return ( <div className="appear">
             <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
             {this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: this.state.loadingData ? <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>

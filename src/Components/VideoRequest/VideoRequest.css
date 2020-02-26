@@ -1,0 +1,9 @@
+.appear {
+    animation-name: appearance;
+    animation-duration: 1s;
+  }
+  
+  @keyframes appearance {
+    from {opacity: 0.1;}
+    to {opacity: 1;}
+  }

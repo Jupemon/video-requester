@@ -6,6 +6,7 @@ import CreateRequest from './CreateRequest';
 
 class ViewProfile extends Component {
     state = { 
+        renderedRequests : [],
         requestPrice : "Free",
         unfinishedRequests : 0,
         creatingVideoRequest : false,
@@ -15,8 +16,15 @@ class ViewProfile extends Component {
         profileFound : false
      }
 
-     createVideoRequest = (title, description) => { // creates another video request, called by createRequest component
-       this.setState({creatingVideoRequest : true})
+     createVideoRequest = (title, description) => { // If video request is added to db, create one locally on the frontend as well with this
+       const data = this.state.data;
+       const vr = {
+         title : title,
+         description : description,
+       }
+       data.unshift(vr)
+       this.setState({data : data})
+       
        console.log("send video request to backend ")
        console.log(title, description)
      }
@@ -42,6 +50,13 @@ class ViewProfile extends Component {
       return arr.map(vr => {
         return JSON.parse(vr)
       })
+    }
+
+
+    componentRendered = (renderedRequest) => { // called by every single rendered request component
+      const renderedRequests = this.state.renderedRequests;
+      renderedRequests.push(renderedRequest)
+      this.setState({ renderedRequests })
     }
 
     componentDidMount () {
@@ -99,10 +114,10 @@ class ViewProfile extends Component {
                 <RequestInfo unfinishedRequests={this.state.unfinishedRequests} requestPrice={this.state.requestPrice}/>
                 </Col>
                 <Col>
-                <CreateRequest userId={this.state.userId}/>
+                <CreateRequest createVideoRequest={this.createVideoRequest} userId={this.state.userId}/>
                 </Col>
                 {this.state.data.map(vidReq => {
-                    return (<Col> <VideoRequest viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
+                    return (<Col> <VideoRequest componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
                 })}
                 </Row>
               </Container>
