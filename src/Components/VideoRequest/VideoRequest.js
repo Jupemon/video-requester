@@ -5,7 +5,11 @@ import Info from './Info.js';
 import './VideoRequest.css'
 
 class VideoRequest extends Component {
-    state = { 
+  constructor(props) {
+    super(props)
+    console.log("component mount is happening")
+    this.state = { 
+      style : {opacity : 1, transition : "1s"},
       requestFulfilled : false,
       loadingData : false,
       videoLoaded : false,
@@ -13,6 +17,7 @@ class VideoRequest extends Component {
       linkInfo : "Insert a youtube video link here",
      }
 
+    }
      componentDidMount() { // check if component is view only & check if request already fulfilled
        if (this.props.videoId) {
          this.setState({videoId : this.props.videoId, requestFulfilled : true})
@@ -22,10 +27,7 @@ class VideoRequest extends Component {
         console.log("view only component")
        }
        this.props.componentRendered()
-     }
-
-     componentWillAppear() {
-       console.log("appearance")
+       setTimeout(() => {console.log("ti tii ti ititii itiitiii", this.props.videoId)}, 2000)
      }
 
      checkValidUrl = (ytlink) => { // checks if youtube link is valid, returns the video id if it is
@@ -90,7 +92,7 @@ class VideoRequest extends Component {
     }
 
     render() { 
-        return ( <div className="appear">
+        return ( <div style={{animation : "appearance 5s"}}>
             <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
             {this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: this.state.loadingData ? <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>

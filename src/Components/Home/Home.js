@@ -67,7 +67,7 @@ class Home extends Component {
 
     render() { 
         if (!this.state.loggedIn) {
-            return ( <div>
+            return ( <div style={{textAlign : "center", marginTop : "290px"}}>
                 <Jumbotron>
   <h1>Requstenator</h1>
   <p>

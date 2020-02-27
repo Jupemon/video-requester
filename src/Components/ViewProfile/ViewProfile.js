@@ -8,6 +8,7 @@ class ViewProfile extends Component {
     state = { 
         renderedRequests : [],
         requestPrice : "Free",
+        totalRequests : 25,
         unfinishedRequests : 0,
         creatingVideoRequest : false,
         data : false,
@@ -22,7 +23,7 @@ class ViewProfile extends Component {
          title : title,
          description : description,
        }
-       data.unshift(vr)
+       data.push(vr)
        this.setState({data : data})
        
        console.log("send video request to backend ")
@@ -53,9 +54,10 @@ class ViewProfile extends Component {
     }
 
 
-    componentRendered = (renderedRequest) => { // called by every single rendered request component
+    componentRendered = () => { // called by every single rendered request component
       const renderedRequests = this.state.renderedRequests;
-      renderedRequests.push(renderedRequest)
+      const data = this.state.data
+      renderedRequests.push(data[renderedRequests.length]) /////// NANANANANAAA
       this.setState({ renderedRequests })
     }
 
@@ -111,14 +113,15 @@ class ViewProfile extends Component {
                 </Row>
                 <Row>
                 <Col>
-                <RequestInfo unfinishedRequests={this.state.unfinishedRequests} requestPrice={this.state.requestPrice}/>
+                <RequestInfo totalRequests={this.state.totalRequests} unfinishedRequests={this.state.unfinishedRequests} requestPrice={this.state.requestPrice}/>
                 </Col>
+
+                {this.state.data.map(vidReq => {
+                    return (<Col> <VideoRequest componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
+                })}
                 <Col>
                 <CreateRequest createVideoRequest={this.createVideoRequest} userId={this.state.userId}/>
                 </Col>
-                {this.state.data.map(vidReq => {
-                    return (<Col> <VideoRequest componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.videoId}/></Col>)
-                })}
                 </Row>
               </Container>
                       </div> );

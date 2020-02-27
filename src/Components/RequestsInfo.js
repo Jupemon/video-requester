@@ -23,7 +23,7 @@ class RequestInfo extends Component {
     <Card.Text>
       The price for a video is : {this.props.requestPrice}
     </Card.Text>
-    <div><h2>{this.props.unfinishedRequests}/20 unfilled video requests</h2></div>
+    <div><h2>{this.props.unfinishedRequests}/{this.props.totalRequests} unfilled video requests</h2></div>
   </Card.Body>
 </Card>
         </div> );
