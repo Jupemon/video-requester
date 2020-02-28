@@ -39,7 +39,6 @@ class ManageProfile extends Component {
         let data = this.props.data
         this.loadYoutube()
         data.videorequests = this.parseVideoRequests(this.props.data.videorequests)
-        
         // data which is gotten from database
         console.log(data, "parsed data")
         this.setState({data : data})
