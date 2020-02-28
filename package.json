@@ -1,6 +1,6 @@
 {
-  "homepage": "https://jupemon.github.io/my-app/requester",
-  "name": "requester",
+  "homepage": "https://jupemon.github.io/video-requester",
+  "name": "video-requester",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
