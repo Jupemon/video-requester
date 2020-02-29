@@ -53,18 +53,25 @@ class ViewProfile extends Component {
       })
     }
 
-
-    componentRendered = () => { // called by every single rendered request component
-      const renderedRequests = this.state.renderedRequests;
-      const data = this.state.data
-      renderedRequests.push(data[renderedRequests.length]) /////// NANANANANAAA
-      this.setState({ renderedRequests })
+    youtubeLoaded = () => { // fires once youtube script is loaded
+      console.log("youtube iframe api loaded");
+      const userId = window.location.hash.slice(1)
+      this.getProfile(userId)
     }
 
-    componentDidMount () {
-      const userId = window.location.hash.slice(1)
-      console.log("mounting", userId); // does a get requets with hash to see if there is 
-      this.getProfile(userId)
+    loadYoutube = () => { // loads youtube script
+
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+
+      window.onYouTubeIframeAPIReady = this.youtubeLoaded; // once youtube video is done loading call loadvideo function
+
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    componentDidMount () {   
+      this.loadYoutube()
       
     }
 

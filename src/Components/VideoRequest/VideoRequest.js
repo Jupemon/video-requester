@@ -26,8 +26,6 @@ class VideoRequest extends Component {
        if (this.props.viewOnly) { // checks if you are fulfilling or viewing video requests
         console.log("view only component")
        }
-       this.props.componentRendered()
-       setTimeout(() => {console.log("ti tii ti ititii itiitiii", this.props.videoId)}, 2000)
      }
 
      checkValidUrl = (ytlink) => { // checks if youtube link is valid, returns the video id if it is

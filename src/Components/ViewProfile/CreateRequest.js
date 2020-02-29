@@ -24,6 +24,7 @@ class CreateRequest extends Component {
          if (r.status === 201) {
            console.log("created a new video request")
            this.setState({infoMessage : "Video requested"})
+           this.props.createVideoRequest(title, description)
            
          }
          else {
@@ -42,7 +43,7 @@ class CreateRequest extends Component {
     <Card.Text>
     <textarea disabled={this.state.loading} onChange={(e) => {this.setState({description : e.currentTarget.value})}} value={description} maxLength="854" style={{resize : "none"}} rows="14.5" cols="40" placeholder="Write a description of the video you want"/>
     </Card.Text>
-    <Button onClick={() => {this.props.createVideoRequest(title, description)}} disabled={this.state.loading} variant="primary">{this.state.loading ? <Spinner animation="border" /> : "Request video"}</Button>
+    <Button onClick={() => {this.createVideoRequest(title, description)}} disabled={this.state.loading} variant="primary">{this.state.loading ? <Spinner animation="border" /> : "Request video"}</Button>
     <p style={{float:"right", color:"red"}}>{this.state.errorMessage}</p>
   </Card.Body>
 </Card>
