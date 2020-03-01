@@ -69,6 +69,7 @@ class ManageProfile extends Component {
   <p>
     Basic info about {data.firstname}
   </p>
+  <p>Suggest videos to this link <a target="blank" href={window.location.href + "viewprofile#" + data.user_id}>{window.location.href + "viewprofile#" + data.user_id}</a></p>
   </div>
 </Jumbotron>
 </Col>

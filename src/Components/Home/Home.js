@@ -18,7 +18,7 @@ class Home extends Component {
 
         const token_id = googleUser.tokenId;
 
-        fetch("http://localhost:3001/signin", {
+        fetch("https://video-requester-backend.herokuapp.com/signin", {
             method : "POST",
             headers : {
               'Content-Type' : "application/json"

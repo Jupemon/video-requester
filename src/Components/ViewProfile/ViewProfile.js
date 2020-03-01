@@ -32,7 +32,7 @@ class ViewProfile extends Component {
 
      getProfile = (userId) => {
        console.log("am i happeninig?")
-      fetch(`http://localhost:3001/getprofile/${userId}`).then(r => {
+      fetch(`https://video-requester-backend.herokuapp.com/getprofile/${userId}`).then(r => {
         if (r.status === 200) {
           r.json().then(data => {
             
@@ -56,7 +56,7 @@ class ViewProfile extends Component {
     youtubeLoaded = () => { // fires once youtube script is loaded
       console.log("youtube iframe api loaded");
       const userId = window.location.hash.slice(1)
-      this.getProfile(userId)
+      this.getProfile(userId) // after youtube script is loaded load profile
     }
 
     loadYoutube = () => { // loads youtube script
