@@ -12,7 +12,8 @@ const popover = (
   );
 class RequestInfo extends Component {
     state = {  }
-    render() { 
+    render() { const {unfulfilledRequestsAmount, fulfilledRequestsAmount, requestsAmount} = this.props
+    console.log(unfulfilledRequestsAmount, fulfilledRequestsAmount, requestsAmount, "WATCH THESE")
         return ( <div>
             <Card style={{ width: '22rem', margin : "auto", marginTop:"25px" }}>
   <Card.Body>
@@ -23,7 +24,7 @@ class RequestInfo extends Component {
     <Card.Text>
       The price for a video is : {this.props.requestPrice}
     </Card.Text>
-    <div><h2>{this.props.unfinishedRequests}/{this.props.totalRequests} unfilled video requests</h2></div>
+    <div><h2>{unfulfilledRequestsAmount}/{requestsAmount} unfilled video requests</h2></div>
   </Card.Body>
 </Card>
         </div> );
