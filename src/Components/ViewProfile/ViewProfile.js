@@ -32,7 +32,7 @@ class ViewProfile extends Component {
 
      getProfile = (userId) => {
        console.log("am i happeninig?")
-      fetch(`https://video-requester-backend.herokuapp.com/getprofile/${userId}`).then(r => {
+      fetch(`http://localhost:3001/getprofile/${userId}`).then(r => {
         if (r.status === 200) {
           r.json().then(data => {
             

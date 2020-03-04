@@ -7,3 +7,19 @@
     from {opacity: 0.1;}
     to {opacity: 1;}
   }
+
+.video-request {
+  width: 22rem;
+  margin: auto;
+  margin-top: 25px;
+  height : 360px;
+  width: 350px;
+  
+}
+
+.top-content {
+}
+
+.bottom-content {
+
+}
