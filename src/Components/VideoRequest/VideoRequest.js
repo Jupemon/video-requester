@@ -4,17 +4,15 @@ import Youtube from './Youtube.js'
 import Info from './Info.js';
 import './VideoRequest.css'
 import Loading from './Loading.js';
-import ViewRequest from './ViewRequest.js';
-import EditRequest from './EditRequest.js';
 
 class VideoRequest extends Component {
   constructor(props) {
     super(props)
     console.log("component mount is happening")
     this.state = { 
-      style : {opacity : 1, transition : "1s"},
+      style : {opacity : 0.0, transition : "1s"},
       requestFulfilled : false,
-      loading : true,
+      loading : false,
       videoId : "",
       linkInfo : "Insert a youtube video link here",
      }
@@ -42,7 +40,7 @@ class VideoRequest extends Component {
 
      sendData = (videoId) => { // Send a post request to backend
       let { linkInfo } = this.state.linkInfo;
-      this.setState({sendingData : true})
+      this.setState({loading : true})
       console.log("sending request")
       fetch("http://localhost:3001/fulfillrequest", {
         method : "POST",
@@ -66,15 +64,15 @@ class VideoRequest extends Component {
           linkInfo = "Something went wrong"
           
         }
-        this.setState({sendingData : false, linkInfo : linkInfo})
       })
       .catch(er => {
         console.log(er)
         linkInfo = "Unable to connect to server"
-        this.setState({sendingData : false, linkInfo})
+        
       })
       .finally((d) => {
-        console.log(d)
+        this.setState({loading : false, linkInfo})
+        console.log(d, "final data")
       })
      }
 
@@ -91,31 +89,16 @@ class VideoRequest extends Component {
     }
 
     fulfillRequest = (videoId) => { // load youtube video & called dataRequest is ok
-      this.setState({requestFulfilled : true, videoId : videoId})
+      let style = this.state.style
+      style = {opacity : 1, transition : "1s"}
+      this.setState({requestFulfilled : true, videoId : videoId, loading : false, style : style})
+
     }
 
     render() { 
-        return (<div>
-          <Card className="video-request" bg={this.state.requestFulfilled ? "success" : "warning"}>
-            {this.state.loading ? 
-              <Loading /> :
-              this.props.viewOnly? <ViewRequest />: <EditRequest />
-            }
-          </Card>
-        </div>)
-
-    }
-}
- 
-export default VideoRequest;
-
-/*        return ( <div style={{animation : "appearance 5s"}}>
-            <Card className="video-request" bg={this.state.requestFulfilled ? "success" : "warning"}>
-            {this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: this.state.sendingData ? <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
-  <div style={{position:"absolute", right:"80px", top:"175px"}}>
-  <div>Loading</div>
-  </div>
-  </div>: <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
+        return ( <div style={this.state.style} className="video-request">
+            <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
+            {this.state.loading ? <Loading /> : this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>
   <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
   <p>{this.state.linkInfo}</p>
@@ -129,4 +112,8 @@ export default VideoRequest;
     </Card.Text>
   </Card.Body>
 </Card>
-        </div> ); */
+        </div> );
+    }
+}
+ 
+export default VideoRequest;
