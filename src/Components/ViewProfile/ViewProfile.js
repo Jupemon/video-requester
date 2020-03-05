@@ -18,12 +18,12 @@ class ViewProfile extends Component {
      }
 
      createVideoRequest = (title, description) => { // If video request is added to db, create one locally on the frontend as well with this
-       const data = this.state.data;
+       const data = this.state.data
        const vr = {
          title : title,
          description : description,
        }
-       data.push(vr)
+       data.videoRequests.push(vr)
        this.setState({data : data})
        
        console.log("send video request to backend ")
@@ -35,21 +35,12 @@ class ViewProfile extends Component {
       fetch(`http://localhost:3001/getprofile/${userId}`).then(r => {
         if (r.status === 200) {
           r.json().then(data => {
-            
-            data = this.parseData(data)
-            console.log("this was gotten", data)
             this.setState({data : data, profileFound : true, userId : userId})
           })
         }
         else { // profile not found
           console.log("something went wrong")
         }
-      })
-    }
-
-    parseData = (arr) => { // parse received videorequests
-      return arr.map(vr => {
-        return JSON.parse(vr)
       })
     }
 
@@ -120,10 +111,10 @@ class ViewProfile extends Component {
                 </Row>
                 <Row>
                 <Col>
-                <RequestInfo totalRequests={this.state.totalRequests} unfinishedRequests={this.state.unfinishedRequests} requestPrice={this.state.requestPrice}/>
+                <RequestInfo requestsAmount={data.requestsAmount} unfulfilledRequestsAmount={data.unfilledRequests} />
                 </Col>
 
-                {this.state.data.map(vidReq => {
+                {this.state.data.videoRequests.map(vidReq => {
                     return (<Col> <VideoRequest componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
                 })}
                 <Col>

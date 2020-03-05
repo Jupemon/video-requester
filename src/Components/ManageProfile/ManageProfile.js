@@ -76,7 +76,7 @@ class ManageProfile extends Component {
   </Row>
   <Row>
   <Col>
-  <RequestInfo unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount} videoPrice={this.state.data.videoPrice}/>
+  <RequestInfo unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
   </Col>
   {this.state.data.videorequests.map(vidReq => {
       return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)

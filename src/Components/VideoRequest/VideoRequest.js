@@ -22,6 +22,9 @@ class VideoRequest extends Component {
        if (this.props.videoId) {
          this.setState({videoId : this.props.videoId, requestFulfilled : true})
        }
+       else {
+         this.fulfillRequest()
+       }
        
        if (this.props.viewOnly) { // checks if you are fulfilling or viewing video requests
         console.log("view only component")
@@ -91,7 +94,13 @@ class VideoRequest extends Component {
     fulfillRequest = (videoId) => { // load youtube video & called dataRequest is ok
       let style = this.state.style
       style = {opacity : 1, transition : "1s"}
-      this.setState({requestFulfilled : true, videoId : videoId, loading : false, style : style})
+      if (videoId) {
+        this.setState({requestFulfilled : true, videoId : videoId, loading : false, style : style})
+      }
+      else {
+        this.setState({loading : false, style : style})
+      }
+
 
     }
 
@@ -100,7 +109,7 @@ class VideoRequest extends Component {
             <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
             {this.state.loading ? <Loading /> : this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
   <div style={{position:"absolute", right:"80px", top:"175px"}}>
-  <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
+  <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/><div>X<div/></div></div>
   <p>{this.state.linkInfo}</p>
   </div>
   </div>}
