@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
-import {Popover, Overlay, Button, OverlayTrigger, Card} from 'react-bootstrap';
+import {Tooltip, Button, OverlayTrigger, Card} from 'react-bootstrap';
 
-const popover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Max video requests</Popover.Title>
-      <Popover.Content>
-      <input type="text" />
-      <Button>Save</Button>
-      </Popover.Content>
-    </Popover>
-  );
+function renderTooltip(props) {
+  if (5===5) {
+    return <Tooltip {...props}>Max amount of requests reached!</Tooltip>
+  }
+  else if(5==3) {
+    return <Tooltip {...props}></Tooltip>
+  }
+  return <Tooltip {...props}>Max amount of requests is 20!</Tooltip>;
+}
+
+const Example = (props) => (
+  <OverlayTrigger
+    placement="right"
+    delay={{ show: 250, hide: 400 }}
+    overlay={renderTooltip}
+  >
+    <Button variant="danger">{props.children}</Button>
+  </OverlayTrigger>
+);
+
+
+
+
+
+
 class RequestInfo extends Component {
     state = {  }
     render() { const {unfulfilledRequestsAmount, fulfilledRequestsAmount, requestsAmount} = this.props
@@ -24,7 +40,7 @@ class RequestInfo extends Component {
     <Card.Text>
       The price for a video is : {this.props.requestPrice ? this.props.requestPrice : "Free"}
     </Card.Text>
-    <div><h2>{unfulfilledRequestsAmount}/{requestsAmount} unfilled video requests</h2></div>
+    <Example><div><h2>{unfulfilledRequestsAmount}/{requestsAmount} unfilled video requests</h2></div></Example>
   </Card.Body>
 </Card>
         </div> );

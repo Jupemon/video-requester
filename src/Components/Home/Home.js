@@ -69,9 +69,9 @@ class Home extends Component {
         if (!this.state.loggedIn) {
             return ( <div style={{textAlign : "center", marginTop : "290px"}}>
                 <Jumbotron>
-  <h1>Requstenator</h1>
+  <h1>Hey youtuber!</h1>
   <p>
-  Create and sell custom video content for your audience!
+  Create youtube videos based on audience suggestions.
   </p>
   <p>
   <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>

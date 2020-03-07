@@ -3,6 +3,7 @@ import {Button, Container, Col, Row, Jumbotron, Card, Spinner} from 'react-boots
 import './ManageProfile.css';
 import VideoRequest from '../VideoRequest/VideoRequest';
 import RequestInfo from '../RequestsInfo';
+import ProfileInfo from './ProfileInfo';
 
 class ManageProfile extends Component {
     state = {
@@ -63,15 +64,7 @@ class ManageProfile extends Component {
 <Container fluid>
   <Row>
   <Col>
-  <Jumbotron>
-  <div className="headline">
-  <h1>{data.firstname}</h1>
-  <p>
-    Basic info about {data.firstname}
-  </p>
-  <p>Suggest videos to this link <a target="blank" href={window.location.href + "viewprofile#" + data.user_id}>{window.location.href + "viewprofile#" + data.user_id}</a></p>
-  </div>
-</Jumbotron>
+  <ProfileInfo firstName={data.firstname} user_id={data.user_id}/>
 </Col>
   </Row>
   <Row>
