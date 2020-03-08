@@ -3,7 +3,7 @@ import {Button, Container, Col, Row, Jumbotron, Card, Spinner} from 'react-boots
 import './ManageProfile.css';
 import VideoRequest from '../VideoRequest/VideoRequest';
 import RequestInfo from '../RequestsInfo';
-import ProfileInfo from './ProfileInfo';
+import EditProfile from './EditProfile';
 
 class ManageProfile extends Component {
     state = {
@@ -64,7 +64,7 @@ class ManageProfile extends Component {
 <Container fluid>
   <Row>
   <Col>
-  <ProfileInfo firstName={data.firstname} user_id={data.user_id}/>
+  <EditProfile firstName={data.firstname} user_id={data.user_id}/>
 </Col>
   </Row>
   <Row>

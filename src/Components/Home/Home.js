@@ -4,24 +4,6 @@ import ManageProfile from '../ManageProfile/ManageProfile';
 import { Jumbotron, Button, Popover, OverlayTrigger } from 'react-bootstrap';
 
 
-
-class Username extends Component {
-  state = { userName :  ""}
-  render() { 
-    return ( <OverlayTrigger trigger="click" placement="right" overlay={<Popover id="popover-basic">
-    <Popover.Title as="h3">Rename username</Popover.Title>
-        <Popover.Content>
-        <input type="text" value={this.state.userName} onChange={(e) => {this.setState({userName : e.currentTarget.value})}}/>
-        <Button>Save</Button>
-        </Popover.Content>
-      </Popover>}>
-        <Button variant="success">{this.state.userName.length <= 0 ? "Username" : this.state.userName}</Button>
-      </OverlayTrigger> );
-  }
-}
-
-
-
 class Home extends Component {
 
     state = { 
@@ -88,10 +70,9 @@ class Home extends Component {
         if (!this.state.loggedIn) {
             return ( <div style={{textAlign : "center", marginTop : "290px"}}>
                 <Jumbotron>
-                  <Username />
   <h1>Hey youtuber!</h1>
   <p>
-  Create youtube videos based on audience suggestions.
+  Create youtube videos based on audience suggestions!
   </p>
   <p>
   <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
