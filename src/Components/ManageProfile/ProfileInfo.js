@@ -1,5 +1,29 @@
-import React, { Component } from 'react';
-import { Jumbotron, Button } from 'react-bootstrap';
+import React, { Component, useState, useRef } from 'react';
+import { Jumbotron, Button, Overlay, Popover } from 'react-bootstrap';
+
+function Example(props) {
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
+  return (
+    <>
+      <Button ref={target} onClick={() => setShow(!show)}>
+        <h1>{props.name}</h1>
+      </Button>
+      <Overlay target={target.current} show={show} placement="right">
+        {props => (
+          <Popover id="popover-contained">
+          <Popover.Title as="h3">Change username</Popover.Title>
+          <Popover.Content>
+            <strong>Holy guacamole!</strong> Check this info.
+          </Popover.Content>
+        </Popover>
+        )}
+      </Overlay>
+    </>
+  );
+}
+
 
 class ProfileInfo extends Component {
     state = {  }
@@ -7,7 +31,7 @@ class ProfileInfo extends Component {
         return ( <div>
               <Jumbotron>
   <div className="headline">
-  <Button><h1>{this.props.firstName}</h1></Button>
+  <Example name={"Jupemon"} />
   <p>
     Basic info about {this.props.firstName}
   </p>

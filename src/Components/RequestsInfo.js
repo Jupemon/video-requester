@@ -3,12 +3,15 @@ import {Tooltip, Button, OverlayTrigger, Card} from 'react-bootstrap';
 
 function renderTooltip(props) {
   if (5===5) {
+    console.log(props, "here you go props you")
     return <Tooltip {...props}>Max amount of requests reached!</Tooltip>
   }
   else if(5==3) {
     return <Tooltip {...props}></Tooltip>
   }
+ else {
   return <Tooltip {...props}>Max amount of requests is 20!</Tooltip>;
+ }
 }
 
 const Example = (props) => (
@@ -40,7 +43,7 @@ class RequestInfo extends Component {
     <Card.Text>
       The price for a video is : {this.props.requestPrice ? this.props.requestPrice : "Free"}
     </Card.Text>
-    <Example><div><h2>{unfulfilledRequestsAmount}/{requestsAmount} unfilled video requests</h2></div></Example>
+    <Example testProp={"olivia"}><div><h2>{unfulfilledRequestsAmount}/{requestsAmount} unfilled video requests</h2></div></Example>
   </Card.Body>
 </Card>
         </div> );
