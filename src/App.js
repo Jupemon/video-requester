@@ -1,22 +1,18 @@
 import React from 'react';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import { GoogleLogin } from 'react-google-login';
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from './Components/Home/Home';
 import ViewProfile from './Components/ViewProfile/ViewProfile';;
 
 function App() { // /viewprofile"
+return (<BrowserRouter>
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route path="/viewprofile" component={ViewProfile} />
+    <Route component={<div>Not found</div>} />
+  </Switch>
+</BrowserRouter>)
 
-  if (window.location.href.includes("viewprofile")) {
-    return <ViewProfile />
-  }
-  else {
-    return <Home />
-  }
 
 }
 
