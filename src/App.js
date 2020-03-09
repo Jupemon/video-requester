@@ -9,10 +9,23 @@ import { GoogleLogin } from 'react-google-login';
 import Home from './Components/Home/Home';
 import ViewProfile from './Components/ViewProfile/ViewProfile';;
 
-function App() {
-  return (<Router>
+function App() { // /viewprofile"
+
+  if (window.location.href.includes("viewprofile")) {
+    return <ViewProfile />
+  }
+  else {
+    return <Home />
+  }
+
+}
+
+export default App;
+
+
+/*  return (<Router>
     <Switch>
-    <Route path="/viewprofile">
+    <Route path={process.env.PUBLIC_URL + '/viewprofile'}>
       <ViewProfile />
     </Route>
     <Route path="/">
@@ -20,7 +33,4 @@ function App() {
     </Route>
   </Switch>
     </Router>
-  );
-}
-
-export default App;
+  ); */
