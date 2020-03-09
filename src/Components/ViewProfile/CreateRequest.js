@@ -10,7 +10,7 @@ class CreateRequest extends Component {
      }
 
      createVideoRequest = (title, description) => {
-       fetch("http://localhost:3001/createrequest", {
+       fetch("https://requstenator-server.herokuapp.com/createrequest", {
          method : "POST",
          headers : {
           'Content-Type': 'application/json'

@@ -45,7 +45,7 @@ class VideoRequest extends Component {
       let { linkInfo } = this.state.linkInfo;
       this.setState({loading : true})
       console.log("sending request")
-      fetch("http://localhost:3001/fulfillrequest", {
+      fetch("https://requstenator-server.herokuapp.com/fulfillrequest", {
         method : "POST",
         headers : {
           'Content-Type' : "application/json"

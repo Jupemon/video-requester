@@ -32,7 +32,7 @@ class ViewProfile extends Component {
 
      getProfile = (userId) => {
        console.log("am i happeninig?")
-      fetch(`http://localhost:3001/getprofile/${userId}`).then(r => {
+      fetch(`https://requstenator-server.herokuapp.com/${userId}`).then(r => {
         if (r.status === 200) {
           r.json().then(data => {
             this.setState({data : data, profileFound : true, userId : userId})
