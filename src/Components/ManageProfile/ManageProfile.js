@@ -64,7 +64,7 @@ class ManageProfile extends Component {
 <Container fluid>
   <Row>
   <Col>
-  <EditProfile firstName={data.firstname} user_id={data.user_id}/>
+  <EditProfile userName={data.username} user_id={data.user_id}/>
 </Col>
   </Row>
   <Row>

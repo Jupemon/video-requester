@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginButton from '../Signin/LoginButton';
 import ManageProfile from '../ManageProfile/ManageProfile';
+import './Home.css'
 import { Jumbotron, Button, Popover, OverlayTrigger } from 'react-bootstrap';
 
 
@@ -55,10 +56,6 @@ class Home extends Component {
           .finally(() => {
             this.setState({isLoading : false})
           })
-        //this.setState({loggedIn : true})
-        /*const name = googleUser
-        const firstName = 
-        const lastName = */
         
      }
 
@@ -69,15 +66,18 @@ class Home extends Component {
     render() { 
         if (!this.state.loggedIn) {
             return ( <div style={{textAlign : "center", marginTop : "290px"}}>
-                <Jumbotron>
-  <h1>Hey youtuber!</h1>
-  <p>
+              <h1 className="intro-headline">Hey youtuber!</h1>
+  <p className="intro-text">
   Create youtube videos based on audience suggestions!
   </p>
+                <Jumbotron className="intro-slider">
+  <div className="intro-slider-content">
+  <p>Sign in with your google account!</p>
   <p>
   <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
   </p>
   <p style={{color:"red"}}>{this.state.errorInfo}</p>
+  </div>
 </Jumbotron>
             </div> );
         }

@@ -103,7 +103,7 @@ class ViewProfile extends Component {
                 <div className="headline">
                 <h1>{data.userName}</h1>
                 <p>
-                  Basic info about {data.userName}
+                  give youtube video ideas to {data.userName}
                 </p>
                 </div>
               </Jumbotron>

@@ -31,7 +31,8 @@ class EditProfile extends Component {
         return ( <div>
               <Jumbotron>
   <div className="headline">
-  <Username userName={"Jupemon"} />
+  {/*<Username userName={this.props.userName} />*/}
+  <h1>{this.props.userName}</h1>
   <p>Share this link with your audience! : <a target="blank" href={window.location.href + "viewprofile#" + this.props.user_id}>{window.location.href + "viewprofile#" + this.props.user_id}</a></p>
   </div>
 </Jumbotron>
