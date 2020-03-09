@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/video-requester/static/css/main.4d850cfd.chunk.css",
-    "main.js": "/video-requester/static/js/main.0d94fab5.chunk.js",
-    "main.js.map": "/video-requester/static/js/main.0d94fab5.chunk.js.map",
+    "main.css": "/video-requester/static/css/main.c8e06856.chunk.css",
+    "main.js": "/video-requester/static/js/main.abddb4cd.chunk.js",
+    "main.js.map": "/video-requester/static/js/main.abddb4cd.chunk.js.map",
     "runtime-main.js": "/video-requester/static/js/runtime-main.79f8c3db.js",
     "runtime-main.js.map": "/video-requester/static/js/runtime-main.79f8c3db.js.map",
     "static/css/2.47e06e2e.chunk.css": "/video-requester/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.a2825daf.chunk.js": "/video-requester/static/js/2.a2825daf.chunk.js",
-    "static/js/2.a2825daf.chunk.js.map": "/video-requester/static/js/2.a2825daf.chunk.js.map",
+    "static/js/2.aebdb8ef.chunk.js": "/video-requester/static/js/2.aebdb8ef.chunk.js",
+    "static/js/2.aebdb8ef.chunk.js.map": "/video-requester/static/js/2.aebdb8ef.chunk.js.map",
     "index.html": "/video-requester/index.html",
-    "precache-manifest.24bcc2994554344bd829f29ac65ad908.js": "/video-requester/precache-manifest.24bcc2994554344bd829f29ac65ad908.js",
+    "precache-manifest.bafed777bf7bfde73d0e5519791ce57d.js": "/video-requester/precache-manifest.bafed777bf7bfde73d0e5519791ce57d.js",
     "service-worker.js": "/video-requester/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/video-requester/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.4d850cfd.chunk.css.map": "/video-requester/static/css/main.4d850cfd.chunk.css.map",
-    "static/js/2.a2825daf.chunk.js.LICENSE.txt": "/video-requester/static/js/2.a2825daf.chunk.js.LICENSE.txt"
+    "static/css/main.c8e06856.chunk.css.map": "/video-requester/static/css/main.c8e06856.chunk.css.map",
+    "static/js/2.aebdb8ef.chunk.js.LICENSE.txt": "/video-requester/static/js/2.aebdb8ef.chunk.js.LICENSE.txt",
+    "static/media/loader.gif": "/video-requester/static/media/loader.9bdf6f25.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.79f8c3db.js",
     "static/css/2.47e06e2e.chunk.css",
-    "static/js/2.a2825daf.chunk.js",
-    "static/css/main.4d850cfd.chunk.css",
-    "static/js/main.0d94fab5.chunk.js"
+    "static/js/2.aebdb8ef.chunk.js",
+    "static/css/main.c8e06856.chunk.css",
+    "static/js/main.abddb4cd.chunk.js"
   ]
 }
