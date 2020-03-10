@@ -1,18 +1,22 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from './Components/Home/Home';
 import ViewProfile from './Components/ViewProfile/ViewProfile';;
 
 function App() { // /viewprofile"
-return (<BrowserRouter>
+return (<Router basename="/video-requester">
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/viewprofile" component={ViewProfile} />
-    <Route component={<div>Not found</div>} />
-  </Switch>
-</BrowserRouter>)
+  <Route exact path="/">
+    <Home />
+  </Route>
+  <Route path='/viewprofile'>
+    <ViewProfile />
+  </Route>
 
+</Switch>
+  </Router>
+)
 
 }
 
