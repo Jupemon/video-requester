@@ -13,8 +13,7 @@ class ViewProfile extends Component {
         creatingVideoRequest : false,
         data : false,
         userId : "",
-        loadingProfile : false,
-        profileFound : false
+        loadingData : true,
      }
 
      createVideoRequest = (title, description) => { // If video request is added to db, create one locally on the frontend as well with this
@@ -31,16 +30,17 @@ class ViewProfile extends Component {
      }
 
      getProfile = (userId) => {
-       console.log("am i happeninig?")
       fetch(`https://requstenator-server.herokuapp.com/getprofile/${userId}`).then(r => {
         if (r.status === 200) {
           r.json().then(data => {
-            this.setState({data : data, profileFound : true, userId : userId})
+            this.setState({data : data, userId : userId })
           })
         }
         else { // profile not found
           console.log("something went wrong")
+          
         }
+        this.setState({loadingData : false})
       })
     }
 
@@ -67,8 +67,8 @@ class ViewProfile extends Component {
     }
 
     render() { 
-        const { loadingProfile, data, profileFound } = this.state
-        if (loadingProfile) {
+        const { loadingData, data } = this.state
+        if (loadingData && !data) {
           return (<div>
             <Jumbotron>
   <div className="headline">
@@ -81,7 +81,7 @@ class ViewProfile extends Component {
 <div style={{paddingLeft:"50%", width:"100%"}}><Spinner animation="border" /></div>
             </div>)
         }
-        else if (!profileFound) {
+        if (!data && !loadingData) {
           return (<div>
             <Jumbotron>
   <div className="headline">
