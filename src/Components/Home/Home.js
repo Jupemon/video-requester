@@ -3,6 +3,7 @@ import LoginButton from '../Signin/LoginButton';
 import ManageProfile from '../ManageProfile/ManageProfile';
 import './Home.css'
 import { Jumbotron, Button, Popover, OverlayTrigger } from 'react-bootstrap';
+import PaymentScreen from '../PaymentScreen/PaymentScreen';
 
 
 class Home extends Component {
@@ -77,8 +78,10 @@ class Home extends Component {
   <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
   </p>
   <p style={{color:"red"}}>{this.state.errorInfo}</p>
+  
   </div>
 </Jumbotron>
+<PaymentScreen />
             </div> );
         }
         else if (this.state.loggedIn) {
