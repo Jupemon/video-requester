@@ -1,12 +1,35 @@
 // Opens up when user clicks on create videorequest button
 import CheckoutForm from './CheckoutForm'
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 class PaymentScreen extends Component {
-    state = {  }
+    state = { 
+        clientSecret : true
+     }
+
+    componentDidMount() {/*
+        console.log("mana unananan")
+        fetch("https://requstenator-server.herokuapp.com/handlepayment", {
+            method : "POST"
+        }).then(r => {
+            r.json().then(d => {
+                this.setState({clientSecret : d.clientSecret})
+            })
+        })
+        .catch(e => {
+            console.log("something went wrong with handeling payment")
+        })
+        */
+    }
     render() { 
-        return ( <div style={{position : "fixed", right : "0%", left : "0%", width:"100%", height:"100%", backgroundColor: "#e9ecef"}}>
-        <CheckoutForm />
+        const {clientSecret} = this.state
+        if (!clientSecret) {
+            return <div>Loading ClientSecret for payments</div>
+        }
+        return ( <div style={{position : "fixed", top:"0px", right : "0%", left : "0%", width:"100%", height:"100%", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+        <CheckoutForm clientSecret={clientSecret}/>
+        <Button style={{position:"absolute", right:"0px", top:"0px"}} variant="danger">X</Button>
         </div> );
     }
 }

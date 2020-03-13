@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import LoginButton from '../Signin/LoginButton';
 import ManageProfile from '../ManageProfile/ManageProfile';
 import './Home.css'
-import { Jumbotron, Button, Popover, OverlayTrigger } from 'react-bootstrap';
-import PaymentScreen from '../PaymentScreen/PaymentScreen';
+import { Jumbotron } from 'react-bootstrap';
 
 
 class Home extends Component {
@@ -81,7 +80,6 @@ class Home extends Component {
   
   </div>
 </Jumbotron>
-<PaymentScreen />
             </div> );
         }
         else if (this.state.loggedIn) {
