@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 
 class PaymentScreen extends Component {
     state = { 
-        clientSecret : true
+        clientSecret : false
      }
      
     componentDidMount() {

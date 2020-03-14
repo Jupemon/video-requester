@@ -8,7 +8,7 @@ class CheckoutForm extends React.Component {
   state = {
     validated : false,
     errorMessage : "",
-    paymentHandled : false,
+    paymentHandled : true,
 
       // form data
     firstName : "",
@@ -50,14 +50,16 @@ class CheckoutForm extends React.Component {
           },
         }
       });
-  
+
       if (result.error) {
         // Show error to your customer (e.g., insufficient funds)
+        console.log("something didint go as planned , here is the error")
         console.log(result.error.message);
         this.setState({errorMessage : "something went wrong"})
       } else {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
+          console.log()
           // Show a success message to your customer
           // There's a risk of the customer closing the window before callback
           // execution. Set up a webhook or plugin to listen for the
@@ -65,6 +67,8 @@ class CheckoutForm extends React.Component {
           // post-payment actions.
         }
       }
+
+      this.setState({paymentHandled : true})
 
     }
     // We don't want to let default form submission happen here,
@@ -119,13 +123,14 @@ class CheckoutForm extends React.Component {
     if (paymentHandled) {
       return (<div>
         Payment succesfull
-        <Button onClick={() => {togglePaymentScreen()}} variant="success">Ok!</Button>
+        <Button onClick={() => {this.setState({paymentHandled : false}); console.log("payment handled yo")}} variant="success">Ok!</Button>
       </div>)
     }
     else {
+      const {stripe, elements} = this.props
       return (
         <Form style={{backgroundColor:"white"}} noValidate validated={validated} onSubmit={this.handleSubmit}>
-        <Button>X</Button>
+        <Button onClick={() => {togglePaymentScreen()}}>X</Button>
           <Form.Row>
             <Form.Group>
               <CardSection />
@@ -211,7 +216,7 @@ class CheckoutForm extends React.Component {
             />
           </Form.Group>
           
-          <Button type="submit">Submit form</Button>
+          <Button disabled={ !stripe || !elements ? true : false} type="submit">Submit form</Button>
         </Form>
       );
     }
