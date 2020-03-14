@@ -7,7 +7,7 @@ import { InputGroup, Form, Col, Button } from 'react-bootstrap';
 class CheckoutForm extends React.Component {
   state = {
     validated : false,
-    errorMessage : "Something went wrong",
+    errorMessage : "",
     paymentHandled : false,
 
       // form data
@@ -23,7 +23,8 @@ class CheckoutForm extends React.Component {
   handleSubmit = async (event) => {
 
     const form = event.currentTarget;
-
+    this.setState({validated : true})
+    event.preventDefault();
     if (form.checkValidity() === false) {
       event.stopPropagation()
     }
@@ -34,7 +35,7 @@ class CheckoutForm extends React.Component {
         firstName, lastName, email, city, country, billingAddress, state, postalCode
       }
 
-      const {stripe, elements, clientSecret, togglePaymentScreen} = this.props
+      const {stripe, elements, clientSecret } = this.props
 
       const result = await stripe.confirmCardPayment(`{${clientSecret}}`, {
         payment_method: {
@@ -66,8 +67,6 @@ class CheckoutForm extends React.Component {
       }
 
     }
-    this.setState({validated : true})
-    event.preventDefault();
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     
@@ -107,24 +106,26 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
-    const { errorMessage, validated } = this.state
+    const { errorMessage, paymentHandled, validated } = this.state
+    const { togglePaymentScreen } = this.props
 
-    if (errorMessage.length > 0 && !validated) {
+    if (errorMessage.length > 0 && !paymentHandled) {
       return (<div>
         <div>{errorMessage}</div>
-        <Button onClick={() => {this.props.togglePaymentScreen()}} variant="danger">Ok!</Button>
+        <Button onClick={() => {togglePaymentScreen()}} variant="danger">Ok!</Button>
       </div>)
     }
 
-    if (validated) {
+    if (paymentHandled) {
       return (<div>
         Payment succesfull
-        <Button variant="success">Ok!</Button>
+        <Button onClick={() => {togglePaymentScreen()}} variant="success">Ok!</Button>
       </div>)
     }
     else {
       return (
         <Form style={{backgroundColor:"white"}} noValidate validated={validated} onSubmit={this.handleSubmit}>
+        <Button>X</Button>
           <Form.Row>
             <Form.Group>
               <CardSection />

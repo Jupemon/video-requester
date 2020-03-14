@@ -8,8 +8,7 @@ class PaymentScreen extends Component {
         clientSecret : true
      }
      
-    componentDidMount() {/*
-        console.log("mana unananan")
+    componentDidMount() {
         fetch("https://requstenator-server.herokuapp.com/handlepayment", {
             method : "POST"
         }).then(r => {
@@ -20,7 +19,7 @@ class PaymentScreen extends Component {
         .catch(e => {
             console.log("something went wrong with handeling payment")
         })
-        */
+        
     }
     render() { 
         const {clientSecret} = this.state
