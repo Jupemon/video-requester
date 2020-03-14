@@ -7,7 +7,7 @@ class PaymentScreen extends Component {
     state = { 
         clientSecret : true
      }
-
+     
     componentDidMount() {/*
         console.log("mana unananan")
         fetch("https://requstenator-server.herokuapp.com/handlepayment", {
@@ -28,8 +28,7 @@ class PaymentScreen extends Component {
             return <div>Loading ClientSecret for payments</div>
         }
         return ( <div style={{position : "fixed", top:"0px", right : "0%", left : "0%", width:"100%", height:"100%", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
-        <CheckoutForm clientSecret={clientSecret}/>
-        <Button style={{position:"absolute", right:"0px", top:"0px"}} variant="danger">X</Button>
+        <CheckoutForm clientSecret={clientSecret} togglePaymentScreen={this.props.togglePaymentScreen}/>
         </div> );
     }
 }

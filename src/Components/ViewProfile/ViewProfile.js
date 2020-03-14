@@ -68,6 +68,11 @@ class ViewProfile extends Component {
       
     }
 
+    togglePaymentScreen = () => {
+      const paymentScreen = this.state.paymentScreen
+      this.setState({paymentScreen : !paymentScreen})
+    }
+
     render() { 
         const { loadingData, data } = this.state
         if (loadingData && !data) {
@@ -124,7 +129,7 @@ class ViewProfile extends Component {
                 </Col>
                 </Row>
               </Container>
-              {this.state.paymentScreen ? <PaymentScreen /> : null}
+              {this.state.paymentScreen ? <PaymentScreen togglePaymentScreen={this.togglePaymentScreen} /> : null}
                       </div> );
         }
     }
