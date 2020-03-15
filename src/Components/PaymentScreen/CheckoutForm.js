@@ -8,7 +8,8 @@ class CheckoutForm extends React.Component {
   state = {
     validated : false,
     errorMessage : "",
-    paymentHandled : true,
+    paymentHandled : false,
+    loading : false,
 
       // form data
     firstName : "",
@@ -20,7 +21,7 @@ class CheckoutForm extends React.Component {
     state : "",
     postalCode : ""
   }
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
 
     const form = event.currentTarget;
     this.setState({validated : true})
@@ -34,9 +35,38 @@ class CheckoutForm extends React.Component {
       const formData = {
         firstName, lastName, email, city, country, billingAddress, state, postalCode
       }
+      this.setState({loading : true})
+
 
       const {stripe, elements, clientSecret } = this.props
 
+      stripe.confirmCardPayment(`{${clientSecret}}`, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: firstName +" "+ lastName,
+            city,
+            country,
+            billingAddress,
+            state,
+            postalCode
+          },
+        }
+      }).then(d => {
+        console.log(d, "this is data from promise");
+        if(d.error) {
+          console.log("something went wrong here is error", d.error)
+          this.setState({paymentHandled : true, errorMessage : "somethng went wrong"})
+        }
+        else {
+          console.log("everyhitng went well, YAY", d.paymentIntent.status)
+          this.setState({paymentHandled : true})
+        }
+      }).catch(e => {
+        console.log("error catched yo here it is:", e)
+        this.setState({paymentHandled : true, errorMessage : "couldnt verify the thing"})
+      })
+      /*
       const result = await stripe.confirmCardPayment(`{${clientSecret}}`, {
         payment_method: {
           card: elements.getElement(CardElement),
@@ -50,13 +80,14 @@ class CheckoutForm extends React.Component {
           },
         }
       });
-
+      console.log("i am a result", result)
       if (result.error) {
         // Show error to your customer (e.g., insufficient funds)
         console.log("something didint go as planned , here is the error")
         console.log(result.error.message);
         this.setState({errorMessage : "something went wrong"})
-      } else {
+      } 
+      else {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
           console.log()
@@ -66,9 +97,7 @@ class CheckoutForm extends React.Component {
           // payment_intent.succeeded event that handles any business critical
           // post-payment actions.
         }
-      }
-
-      this.setState({paymentHandled : true})
+      }*/
 
     }
     // We don't want to let default form submission happen here,
@@ -113,24 +142,27 @@ class CheckoutForm extends React.Component {
     const { errorMessage, paymentHandled, validated } = this.state
     const { togglePaymentScreen } = this.props
 
-    if (errorMessage.length > 0 && !paymentHandled) {
-      return (<div>
-        <div>{errorMessage}</div>
-        <Button onClick={() => {togglePaymentScreen()}} variant="danger">Ok!</Button>
-      </div>)
-    }
-
     if (paymentHandled) {
-      return (<div>
-        Payment succesfull
-        <Button onClick={() => {this.setState({paymentHandled : false}); console.log("payment handled yo")}} variant="success">Ok!</Button>
-      </div>)
+      if (errorMessage.length > 0) {
+        return (<div>
+          <div>{errorMessage}</div>
+          <Button onClick={() => {togglePaymentScreen()}} variant="danger">Oops!</Button>
+        </div>)
+      }
+
+      else {
+        return (<div>
+          Payment succesfull
+          <Button onClick={() => {togglePaymentScreen()}} variant="success">Ok!</Button>
+        </div>)
+      }
     }
+  
     else {
       const {stripe, elements} = this.props
       return (
         <Form style={{backgroundColor:"white"}} noValidate validated={validated} onSubmit={this.handleSubmit}>
-        <Button onClick={() => {togglePaymentScreen()}}>X</Button>
+        <Button disabled={this.state.loading} onClick={() => {togglePaymentScreen()}}>X</Button>
           <Form.Row>
             <Form.Group>
               <CardSection />
@@ -216,7 +248,7 @@ class CheckoutForm extends React.Component {
             />
           </Form.Group>
           
-          <Button disabled={ !stripe || !elements ? true : false} type="submit">Submit form</Button>
+          <Button disabled={ !stripe || !elements || this.state.loading ? true : false} type="submit">{this.state.loading ? "Loading" : "Submit payment"}</Button>
         </Form>
       );
     }
