@@ -37,7 +37,7 @@ class Youtube extends Component {
       };
 
     onPlayerReady = (event) => {
-        event.target.a.width = "100%";
+        //event.target.a.width = "100%"; // this is causing an error, and i dont know why?
         console.log("player is ready to play")
         this.props.fulfillRequest()
     }

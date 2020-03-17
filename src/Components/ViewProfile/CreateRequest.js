@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import { Card, Button, Spinner } from 'react-bootstrap';
+import PaymentScreen from '../PaymentScreen/PaymentScreen';
 
 class CreateRequest extends Component {
     state = { 
+        paymentScreen : true,
         loading : false,
         title : "",
         description : "",
         infoMessage : ""
      }
 
-     createVideoRequest = (title, description) => {
+
+     togglePaymentScreen = (succeeded) => { // toggles payments screen, if input is true then payment was a success
+      if (succeeded) {
+        console.log("payment was a success, create a new video request")
+      }
+      const paymentScreen = this.state.paymentScreen
+      this.setState({paymentScreen : !paymentScreen})
+    }
+
+     createVideoRequest = (title, description, userId) => {
        fetch("https://requstenator-server.herokuapp.com/createrequest", {
          method : "POST",
          headers : {
@@ -47,6 +58,7 @@ class CreateRequest extends Component {
     <p style={{float:"right", color:"red"}}>{this.state.errorMessage}</p>
   </Card.Body>
 </Card>
+ {this.state.paymentScreen ? <PaymentScreen togglePaymentScreen={this.togglePaymentScreen} createVideoRequest={this.createVideoRequest}/> : null}
         </div> );
     }
 }

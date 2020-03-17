@@ -3,11 +3,9 @@ import { Jumbotron, Spinner, Row, Col, Container } from 'react-bootstrap';
 import RequestInfo from '../RequestsInfo';
 import VideoRequest from '../VideoRequest/VideoRequest';
 import CreateRequest from './CreateRequest';
-import PaymentScreen from '../PaymentScreen/PaymentScreen';
 
 class ViewProfile extends Component {
     state = { 
-        paymentScreen : true,
         renderedRequests : [],
         requestPrice : "Free",
         totalRequests : 25,
@@ -68,11 +66,6 @@ class ViewProfile extends Component {
       
     }
 
-    togglePaymentScreen = () => {
-      const paymentScreen = this.state.paymentScreen
-      this.setState({paymentScreen : !paymentScreen})
-    }
-
     render() { 
         const { loadingData, data } = this.state
         if (loadingData && !data) {
@@ -129,7 +122,6 @@ class ViewProfile extends Component {
                 </Col>
                 </Row>
               </Container>
-              {this.state.paymentScreen ? <PaymentScreen togglePaymentScreen={this.togglePaymentScreen} /> : null}
                       </div> );
         }
     }

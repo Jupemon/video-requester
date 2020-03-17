@@ -7,6 +7,11 @@ import { Button, Form } from 'react-bootstrap';
 class CheckoutForm extends React.Component {
 
   state={
+
+    // form data
+    name : "",
+    email : "",
+
     errorMessage : "",
     paymentHandled : false,
     loading : false
@@ -16,9 +21,10 @@ class CheckoutForm extends React.Component {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
+    this.setState({loading : true})
 
     const {stripe, elements, clientSecret} = this.props
-
+    const { name, email } = this.state
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make  sure to disable form submission until Stripe.js has loaded.
@@ -28,7 +34,8 @@ class CheckoutForm extends React.Component {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: 'Jenny Rosen',
+          name: name,
+          email : email
         },
       }
     });
@@ -37,7 +44,7 @@ class CheckoutForm extends React.Component {
       // Show error to your customer (e.g., insufficient funds)
       console.log("something went wrong with this whole thing")
       console.log(result.error.message);
-      this.setState({paymentHandled : true, errorMessage : "something went wrong"})
+      this.setState({paymentHandled : true, errorMessage : "something went wrong", loading : false})
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
@@ -46,7 +53,7 @@ class CheckoutForm extends React.Component {
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
-        this.setState({paymentHandled : true})
+        this.setState({paymentHandled : true, loading : false})
         console.log("payment succeeded")
       }
     }
@@ -57,12 +64,12 @@ class CheckoutForm extends React.Component {
     if (paymentHandled) {
       if (errorMessage.length > 0) {
         return (<div>
-        <Button>Something went wrong with payment</Button>
+        <Button onClick={() => {this.props.togglePaymentScreen()}}>Something went wrong with payment</Button>
         </div>)
       }
       else {
         return (<div>
-          <Button>Payment succeeded</Button>
+          <Button onClick={() => {this.props.togglePaymentScreen(true)}}>Payment succeeded</Button>
         </div>)
       }
     }
@@ -71,7 +78,7 @@ class CheckoutForm extends React.Component {
       <CardSection />
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control value={this.state.email} onChange={(e) => {this.setState({email : e.currentTarget.value})}} type="email" placeholder="Enter email" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -79,7 +86,7 @@ class CheckoutForm extends React.Component {
       
         <Form.Group controlId="formFullName">
           <Form.Label>Full name</Form.Label>
-          <Form.Control type="text" placeholder="Full name" />
+          <Form.Control value={this.state.name} onChange={(e) => {this.setState({name : e.currentTarget.value})}} type="text" placeholder="Full name" />
         </Form.Group>
         <Button variant="primary" type="submit">
           Submit
@@ -94,7 +101,7 @@ export default function InjectedCheckoutForm(props) {
   return (
     <ElementsConsumer>
       {({stripe, elements}) => (
-        <CheckoutForm  stripe={stripe} elements={elements} clientSecret={props.clientSecret}/>
+        <CheckoutForm  stripe={stripe} elements={elements} clientSecret={props.clientSecret} togglePaymentScreen={props.togglePaymentScreen}/>
       )}
     </ElementsConsumer>
   );
