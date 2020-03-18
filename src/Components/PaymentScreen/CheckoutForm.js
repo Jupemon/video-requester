@@ -64,12 +64,14 @@ class CheckoutForm extends React.Component {
     if (paymentHandled) {
       if (errorMessage.length > 0) {
         return (<div>
-        <Button onClick={() => {this.props.togglePaymentScreen()}}>Something went wrong with payment</Button>
+        <p>Something went wrong with payment</p>
+        <Button variant="danger" onClick={() => {this.props.togglePaymentScreen()}}>Oops!</Button>
         </div>)
       }
       else {
         return (<div>
-          <Button onClick={() => {this.props.togglePaymentScreen(true)}}>Payment succeeded</Button>
+          <p>Payment Succeeded!</p>
+          <Button variant="success" onClick={() => {this.props.togglePaymentScreen(true)}}>Ok!</Button>
         </div>)
       }
     }

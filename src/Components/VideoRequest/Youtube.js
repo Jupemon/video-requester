@@ -29,6 +29,8 @@ class Youtube extends Component {
         const { id } = this.props;
         // the Player object is created uniquely based on the id in props
         this.player = new window.YT.Player(`youtube-player-${id}`, {
+          height : 360,
+          width : 350,
           videoId: id,
           events: {
             onReady: this.onPlayerReady
@@ -37,8 +39,6 @@ class Youtube extends Component {
       };
 
     onPlayerReady = (event) => {
-        //event.target.a.width = "100%"; // this is causing an error, and i dont know why?
-        console.log("player is ready to play")
         this.props.fulfillRequest()
     }
 
