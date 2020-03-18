@@ -4,7 +4,11 @@ import PaymentScreen from '../PaymentScreen/PaymentScreen';
 
 class CreateRequest extends Component {
     state = { 
-        paymentScreen : true,
+        requestToBeCreated : {
+          title : "",
+          description : ""
+        },
+        paymentScreen : false,
         loading : false,
         title : "",
         description : "",
@@ -15,12 +19,21 @@ class CreateRequest extends Component {
      togglePaymentScreen = (succeeded) => { // toggles payments screen, if input is true then payment was a success
       if (succeeded) {
         console.log("payment was a success, create a new video request")
+        const { requestToBeCreated } = this.state
+        this.createVideoRequest(requestToBeCreated.title, requestToBeCreated.description)
       }
       const paymentScreen = this.state.paymentScreen
       this.setState({paymentScreen : !paymentScreen})
     }
 
-     createVideoRequest = (title, description, userId) => {
+    startPaymentProcess = (title, description) => { // called when create request button is pressed, starts the creating process
+      const requestToBeCreated = {
+        title, description
+      }
+      this.setState({requestToBeCreated, paymentScreen : true})
+    }
+
+     createVideoRequest = (title, description) => {
        fetch("https://requstenator-server.herokuapp.com/createrequest", {
          method : "POST",
          headers : {
@@ -54,13 +67,15 @@ class CreateRequest extends Component {
     <Card.Text>
     <textarea disabled={this.state.loading} onChange={(e) => {this.setState({description : e.currentTarget.value})}} value={description} maxLength="854" style={{resize : "none"}} rows="14.5" cols="40" placeholder="Write a description of the video you want"/>
     </Card.Text>
-    <Button onClick={() => {this.createVideoRequest(title, description)}} disabled={this.state.loading} variant="primary">{this.state.loading ? <Spinner animation="border" /> : "Request video"}</Button>
+    <Button onClick={() => {this.startPaymentProcess(title, description)}} disabled={this.state.loading} variant="primary">{this.state.loading ? <Spinner animation="border" /> : "Request video"}</Button>
     <p style={{float:"right", color:"red"}}>{this.state.errorMessage}</p>
   </Card.Body>
 </Card>
- {this.state.paymentScreen ? <PaymentScreen togglePaymentScreen={this.togglePaymentScreen} createVideoRequest={this.createVideoRequest}/> : null}
+ {this.state.paymentScreen ? <PaymentScreen requestToBeCreated={this.state.requestToBeCreated} togglePaymentScreen={this.togglePaymentScreen} createVideoRequest={this.createVideoRequest}/> : null}
         </div> );
     }
 }
  
 export default CreateRequest;
+
+//this.createVideoRequest(title, description)}

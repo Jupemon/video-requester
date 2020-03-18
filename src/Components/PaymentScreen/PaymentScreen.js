@@ -27,7 +27,7 @@ class PaymentScreen extends Component {
             return <div>Loading ClientSecret for payments</div>
         }
         return ( <div style={{position : "fixed", top:"0px", right : "0%", left : "0%", width:"100%", height:"100%", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
-        <CheckoutForm clientSecret={clientSecret} togglePaymentScreen={this.props.togglePaymentScreen}/>
+        <CheckoutForm clientSecret={clientSecret} togglePaymentScreen={this.props.togglePaymentScreen} requestToBeCreated={this.props.requestToBeCreated} createVideoRequest={this.props.createVideoRequest}/>
         </div> );
     }
 }
