@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Tooltip, Button, OverlayTrigger, Card} from 'react-bootstrap';
+import React, { Component, useState, useRef } from 'react';
+import {Tooltip, Button, Overlay, Card} from 'react-bootstrap';
 
 function renderTooltip(props) {
   if (5===5) {
@@ -14,20 +14,25 @@ function renderTooltip(props) {
  }
 }
 
-const Example = (props) => (
-  <OverlayTrigger
-    placement="right"
-    delay={{ show: 250, hide: 400 }}
-    overlay={renderTooltip}
-  >
-    <Button variant="danger">{props.children}</Button>
-  </OverlayTrigger>
-);
+function Price(props) {
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
 
-
-
-
-
+  return (
+    <>
+      <Button ref={target} onMouseLeave={() => setShow(!show)} onMouseEnter={() => setShow(!show)}>
+        {props.children}
+      </Button>
+      <Overlay target={target.current} show={show} placement="right">
+        {props => (
+          <Tooltip id="overlay-example" {...props}>
+            Stripe account has not been added
+          </Tooltip>
+        )}
+      </Overlay>
+    </>
+  );
+}
 
 class RequestInfo extends Component {
     state = {  }
@@ -41,7 +46,7 @@ class RequestInfo extends Component {
       Here is the list of all recent video requests
     </Card.Text>
     <Card.Text>
-      The price for a video is : {this.props.requestPrice ? this.props.requestPrice : "Free"}
+      The price for a video is : <Price>{this.props.requestPrice ? this.props.requestPrice : "Free"}</Price>
     </Card.Text>
     <div><h2>{unfulfilledRequestsAmount}/{requestsAmount} unfilled video requests</h2></div>
   </Card.Body>
