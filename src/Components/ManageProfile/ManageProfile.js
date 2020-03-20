@@ -46,6 +46,10 @@ class ManageProfile extends Component {
     }
 
     render() { 
+
+        const clientId = "t"
+        const stateValue = "volau"
+
         const data = this.state.data
         if (this.state.loadingContent) {
             return (<div>
