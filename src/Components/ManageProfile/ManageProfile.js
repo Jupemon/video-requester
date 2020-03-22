@@ -48,7 +48,7 @@ class ManageProfile extends Component {
     render() { 
 
         const clientId = "t"
-        const stateValue = "volau"
+        const stripeState = this.state.data.stripeState
 
         const data = this.state.data
         if (this.state.loadingContent) {
@@ -68,7 +68,7 @@ class ManageProfile extends Component {
 <Container fluid>
   <Row>
   <Col>
-  <EditProfile userName={data.username} user_id={data.user_id}/>
+  <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id}/>
 </Col>
   </Row>
   <Row>

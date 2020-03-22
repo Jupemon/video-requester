@@ -26,7 +26,7 @@ function Price(props) {
       <Overlay target={target.current} show={show} placement="right">
         {props => (
           <Tooltip id="overlay-example" {...props}>
-            Stripe account has not been added
+            Stripe account has not been added!
           </Tooltip>
         )}
       </Overlay>

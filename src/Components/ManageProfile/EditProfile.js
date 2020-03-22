@@ -33,8 +33,8 @@ class EditProfile extends Component {
   <div className="headline">
   {/*<Username userName={this.props.userName} />*/}
   <h1>{this.props.userName}</h1>
-  <p>Share this link with your audience! : <a target="blank" href={window.location.href + "viewprofile#" + this.props.user_id}>{window.location.href + "viewprofile#" + this.props.user_id}</a></p>
-  <a href={`https://connect.stripe.com/express/oauth/authorize?client_id=${"ca_GwaRKUrsZ7EmttRGiaV1lei21MlM5Vpz"}&state=${11}.com`}>Create Stripe Account</a>
+  <p>Tell your audience to send video requests here : <a target="blank" href={window.location.href + "viewprofile#" + this.props.user_id}>{window.location.href + "viewprofile#" + this.props.user_id}</a></p>
+  <p>Start charging money for video requests : <a href={`https://connect.stripe.com/express/oauth/authorize?client_id=${process.env.REACT_APP_STRIPE_CLIENT_ID}&state=${this.props.stripeState}.com`}>Create Stripe Account</a></p>
   </div>
 </Jumbotron>
         </div> );
