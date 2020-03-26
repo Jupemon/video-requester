@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import {Button, Container, Col, Row, Jumbotron, Card, Spinner} from 'react-bootstrap/';
 import './ManageProfile.css';
 import VideoRequest from '../VideoRequest/VideoRequest';
-import RequestInfo from '../RequestsInfo';
+import RequestInfo from '../SharedComponents/RequestsInfo';
 import EditProfile from './EditProfile';
 
 class ManageProfile extends Component {
     state = {
+        stripeAccount : false,
         loadingContent : true,
         loadingIndex : 0,
         unfinishedRequests : 0,
@@ -36,13 +37,24 @@ class ManageProfile extends Component {
       })
     }
 
+
+    checkStripeIntegration = (string) => { // returns true if stripe accout has been integrated
+      if (string.includes("acct_")) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+
     componentDidMount() { // loads youtube & parse data
         let data = this.props.data
         this.loadYoutube()
         data.videorequests = this.parseVideoRequests(this.props.data.videorequests)
-        // data which is gotten from database
+        const stripeAccount = this.checkStripeIntegration(data.stripe_account_id)
         console.log(data, "parsed data")
-        this.setState({data : data})
+        
+        this.setState({data : data, stripeAccount : stripeAccount})
     }
 
     render() { 

@@ -26,7 +26,9 @@ class Username extends Component {
 
 
 class EditProfile extends Component {
-    state = {  }
+    state = { 
+      stripeAccount : true
+     }
     render() { 
         return ( <div>
               <Jumbotron>
@@ -34,7 +36,7 @@ class EditProfile extends Component {
   {/*<Username userName={this.props.userName} />*/}
   <h1>{this.props.userName}</h1>
   <p>Tell your audience to send video requests here : <a target="blank" href={window.location.href + "viewprofile#" + this.props.user_id}>{window.location.href + "viewprofile#" + this.props.user_id}</a></p>
-  <p>Start charging money for video requests : <a href={`https://connect.stripe.com/express/oauth/authorize?client_id=${process.env.REACT_APP_STRIPE_CLIENT_ID}&state=${this.props.stripeState}.com`}>Create Stripe Account</a></p>
+  {this.state.stripeAccount ? <p>You have integrated stripe to your profile!</p> : <p>Start charging money for video requests : <a href={`https://connect.stripe.com/express/oauth/authorize?client_id=${process.env.REACT_APP_STRIPE_CLIENT_ID}&state=${this.props.stripeState}.com`}>Create Stripe Account</a></p>}
   </div>
 </Jumbotron>
         </div> );

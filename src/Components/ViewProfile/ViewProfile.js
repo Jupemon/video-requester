@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Jumbotron, Spinner, Row, Col, Container } from 'react-bootstrap';
-import RequestInfo from '../RequestsInfo';
+import RequestInfo from '../SharedComponents/RequestsInfo';
 import VideoRequest from '../VideoRequest/VideoRequest';
 import CreateRequest from './CreateRequest';
 
