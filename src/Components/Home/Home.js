@@ -3,6 +3,7 @@ import LoginButton from '../Signin/LoginButton';
 import ManageProfile from '../ManageProfile/ManageProfile';
 import './Home.css'
 import { Jumbotron } from 'react-bootstrap';
+import EditProfile from '../ManageProfile/EditProfile';
 
 
 class Home extends Component {
@@ -66,6 +67,7 @@ class Home extends Component {
     render() { 
         if (!this.state.loggedIn) {
             return ( <div style={{textAlign : "center", marginTop : "290px"}}>
+             <EditProfile stripeState={false} userName={"Bob"} user_id={5}/>
               <h1 className="intro-headline">Hey youtuber!</h1>
   <p className="intro-text">
   Create youtube videos based on audience suggestions!
@@ -83,9 +85,9 @@ class Home extends Component {
             </div> );
         }
         else if (this.state.loggedIn) {
-            return <div>
+            return (<div>
                 <ManageProfile data={this.state.data}/>
-            </div>
+            </div>)
         }
     }
 }
