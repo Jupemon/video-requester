@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from './Components/Home/Home';
-import ViewProfile from './Components/ViewProfile/ViewProfile';;
+import ViewProfile from './Components/ViewProfile/ViewProfile';
+import NotFound from './Components/NotFound';
 
 function App() { // /viewprofile"
 return (<Router basename="/video-requester">
@@ -13,7 +14,7 @@ return (<Router basename="/video-requester">
   <Route path='/viewprofile'>
     <ViewProfile />
   </Route>
-
+  <Route component={NotFound}/>
 </Switch>
   </Router>
 )

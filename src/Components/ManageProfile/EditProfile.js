@@ -3,9 +3,14 @@ import { Jumbotron, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
 class Username extends Component {
   state = { 
+    editingProfile : false,
     input :  "", 
     userName : "",
     saved : false
+  }
+
+  editingProfile = () => {
+    this.setState({editingProfile : true})
   }
 
   componentDidMount() {
@@ -37,6 +42,8 @@ class EditProfile extends Component {
   <h1>{this.props.userName}</h1>
   <p>Tell your audience to send video requests here : <a target="blank" href={window.location.href + "viewprofile#" + this.props.user_id}>{window.location.href + "viewprofile#" + this.props.user_id}</a></p>
   {this.state.stripeAccount ? <p>You have integrated stripe to your profile!</p> : <p>Start charging money for video requests : <a href={`https://connect.stripe.com/express/oauth/authorize?client_id=${process.env.REACT_APP_STRIPE_CLIENT_ID}&state=${this.props.stripeState}.com`}>Create Stripe Account</a></p>}
+  <p>Current video price is <Button>{this.props.videoPrice}|{this.props.currency}</Button></p>
+  <Button>Save changes</Button>
   </div>
 </Jumbotron>
         </div> );
