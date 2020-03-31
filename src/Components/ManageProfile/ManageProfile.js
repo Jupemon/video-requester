@@ -59,7 +59,6 @@ class ManageProfile extends Component {
 
     render() { 
 
-        const clientId = "t"
         const stripeState = this.state.data.stripeState
 
         const data = this.state.data
@@ -78,11 +77,7 @@ class ManageProfile extends Component {
         } // Does a get request to get the profile, allows managing the profile
         return ( <div>
 <Container fluid>
-  <Row>
-  <Col>
-  <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id}/>
-</Col>
-  </Row>
+  <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id} price={data.video_price} currency={data.currency}/>
   <Row>
   <Col>
   <RequestInfo unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>

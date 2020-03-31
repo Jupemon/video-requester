@@ -67,7 +67,6 @@ class Home extends Component {
     render() { 
         if (!this.state.loggedIn) {
             return ( <div style={{textAlign : "center", marginTop : "290px"}}>
-             <EditProfile stripeState={false} userName={"Bob"} user_id={5}/>
               <h1 className="intro-headline">Hey youtuber!</h1>
   <p className="intro-text">
   Create youtube videos based on audience suggestions!
