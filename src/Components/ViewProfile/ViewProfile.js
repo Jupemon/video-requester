@@ -100,7 +100,7 @@ class ViewProfile extends Component {
                 <Row>
                 <Col>
                 <Jumbotron>
-                <div className="headline">
+                <div style={{color:"purple", textAlign:"center"}}>
                 <h1>{data.userName}</h1>
                 <p>
                   give youtube video ideas to {data.userName}
@@ -111,7 +111,7 @@ class ViewProfile extends Component {
                 </Row>
                 <Row>
                 <Col>
-                <RequestInfo requestsAmount={data.requestsAmount} unfulfilledRequestsAmount={data.unfilledRequests} />
+                <RequestInfo requestsAmount={data.requestsAmount} unfulfilledRequestsAmount={data.unfilledRequests} videoPrice={{price : data.videoPrice, currency: data.currency}}/>
                 </Col>
 
                 {this.state.data.videoRequests.map(vidReq => {

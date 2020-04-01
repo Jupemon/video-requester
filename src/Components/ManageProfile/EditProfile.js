@@ -102,7 +102,7 @@ class EditProfile extends Component {
           'Content-Type' : "application/json"
         },
          body : JSON.stringify({
-           token_id : window.localStorage.getItem("token"),
+           token_id : window.localStorage.getItem("token_id"),
            data : changedData
          })
        }).then(re => {

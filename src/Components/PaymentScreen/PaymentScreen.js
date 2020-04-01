@@ -10,7 +10,15 @@ class PaymentScreen extends Component {
      
     componentDidMount() {
         fetch("https://requstenator-server.herokuapp.com/handlepayment", {
-            method : "POST"
+            method : "POST",
+            headers : {
+              'Content-Type' : "application/json"
+            },
+            body : JSON.stringify({
+              video_price : "",
+              currency : ""
+              
+            })
         }).then(r => {
             r.json().then(d => {
                 this.setState({clientSecret : d.clientSecret})
