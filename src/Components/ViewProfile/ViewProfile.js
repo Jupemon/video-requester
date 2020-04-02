@@ -115,7 +115,7 @@ class ViewProfile extends Component {
                 </Col>
 
                 {this.state.data.videoRequests.map(vidReq => {
-                    return (<Col> <VideoRequest componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
+                    return (<Col> <VideoRequest key={vidReq.request_id} componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
                 })}
                 <Col>
                 <CreateRequest createVideoRequest={this.createVideoRequest} userId={this.state.userId}/>

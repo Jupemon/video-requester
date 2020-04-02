@@ -3,7 +3,6 @@ import LoginButton from '../Signin/LoginButton';
 import ManageProfile from '../ManageProfile/ManageProfile';
 import './Home.css'
 import { Jumbotron } from 'react-bootstrap';
-import EditProfile from '../ManageProfile/EditProfile';
 
 
 class Home extends Component {

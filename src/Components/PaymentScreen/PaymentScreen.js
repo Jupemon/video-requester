@@ -1,7 +1,6 @@
 // Opens up when user clicks on create videorequest button
 import CheckoutForm from './CheckoutForm'
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 
 class PaymentScreen extends Component {
     state = { 
@@ -21,6 +20,7 @@ class PaymentScreen extends Component {
             })
         }).then(r => {
             r.json().then(d => {
+                console.log(d, "this should contain the clientSecret")
                 this.setState({clientSecret : d.clientSecret})
             })
         })

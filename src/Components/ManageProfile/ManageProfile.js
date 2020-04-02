@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Container, Col, Row, Jumbotron, Card, Spinner} from 'react-bootstrap/';
+import { Container, Col, Row, Jumbotron, Spinner } from 'react-bootstrap/';
 import './ManageProfile.css';
 import VideoRequest from '../VideoRequest/VideoRequest';
 import RequestInfo from '../SharedComponents/RequestsInfo';
