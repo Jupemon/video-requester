@@ -71,7 +71,7 @@ class CreateRequest extends Component {
     <p style={{float:"right", color:"red"}}>{this.state.errorMessage}</p>
   </Card.Body>
 </Card>
- {this.state.paymentScreen ? <PaymentScreen requestToBeCreated={this.state.requestToBeCreated} togglePaymentScreen={this.togglePaymentScreen} createVideoRequest={this.createVideoRequest}/> : null}
+ {this.state.paymentScreen ? <PaymentScreen videoPrice={{price : this.props.videoPrice.price, currency : this.props.videoPrice.currency}} requestToBeCreated={this.state.requestToBeCreated} togglePaymentScreen={this.togglePaymentScreen} createVideoRequest={this.createVideoRequest}/> : null}
         </div> );
     }
 }

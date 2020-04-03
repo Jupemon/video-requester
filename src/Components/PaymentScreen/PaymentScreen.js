@@ -14,8 +14,8 @@ class PaymentScreen extends Component {
               'Content-Type' : "application/json"
             },
             body : JSON.stringify({
-              video_price : "",
-              currency : ""
+              video_price : this.props.videoPrice.price,
+              currency : this.props.videoPrice.currency
               
             })
         }).then(r => {

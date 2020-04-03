@@ -118,7 +118,7 @@ class ViewProfile extends Component {
                     return (<Col> <VideoRequest key={vidReq.request_id} componentRendered={this.componentRendered} viewOnly={true} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
                 })}
                 <Col>
-                <CreateRequest createVideoRequest={this.createVideoRequest} userId={this.state.userId}/>
+                <CreateRequest videoPrice={{price : data.videoPrice, currency : data.currency}} createVideoRequest={this.createVideoRequest} userId={this.state.userId}/>
                 </Col>
                 </Row>
               </Container>
