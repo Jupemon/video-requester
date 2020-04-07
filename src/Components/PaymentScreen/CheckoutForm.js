@@ -12,6 +12,7 @@ class CheckoutForm extends React.Component {
     name : "",
     email : "",
 
+    payment_intent : false,
     errorMessage : "",
     paymentHandled : false,
     loading : false
@@ -53,7 +54,8 @@ class CheckoutForm extends React.Component {
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
-        this.setState({paymentHandled : true, loading : false})
+        this.setState({paymentHandled : true, loading : false, payment_intent : result.id})
+        console.log(result.paymentIntent, "payment intent")
         console.log("payment succeeded")
       }
     }
@@ -71,7 +73,7 @@ class CheckoutForm extends React.Component {
       else {
         return (<div>
           <p>Payment Succeeded!</p>
-          <Button variant="success" onClick={() => {this.props.togglePaymentScreen(true)}}>Ok!</Button>
+          <Button variant="success" onClick={() => {this.props.togglePaymentScreen(this.state.payment_intent)}}>Ok!</Button>
         </div>)
       }
     }

@@ -16,11 +16,11 @@ class CreateRequest extends Component {
      }
 
 
-     togglePaymentScreen = (succeeded) => { // toggles payments screen, if input is true then payment was a success
-      if (succeeded) {
+     togglePaymentScreen = (payment_intent) => { // toggles payments screen, if input is true then payment was a success
+      if (payment_intent) {
         console.log("payment was a success, create a new video request")
         const { requestToBeCreated } = this.state
-        this.createVideoRequest(requestToBeCreated.title, requestToBeCreated.description)
+        this.createVideoRequest(requestToBeCreated.title, requestToBeCreated.description, payment_intent)
       }
       const paymentScreen = this.state.paymentScreen
       this.setState({paymentScreen : !paymentScreen})
@@ -33,7 +33,7 @@ class CreateRequest extends Component {
       this.setState({requestToBeCreated, paymentScreen : true})
     }
 
-     createVideoRequest = (title, description) => {
+     createVideoRequest = (title, description, payment_intent) => {
        fetch("https://requstenator-server.herokuapp.com/createrequest", {
          method : "POST",
          headers : {
@@ -42,7 +42,8 @@ class CreateRequest extends Component {
          body : JSON.stringify({
            user_id : this.props.userId,
            title : title,
-           description : description
+           description : description,
+           payment_intent : payment_intent
          })
        }).then(r => {
          if (r.status === 201) {

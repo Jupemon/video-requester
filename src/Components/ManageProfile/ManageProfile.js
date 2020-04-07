@@ -80,7 +80,7 @@ class ManageProfile extends Component {
   <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id} price={data.video_price} currency={data.currency}/>
   <Row>
   <Col>
-  <RequestInfo unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
+  <RequestInfo videoPrice={{price : data.video_price, currency: data.currency}} unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
   </Col>
   {this.state.data.videorequests.map(vidReq => {
       return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
