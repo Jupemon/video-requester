@@ -54,7 +54,7 @@ class CheckoutForm extends React.Component {
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
-        this.setState({paymentHandled : true, loading : false, payment_intent : result.id})
+        this.setState({paymentHandled : true, loading : false, payment_intent : result.paymentIntent.id})
         console.log(result.paymentIntent, "payment intent")
         console.log("payment succeeded")
       }
