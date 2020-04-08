@@ -43,7 +43,7 @@ class CreateRequest extends Component {
            user_id : this.props.userId,
            title : title,
            description : description,
-           payment_intent : payment_intent
+           payment_id : payment_intent
          })
        }).then(r => {
          if (r.status === 201) {
