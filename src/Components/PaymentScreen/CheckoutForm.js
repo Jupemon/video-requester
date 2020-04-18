@@ -84,7 +84,7 @@ class CheckoutForm extends React.Component {
           <Form.Label>Email address</Form.Label>
           <Form.Control value={this.state.email} onChange={(e) => {this.setState({email : e.currentTarget.value})}} type="email" placeholder="Enter email" />
           <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
+            Email is used for refunding payments.
           </Form.Text>
         </Form.Group>
       

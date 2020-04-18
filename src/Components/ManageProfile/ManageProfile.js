@@ -47,6 +47,10 @@ class ManageProfile extends Component {
       }
     }
 
+    rejectRequest = (request_id) => { // deletes the video request locally, called after succesfull db deletion
+      const videoRequests = this.state.data.videorequests.filter
+    }
+
     componentDidMount() { // loads youtube & parse data
         let data = this.props.data
         this.loadYoutube()
