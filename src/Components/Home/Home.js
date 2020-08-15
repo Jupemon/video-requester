@@ -61,6 +61,7 @@ class Home extends Component {
 
      logInFailure = () => { // Something went wrong with  google authentication login
         console.log("failed to log in")
+        alert("failed to login")
      }
 
     render() { 
