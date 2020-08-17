@@ -21,15 +21,16 @@ class VideoPrice extends Component {
     this.setState({currency : this.props.currency, price:this.props.price})
   }
   render() { 
-    return ( <OverlayTrigger onExit={() => {this.setState({input : ""})}} trigger="click" placement="top" overlay={<Popover id="popover-basic">
-    <Popover.Title as="h3">Set video price</Popover.Title>
-        <Popover.Content>
+    return ( 
+    <OverlayTrigger onExit={() => {this.setState({input : ""})}} trigger="click" placement="top" overlay={<Popover id="popover-basic">
+      <Popover.Title as="h3">Set video price</Popover.Title>
+      <Popover.Content>
         <input type="number" min="0" max="500" value={this.state.input} onChange={(e) => {this.setState({input : e.currentTarget.value})}}/>
         <Button onClick={() => {this.setPrice()}}>Save</Button>
-        </Popover.Content>
+      </Popover.Content>
       </Popover>}>
         <Button disabled={this.props.disabled} variant="success"><h1>{this.state.input.length <= 0 ? this.state.price : this.state.input}</h1></Button>
-      </OverlayTrigger> );
+    </OverlayTrigger> );
   }
 }
 

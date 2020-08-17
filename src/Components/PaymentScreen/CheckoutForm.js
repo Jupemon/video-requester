@@ -66,8 +66,8 @@ class CheckoutForm extends React.Component {
     if (paymentHandled) {
       if (errorMessage.length > 0) {
         return (<div>
-        <p>Something went wrong with payment</p>
-        <Button variant="danger" onClick={() => {this.props.togglePaymentScreen()}}>Oops!</Button>
+          <p>Something went wrong with payment</p>
+          <Button variant="danger" onClick={() => {this.props.togglePaymentScreen()}}>Oops!</Button>
         </div>)
       }
       else {
@@ -78,8 +78,9 @@ class CheckoutForm extends React.Component {
       }
     }
     else {
-      return (<Form onSubmit={this.handleSubmit}>
-      <CardSection />
+      return (
+      <Form onSubmit={this.handleSubmit}>
+        <CardSection />
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control value={this.state.email} onChange={(e) => {this.setState({email : e.currentTarget.value})}} type="email" placeholder="Enter email" />

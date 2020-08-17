@@ -63,34 +63,34 @@ class ManageProfile extends Component {
 
     render() { 
 
-        const stripeState = this.state.data.stripeState
+      const stripeState = this.state.data.stripeState
+      const data = this.state.data
 
-        const data = this.state.data
-        if (this.state.loadingContent) {
-            return (<div>
+      if (this.state.loadingContent) {
+        return (
+          <div>
             <Jumbotron>
-  <div className="headline">
-  <h1>Loading...</h1>
-  <p>
-    loading info...
-  </p>
-  </div>
-</Jumbotron>
-<div style={{paddingLeft:"50%", width:"100%"}}><Spinner animation="border" /></div>
-            </div>)
-        } // Does a get request to get the profile, allows managing the profile
+              <div className="headline">
+                <h1>Loading...</h1>
+                <p>loading info...</p>
+              </div>
+            </Jumbotron>
+            <div style={{paddingLeft:"50%", width:"100%"}}><Spinner animation="border" /></div>
+          </div>
+        )
+      } // Does a get request to get the profile, allows managing the profile
         return ( <div>
-<Container fluid>
-  <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id} price={data.video_price} currency={data.currency}/>
-  <Row>
-  <Col>
-  <RequestInfo videoPrice={{price : data.video_price, currency: data.currency}} unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
-  </Col>
-  {this.state.data.videorequests.map(vidReq => {
-      return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
-  })}
-  </Row>
-</Container>
+          <Container fluid>
+            <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id} price={data.video_price} currency={data.currency}/>
+            <Row>
+              <Col>
+                <RequestInfo videoPrice={{price : data.video_price, currency: data.currency}} unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
+              </Col>
+              {this.state.data.videorequests.map(vidReq => {
+                  return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
+              })}
+            </Row>
+          </Container>
         </div> );
     }
 }

@@ -66,59 +66,43 @@ class Home extends Component {
 
     render() { 
         if (!this.state.loggedIn) {
-            return ( <div clas style={{textAlign:"center"}}>
-              <div class="jumbotron">
-  <h1 style={{fontSize:"85px"}} className="display-4">Vregs</h1>
-  <p className="lead">Allows youtubers to get video requests and sell custom video content</p>
-  <hr className="my-4" />
-  <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
-</div>
-<div className="container">
-<Row>
-<Col >
-<div className="jumbotron" style={{backgroundColor:"white"}}>
-  <i style={{marginBottom : "25px"}} className="fas fa-user-plus fa-4x"></i>
-  <h1 classNameName="display-4">1. Sign in</h1>
-  <p classNameName="lead">Setup your account by signing in with your youtube/google account</p>
-</div>
-</Col>
-<Col >
-<div className="jumbotron" style={{backgroundColor:"white"}}>
-  <i style={{marginBottom : "25px"}} className="fas fa-upload fa-4x"></i>
-  <h1 classNameName="display-4">2. Setup your account</h1>
-  <p classNameName="lead">Setup your account and start accepting custom video requests</p>
-</div>
-</Col>
-<Col >
-<div className="jumbotron" style={{backgroundColor:"white"}}>
-  <i style={{marginBottom : "25px"}} className="fas fa-dollar-sign fa-4x"></i>
-  <h1 classNameName="display-4">3. Gain revenue</h1>
-  <p classNameName="lead">Fullfill custom video requests and gain revenue</p>
-</div>
-</Col>
-</Row>
-</div>
+            return ( 
+<div clas style={{textAlign:"center"}}>
 
+    <div class="jumbotron">
+      <h1 style={{fontSize:"85px"}} className="display-4">Vregs</h1>
+      <p className="lead">Allows youtubers to get video requests and sell custom video content</p>
+      <hr className="my-4" />
+      <LoginButton isLoading={this.state.isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
+    </div>
 
-</div>
-
-              /*
-            <div style={{textAlign : "center", marginTop : "290px"}}>
-              <h1 className="intro-headline">Hey youtuber!</h1>
-  <p className="intro-text">
-  Create youtube videos based on audience suggestions!
-  </p>
-                <Jumbotron className="intro-slider">
-  <div className="intro-slider-content">
-  <p>Sign in with your google account!</p>
-  <p>
-  
-  </p>
-  <p style={{color:"red"}}>{this.state.errorInfo}</p>
-  
+  <div className="container">
+    <Row>
+      <Col >
+        <div className="jumbotron" style={{backgroundColor:"white"}}>
+          <i style={{marginBottom : "25px"}} className="fas fa-user-plus fa-4x"></i>
+          <h1 classNameName="display-4">1. Sign in</h1>
+          <p classNameName="lead">Setup your account by signing in with your youtube/google account</p>
+        </div>
+      </Col>
+      <Col >
+        <div className="jumbotron" style={{backgroundColor:"white"}}>
+          <i style={{marginBottom : "25px"}} className="fas fa-upload fa-4x"></i>
+          <h1 classNameName="display-4">2. Setup your account</h1>
+          <p classNameName="lead">Setup your account and start accepting custom video requests</p>
+        </div>
+      </Col>
+      <Col >
+        <div className="jumbotron" style={{backgroundColor:"white"}}>
+          <i style={{marginBottom : "25px"}} className="fas fa-dollar-sign fa-4x"></i>
+          <h1 classNameName="display-4">3. Gain revenue</h1>
+          <p classNameName="lead">Fullfill custom video requests and gain revenue</p>
+        </div>
+      </Col>
+    </Row>
   </div>
-</Jumbotron>
-            </div> */);
+</div>
+);
         }
         else if (this.state.loggedIn) {
             return (<div>

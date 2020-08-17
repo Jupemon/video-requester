@@ -106,21 +106,21 @@ class VideoRequest extends Component {
 
     render() { 
         return ( <div style={this.state.style} className="video-request">
-            <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
-            {this.state.loading ? <Loading /> : this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
-  <div style={{position:"absolute", right:"80px", top:"175px"}}>
-  <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
-  <p>{this.state.linkInfo}</p>
-  </div>
-  </div>}
+          <Card bg={this.state.requestFulfilled ? "success" : "warning"} style={{ width: '22rem', margin : "auto", marginTop:"25px"}}>
+              {this.state.loading ? <Loading /> : this.state.requestFulfilled ? <Youtube fulfillRequest={this.fulfillRequest} id={this.state.videoId}/> : this.props.viewOnly? <Info />: <div style={{width:"350px", height:"360px", backgroundColor:"#ffc107"}}>
+            <div style={{position:"absolute", right:"80px", top:"175px"}}>
+              <div><input style={{width:"200px"}} onChange={(e) => {this.loadVideoUrl(e.currentTarget.value)}} type="text"/></div>
+              <p>{this.state.linkInfo}</p>
+            </div>
+            </div>}
 
-  <Card.Body>
-    <Card.Title>{this.props.title}</Card.Title>
-    <Card.Text>
-      {this.props.description}
-    </Card.Text>
-  </Card.Body>
-</Card>
+            <Card.Body>
+              <Card.Title>{this.props.title}</Card.Title>
+              <Card.Text>
+                {this.props.description}
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </div> );
     }
 }
