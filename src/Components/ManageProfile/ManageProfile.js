@@ -55,10 +55,10 @@ class ManageProfile extends Component {
         let data = this.props.data
         this.loadYoutube()
         data.videorequests = this.parseVideoRequests(this.props.data.videorequests)
-        const stripeAccount = this.checkStripeIntegration(data.stripe_account_id)
+        //const stripeAccount = this.checkStripeIntegration(data.stripe_account_id)
         console.log(data, "parsed data")
         
-        this.setState({data : data, stripeAccount : stripeAccount})
+        this.setState({data : data, /*stripeAccount : stripeAccount*/})
     }
 
     render() { 

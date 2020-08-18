@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoginButton from '../Signin/LoginButton';
 import ManageProfile from '../ManageProfile/ManageProfile';
 import './Home.css'
-import { Jumbotron, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 
 class Home extends Component {
@@ -14,11 +14,11 @@ class Home extends Component {
         data : false
      }
 
-     logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
+    logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
+      
+      this.setState({isLoading : true})
 
-        this.setState({isLoading : true})
-
-        const token_id = googleUser.tokenId;
+      const token_id = googleUser.tokenId;
 
         fetch("https://requstenator-server.herokuapp.com/signin", {
             method : "POST",
