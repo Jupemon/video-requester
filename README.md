@@ -9,9 +9,9 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 1. Sign in using your google account and give the application access to your google data. 
 
-2. This generates a new account on the database and signs you in to your account.
+2. This generates a new account on the database and signs you in.
 
-3. Click on the link to create a stripe payout account. This allows you to receive processed payments from your fans.
+3. Click on the link to create a stripe payout account. Creating it allows you to receive processed payments from your fans.
 
 4. Set a price for custom video requests. This is the amount needed to pay in order to leave a custom video request.
 
@@ -21,9 +21,9 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 7. All of these custom video requests will show up on your account page.
 
-8. You can reject any of the video requests which you don't want to fulfill. This action refunds the payment.
+8. You can reject any of the video requests which you don't want to fulfill, this action refunds the payment.
 
-9. Accept the video requests which you plan on fulfilling
+9. Accept the video requests which you plan on fulfilling.
 
 10. Accepting a video request processes the payment and money is added to your stripe account.
 
@@ -32,10 +32,10 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 ## How i built it
 
-I had to create two seperate frontend views, a server and database. The node server is hosted on Heroku and frontend page hosted via GH-pages. I started by defining the project parts and the functionalities they needed :
+I had to create two seperate frontend views, a server and database. I started by defining the project parts and the functionalities they needed :
 
 - React Frontend client for account management. 
-    - Google Oath token signin process
+    - Handle signin with Google tokens.
     - Fetches account data from the database.
     - Fetches custom video requests from the database.
     - Allows stripe payout account creation.
@@ -45,41 +45,46 @@ I had to create two seperate frontend views, a server and database. The node ser
     
 
 - React Frontend client for video requests
-    - fetches account data from the rest API
-    - Allows fans to make payments with stripe
+    - Fetches account data from the rest API.
+    - Allows fans to make payments with stripe.
     - Allows requesting custom video content from a specific account.
 
 
 - NodeJS server/rest API
-    - Google Oath token signin process
-    - Account creation
-    - Serve requested account data
-    - Server requested custom video requests
-    - Stripe payout account creation
-    - Accepting video requests and processing stripe payments
-    - Rejecting video requests and refunding stripe payments
+    - Google Oath token signin process.
+    - Account creation.
+    - Serve requested account data.
+    - Server requested custom video requests.
+    - Stripe payout account creation.
+    - Accepting video requests and processing stripe payments.
+    - Rejecting video requests and refunding stripe payments.
 
 
 - Postgres Database
-    - Contains account data
+    - Contains account data.
     - Array of requested videos.
-    - Holds stripe account data for processing payouts
+    - Holds stripe account data for processing payouts.
 
 
- ### Tools & Dependencies needed: 
+ ### Tools & Dependencies used: 
 
-- React & Node, Express for frontend/backend
+- React & Node, Express for frontend/backend.
 
-- Bootstrap for easy responsive design & prettiness
+- Bootstrap for easy responsive design & prettiness.
 
-- Google OAuth tokens for safe sign in/athentication functionalities
+- Google OAuth tokens for safe sign in/athentication functionalities.
 
 - Stripe for accepting online payments and handling payouts.
 
-- Knex for database transactions
+- Knex for database transactions.
 
-- Heroku & GH-pages for hosting
+- Heroku & GH-pages for hosting.
 
+
+## Links
+
+- [Backend code](https://github.com/Jupemon/Video-Requester-Backend)
+- [Frontend code](https://github.com/Jupemon/video-requester)
 
 ## Future plans
 
