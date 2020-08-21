@@ -11,7 +11,7 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 2. This generates a new account on the database and signs you in.
 
-3. Click on the link to create a stripe payout account. Creating it allows you to receive processed payments from your fans.
+3. Click on the link to create a stripe payout account. Creating it allows you to receive payouts through stripe.
 
 4. Set a price for custom video requests. This is the amount needed to pay in order to leave a custom video request.
 
@@ -21,7 +21,7 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 7. All of these custom video requests will show up on your account page.
 
-8. You can reject any of the video requests which you don't want to fulfill, this action refunds the payment.
+8. You can reject any of the video requests which you don't want to fulfill, this action refunds the stripe payment.
 
 9. Accept the video requests which you plan on fulfilling.
 
@@ -32,9 +32,9 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 ## How i built it
 
-I had to create two seperate frontend views, a server and database. I started by defining the project parts and the functionalities they needed :
+I started by defining the project parts and the functionalities they needed :
 
-- React Frontend client for account management. 
+- Page for creating/managing the user account. 
     - Handle signin with Google tokens.
     - Fetches account data from the database.
     - Fetches custom video requests from the database.
@@ -44,41 +44,43 @@ I had to create two seperate frontend views, a server and database. I started by
     - Allows accepting a video request which processes the stripe payment.
     
 
-- React Frontend client for video requests
-    - Fetches account data from the rest API.
+- Page for requesting custom videos
+    - Fetches specific account data from the database.
     - Allows fans to make payments with stripe.
-    - Allows requesting custom video content from a specific account.
+    - Allows sending a custom video request to the database.
 
 
-- NodeJS server/rest API
-    - Google Oath token signin process.
-    - Account creation.
-    - Serve requested account data.
-    - Server requested custom video requests.
-    - Stripe payout account creation.
-    - Accepting video requests and processing stripe payments.
-    - Rejecting video requests and refunding stripe payments.
+- NodeJS server
+    - Fetch from google accounts
+    - Initializes an account on the database.
+    - Serve account data from the database.
+    - Serve custom video requests from the database.
+    - Handle stripe account creation.
+    - Processes the stripe payments.
+    - Handle refunding the stripe payments.
 
 
 - Postgres Database
     - Contains account data.
     - Array of requested videos.
-    - Holds stripe account data for processing payouts.
+    - Holds stripe account data for processing payouts to connected accounts.
 
 
  ### Tools & Dependencies used: 
 
-- React & Node, Express for frontend/backend.
+- Built with **React** & **Node**
 
-- Bootstrap for easy responsive design & prettiness.
+- **Bootstrap** For easy responsive design and the components look cool.
 
-- Google OAuth tokens for safe sign in/athentication functionalities.
+- **Google OAuth** Allows signning in with google
 
-- Stripe for accepting online payments and handling payouts.
+- **Stripe** for accepting online payments and handling payouts for connected stripe accounts.
 
-- Knex for database transactions.
+- **Knex** Database transactions.
 
-- Heroku & GH-pages for hosting.
+- **Heroku** Hosts the node server.
+
+- **GH-pages** Package for hosting on github pages.
 
 
 ## Links
@@ -88,4 +90,4 @@ I had to create two seperate frontend views, a server and database. I started by
 
 ## Future plans
 
-I plan on adding Hashing for the database and splitting the project into two seperate frontend clients. This helps with security and lightens the project size.
+I plan on adding Hashing for the database and splitting the project into two seperate frontend clients. This should reduce the project size and increase security.
