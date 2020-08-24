@@ -3,7 +3,7 @@
 
 ## The idea behind the project
 
-I noticed that youtubers need more ways to generate revenue from their audience. I decided to create a video requesting site for it. The idea was to create a web app where youtubers could receive custom video requests from their audience. (similiar to [Cameo](https://www.cameo.com) but specifically designed for youtubers) Youtubers can setup their own account and set a price for custom video requests.
+I noticed that youtubers need more ways to generate revenue from their audience. I decided to create a video requesting site for it. The idea was to create a web app where youtubers could receive custom video requests from their audience. (similiar to [Cameo](https://www.cameo.com) but specifically designed for youtubers) Youtubers can setup their own account and set a price for custom video requests. The app is only used for collecting payments and custom video requests, not for hosting videos.
 
 ## How it works
 
@@ -17,7 +17,7 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 5. This generates an URL address which you can share with your audience.
  
-6. Your fans can now write you their custom video requests in exchance for payment using this URL.
+6. Your fans can now write you their custom video requests using this URL.
 
 7. All of these custom video requests will show up on your account page.
 
@@ -30,12 +30,12 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 11. Fulfill the video requests by uploading the custom videos to your youtube channel.
 
 
-## How i built it
+## Project anatomy
 
-I started by defining the project parts and the functionalities they needed :
+The frontend client is split into two seperate pages for two different users : One page for account creation/management and the other for sending video requests to those accounts. I made a list defining the project parts and seperate the functionalities they needed :
 
 - Page for creating/managing the user account. 
-    - Handle signin with Google tokens.
+    - Handle signin with Google.
     - Fetches account data from the database.
     - Fetches custom video requests from the database.
     - Allows stripe payout account creation.
@@ -46,15 +46,15 @@ I started by defining the project parts and the functionalities they needed :
 
 - Page for requesting custom videos
     - Fetches specific account data from the database.
-    - Allows fans to make payments with stripe.
-    - Allows sending a custom video request to the database.
+    - Allows fans to make payments to specific accounts with stripe.
+    - Allows fans to write a custom video request to a specific account.
 
 
 - NodeJS server
-    - Fetch from google accounts
+    - Fetch google user data.
     - Initializes an account on the database.
     - Serve account data from the database.
-    - Serve custom video requests from the database.
+    - Serve a list of custom video requests from the database.
     - Handle stripe account creation.
     - Processes the stripe payments.
     - Handle refunding the stripe payments.
@@ -62,7 +62,7 @@ I started by defining the project parts and the functionalities they needed :
 
 - Postgres Database
     - Contains account data.
-    - Array of requested videos.
+    - A large array of custom video requests.
     - Holds stripe account data for processing payouts to connected accounts.
 
 
@@ -70,17 +70,19 @@ I started by defining the project parts and the functionalities they needed :
 
 - Built with **React** & **Node**
 
-- **Bootstrap** For easy responsive design and the components look cool.
+- **Express** For creating the API.
 
-- **Google OAuth** Allows signning in with google
+- **Bootstrap** For easy responsive design and cool components.
 
-- **Stripe** for accepting online payments and handling payouts for connected stripe accounts.
+- **Google-auth-library** Handles google signin and getting google account data.
 
-- **Knex** Database transactions.
+- **Stripe** For accepting online payments, creating connected accounts and making payouts to those accounts.
+
+- **Knex** Handle database transactions.
 
 - **Heroku** Hosts the node server.
 
-- **GH-pages** Package for hosting on github pages.
+- **GH-pages** Hosts the frontend client.
 
 
 ## Links
@@ -90,4 +92,4 @@ I started by defining the project parts and the functionalities they needed :
 
 ## Future plans
 
-I plan on adding Hashing for the database and splitting the project into two seperate frontend clients. This should reduce the project size and increase security.
+I plan on adding hashing for the database and splitting the project into two seperate frontend clients. This should reduce the project size and increase security.
