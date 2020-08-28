@@ -85,10 +85,25 @@ The frontend client is split into two seperate pages for two different users : O
 - **GH-pages** Hosts the frontend client.
 
 
+
+## How and why the google account data is used
+
+- Sign in requires the user to give the app access to their google account data. 
+
+- This action generates a google token on the frontend client. The token expires after a while and can be used to pull google account data.
+
+- The token is sent to the server where Google API is used to pull some account data from it.
+
+- The pulled data( first name, last name, email, etc. ) is saved on a database. 
+
+- The data is later used when creating a connected Stripe account and usefull when implementing certain security features.
+
+
 ## Links
 
 - [Backend code](https://github.com/Jupemon/Video-Requester-Backend)
 - [Frontend code](https://github.com/Jupemon/video-requester)
+
 
 ## Future plans
 
