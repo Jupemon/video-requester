@@ -1,26 +1,18 @@
-.intro-headline {
+.box-1 {
   animation: appear;
   animation-duration: 1.5s;
 }
 
-.intro-text {
+.box-2 {
   animation: appear;
-  animation-duration: 1.5s;
+  animation-duration: 2.5s;
 }
 
-.intro-slider {
-  animation: slide;
-  animation-duration: 1.5s;
-}
-.intro-slider-content {
+.box-3 {
   animation: appear;
-  animation-duration: 2s;
+  animation-duration: 3.5s;
 }
 
-@keyframes slide {
-  from {width: 0% }
-  to {width: 100% }
-}
 
 @keyframes appear {
   from {opacity: 0 }

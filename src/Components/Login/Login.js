@@ -16,7 +16,6 @@ class Login extends Component {
 
     logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
 
-
       this.setState({isLoading : true})
 
       const token_id = googleUser.tokenId;
@@ -84,15 +83,15 @@ class Login extends Component {
 
               <Row>
                 <Col >
-                  <div className="jumbotron" style={{backgroundColor:"white"}}>
+                  <div className="box-1">
                     <i style={{marginBottom : "25px"}} className="fas fa-user-plus fa-4x"></i>
                     <h1 classNameName="display-4">1. Sign in</h1>
                     <p classNameName="lead">Setup your account by signing in with your youtube/google account</p>
                   </div>
                 </Col>
 
-                <Col >
-                  <div className="jumbotron" style={{backgroundColor:"white"}}>
+                <Col>
+                <div className="box-2">
                     <i style={{marginBottom : "25px"}} className="fas fa-upload fa-4x"></i>
                     <h1 classNameName="display-4">2. Setup your account</h1>
                     <p classNameName="lead">Setup your account and start accepting custom video requests</p>
@@ -100,14 +99,14 @@ class Login extends Component {
                 </Col>
 
                 <Col >
-                  <div className="jumbotron" style={{backgroundColor:"white"}}>
+                <div className="box-3">
                     <i style={{marginBottom : "25px"}} className="fas fa-dollar-sign fa-4x"></i>
                     <h1 classNameName="display-4">3. Gain revenue</h1>
                     <p classNameName="lead">Fullfill custom video requests and gain revenue</p>
                   </div>
                 </Col>
-                
               </Row>
+
             </Container>
           </div>
         );
