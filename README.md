@@ -107,4 +107,4 @@ The frontend client is split into two seperate pages for two different users : O
 
 ## Future plans
 
-I plan on adding hashing for the database and splitting the project into two seperate frontend clients. This should reduce the project size and increase security.
+I plan on adding hashing for the database and cleaning the code
