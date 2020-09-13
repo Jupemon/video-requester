@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button, Card} from 'react-bootstrap';
 
 
-class RequestInfo extends Component {
+class RequestsInfo extends Component {
     state = {  }
     render() { const { unfulfilledRequestsAmount, fulfilledRequestsAmount, requestsAmount } = this.props
     console.log(unfulfilledRequestsAmount, fulfilledRequestsAmount, requestsAmount, "WATCH THESE")
@@ -23,4 +23,4 @@ class RequestInfo extends Component {
     }
 }
  
-export default RequestInfo;
+export default RequestsInfo;

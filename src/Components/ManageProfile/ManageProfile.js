@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Jumbotron, Spinner } from 'react-bootstrap/';
+import { Container, Col, Row } from 'react-bootstrap/';
 import './ManageProfile.css';
 import VideoRequest from '../VideoRequest/VideoRequest';
-import RequestInfo from '../SharedComponents/RequestsInfo';
+import RequestsInfo from '../SharedComponents/RequestsInfo';
 import EditProfile from './EditProfile';
+import Loading from '../VideoRequest/Loading';
+import Profile from './Profile';
 
 class ManageProfile extends Component {
     state = {
@@ -64,27 +66,21 @@ class ManageProfile extends Component {
     render() { 
 
       const stripeState = this.state.data.stripeState
-      const data = this.state.data
 
-      if (this.state.loadingContent) {
-        return (
-          <div>
-            <Jumbotron>
-              <div className="headline">
-                <h1>Loading...</h1>
-                <p>loading info...</p>
-              </div>
-            </Jumbotron>
-            <div style={{paddingLeft:"50%", width:"100%"}}><Spinner animation="border" /></div>
-          </div>
-        )
-      } // Does a get request to get the profile, allows managing the profile
+      const {data, loadingContent } = this.state
+
+      if (loadingContent) {
+        return (<Loading/>)
+      }
+
+      else {
         return ( <div>
           <Container fluid>
-            <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id} price={data.video_price} currency={data.currency}/>
+          <EditProfile stripeState={stripeState} userName={data.username} user_id={data.user_id} price={data.video_price} currency={data.currency}/>
+          <RequestsInfo videoPrice={{price : data.video_price, currency: data.currency}} unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
             <Row>
               <Col>
-                <RequestInfo videoPrice={{price : data.video_price, currency: data.currency}} unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
+                <RequestsInfo videoPrice={{price : data.video_price, currency: data.currency}} unfulfilledRequestsAmount={this.state.data.requestsAmount - this.state.data.fulfilledRequestsAmount} fulfilledRequestsAmount={this.state.data.fulfilledRequestsAmount} requestsAmount={this.state.data.requestsAmount}/>
               </Col>
               {this.state.data.videorequests.map(vidReq => {
                   return (<Col> <VideoRequest key={vidReq.request_id} requestId={vidReq.request_id} description={vidReq.description} title={vidReq.title} videoId={vidReq.video_id}/></Col>)
@@ -92,6 +88,8 @@ class ManageProfile extends Component {
             </Row>
           </Container>
         </div> );
+      }
+
     }
 }
  

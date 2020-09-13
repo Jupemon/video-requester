@@ -1,6 +1,8 @@
 
 # Video requesting application
 
+# Developing
+
 ## The idea behind the project
 
 I noticed that youtubers need more ways to generate revenue from their audience. I decided to create a video requesting site for it. The idea was to create a web app where youtubers could receive custom video requests from their audience. (similiar to [Cameo](https://www.cameo.com) but specifically designed for youtubers) Youtubers can setup their own account and set a price for custom video requests. The app is only used for collecting payments and custom video requests, not for hosting videos.
@@ -72,7 +74,7 @@ The frontend client is split into two seperate pages for two different users : O
 
 - **Express** For creating the API.
 
-- **Bootstrap** For easy responsive design and cool components.
+- **Bootstrap** For easy responsive design and cool react components.
 
 - **Google-auth-library** Handles google signin and getting google account data.
 
@@ -91,6 +93,8 @@ The frontend client is split into two seperate pages for two different users : O
 - Sign in requires the user to give the app access to their google account data. 
 
 - This action generates a google token on the frontend client. The token expires after a while and can be used to pull google account data.
+
+- The token is saved on the frontend client ( localstorage ) and used to secure and identify users (kinda like JWT tokens) 
 
 - The token is sent to the server where Google API is used to pull some account data from it.
 
