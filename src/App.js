@@ -1,23 +1,29 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import Login from './Components/Login/Login';
-import ViewProfile from './Components/ViewProfile/ViewProfile';
-import NotFound from './Components/NotFound';
+import ManageProfile from './Views/ManageProfile';
+import NotFound from './Views/NotFound';
+import ViewProfile from './Views/ViewProfile';
+
 
 function App() { // /viewprofile"
-  return (<Router basename="/video-requester">
+  return (
+  <Router basename="/video-requester">
     <Switch>
+    
       <Route exact path="/">
-        <Login />
+        <ManageProfile/>
       </Route>
+
       <Route path='/viewprofile'>
         <ViewProfile />
       </Route>
-      <Route component={NotFound}/>
-    </Switch>
 
-  </Router>)
+      <Route component={NotFound}/>
+
+    </Switch>
+  </Router>
+  )
 
 }
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class EditRequest extends Component {
+class CreateVideoRequest extends Component {
     state = {  }
     render() { 
         return ( <div>
-            allows fulfilling request
+            Hello world
         </div> );
     }
 }
  
-export default EditRequest;
+export default CreateVideoRequest;

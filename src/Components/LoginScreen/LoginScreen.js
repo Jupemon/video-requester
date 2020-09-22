@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import LoginButton from './LoginButton';
-import ManageProfile from '../ManageProfile/ManageProfile';
-import './Login.css'
+//import ManageProfile from '../ManageProfile/ManageProfile';
+import './LoginScreen.css'
 import { Row, Col, Jumbotron, Container } from 'react-bootstrap';
-import Profile from '../ManageProfile/Profile';
+//import Profile from '../ManageProfile/Profile';
 
 
-class Login extends Component {
+class LoginScreen extends Component {
 
   state = { 
       isLoading : false,
@@ -15,7 +15,6 @@ class Login extends Component {
     }
 
     handleClick = (googleUser) => { 
-
       const data = JSON.parse(localStorage.getItem("user_data"))
 
       if (data) { // Load profile from localstorage
@@ -27,58 +26,45 @@ class Login extends Component {
       }
     }
 
-    logIn = (googleUser) => { // login happens checks if user already exists in the database, create a new profile if not
+    fetchData = async ( googleUser )=> { // Send google token_id to be verified on server
 
       this.setState({isLoading : true})
 
-      const token_id = googleUser.tokenId;
+      try {
+        const token_id = googleUser.tokenId;
 
-      fetch("http://localhost:3001/signin", {
-        method : "POST",
-        headers : {
-          'Content-Type' : "application/json"
-        },
-        body : JSON.stringify({
-          token_id : token_id              
-        })
-
-      })
-      .then(res => {
-        if (res.status === 200) { // user alredy exists
-            res.json().then(data => {
-            this.setState({loggedIn : true, data : data})
-            window.localStorage.setItem('token_id', token_id) // Used to verify user on some get requests
-            window.localStorage.setItem('user_data', JSON.stringify(data))
+        const response = await fetch('http://localhost:3001/signin', {
+          method : "POST",
+          headers : {
+            'Content-Type' : "application/json"
+          },
+          body : JSON.stringify({
+            token_id : token_id
           })
+        })
+  
+        if (response.status === 200 || response.status === 201) {
+          const parsedData = await response.json()
+          window.localStorage.setItem('token_id', token_id) // Used to verify user on some http requests
+          this.props.loadProfile(parsedData)
+  
         }
-
-        else if (res.status === 201) { // new user created
-          res.json().then(data => {
-            this.setState({loggedIn : true, data : data})
-            window.localStorage.setItem('token_id', token_id) // Used to verify user on some get requests
-            window.localStorage.setItem('user_data', JSON.stringify(data)) 
-            })
+  
+        else {
+          throw "Couldnt sign in"
+  
         }
+      }
 
-        else { // Login failed
-            this.setState({errorInfo : "Something went wrong, couldn't sign in"})
-        }
-          
-      })
-      .catch(er => {
-        this.setState({errorInfo : "Couldn't connect to the server"})
-      })
-      .finally(() => {
-        this.setState({isLoading : false})
-      })   
+      catch{
+        this.setState({errorInfo : "Couldn't sign in"})
+        
+      }
+      
 
+      
     }
-
-
-     logInFailure = () => { // Something went wrong with  google authentication login
-        alert("failed to login")
-    }
-
+    
     render() {
 
       const {errorInfo, isLoading, data} = this.state
@@ -87,12 +73,11 @@ class Login extends Component {
         return ( 
           <div className="Content">
             <Container>
-            <Profile userName={"jupemon@gmail.com"} user_id={"134"} price={"50"} currency={"EUR"}/>
               <Jumbotron>
                 <h1 style={{fontSize:"85px"}} className="display-4">Vregs</h1>
                 <p className="lead">Allows youtubers to get video requests and sell custom video content</p>
                 <hr className="my-4" />
-                <LoginButton isLoading={isLoading} logInFailure={this.logInFailure} logIn={this.logIn}/>
+                <LoginButton isLoading={isLoading} logInFailure={this.logInFailure} logIn={this.fetchData}/>
                 <p style={{color:"red"}}>{errorInfo}</p>
               </Jumbotron>
 
@@ -128,11 +113,11 @@ class Login extends Component {
       }
         else if (data) {
             return (<div>
-                <ManageProfile data={data}/>
+                
             </div>)
         }
     }
 }
  
  
-export default Login;
+export default LoginScreen;
