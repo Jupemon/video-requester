@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import Accepted from './Accepted';
-import Rejected from './Rejected';
+import Accept from './Accept';
+import Reject from './Reject';
 
 class Buttons extends Component {
     state = { 
@@ -16,11 +16,11 @@ class Buttons extends Component {
         const { accepted } = this.state
 
         if (accepted === true) {
-            return <Accepted loadYoutubePlayer={this.props.loadYoutubePlayer} cancel={this.cancel} requestId={this.props.requestId}/>
+            return <Accept loadYoutubePlayer={this.props.loadYoutubePlayer} cancel={this.cancel} requestId={this.props.requestId}/>
         }
 
         else if (accepted === false) {
-            return <Rejected cancel={this.cancel} requestId={this.props.requestId}/>
+            return <Reject rejectVideo={this.props.rejectVideo} cancel={this.cancel} requestId={this.props.requestId}/>
         }
 
         else {

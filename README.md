@@ -112,3 +112,15 @@ The frontend client is split into two seperate pages for two different users : O
 ## Future plans
 
 I plan on adding hashing for the database and cleaning the code
+
+
+
+
+
+## Project Anatomy
+
+- Views = Acts as a parent for all the components, Renders all the needed react components for the page
+
+- Components = Holds the react components.
+    - ManageProfile -> 
+        - LoginScreen -> Allows user to sign in with t

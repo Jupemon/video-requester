@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
 
-class Rejected extends Component {
+class Reject extends Component {
     state = { 
         loading : false,
         rejected : false,
@@ -25,6 +25,7 @@ class Rejected extends Component {
 
         if (response.status===200) {
             this.setState({ rejected: true, loading: false })
+            this.props.rejectVideo()
         }
 
         else {
@@ -36,7 +37,6 @@ class Rejected extends Component {
     handleClick = () => {
         const token_id = window.localStorage.getItem('token_id')
         const { requestId } = this.props
-
         this.fetchData(token_id, requestId)
     }
 
@@ -66,4 +66,4 @@ class Rejected extends Component {
     }
 }
 
-export default Rejected;
+export default Reject;

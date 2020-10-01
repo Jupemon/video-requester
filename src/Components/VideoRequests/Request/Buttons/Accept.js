@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
-class Accepted extends Component {
+class Accept extends Component {
     state = { 
         placeHolder : "Enter a youtube URL",
         input : "",
@@ -39,7 +39,7 @@ class Accepted extends Component {
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         var match = url.match(regExp);
 
-        if (match && match[2].length == 11) {
+        if (match && match[2].length === 11) {
           return match[2];
         }
 
@@ -87,4 +87,4 @@ class Accepted extends Component {
     }
 }
  
-export default Accepted;
+export default Accept;

@@ -1,57 +1,60 @@
 import React, { Component } from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
-import Request from './Request';
+import { Row, Col } from 'react-bootstrap';
+import Request from './Request/Request';
+import RequestsInfo from './RequestsInfo';
 
 class VideoRequests extends Component {
-    state = { 
-        loading : true,
-        videoRequests : [],
-        errorMessage : ""
-     }
 
-    fetchVideoRequests = async (user_id) => {
-        try {
-            const response = await fetch(`http://localhost:3001/getvideorequests/${user_id}`)
-            const videoRequests = await response.json()
-            this.setState({ videoRequests, loading : false })
-        }
-        catch {
-            this.setState({errorMessage : "Couldnt find any videoRequests", loading : false})
-        }
+    state = { 
+        videoRequests : [],
+        errorMessage : "",
+        youtubeLoaded : false
     }
+
+    youtubeLoaded = () => {
+        this.setState({youtubeLoaded : true})
+    }
+
+    loadYoutubeScripts = () => {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        window.onYouTubeIframeAPIReady = this.youtubeLoaded// Called after scripts have been loaded
+    }
+
 
     componentDidMount() {
-        this.fetchVideoRequests(this.props.userId)
+        this.loadYoutubeScripts()
     }
-    
-    
+
+
+
     render() { 
-        const { videoRequests, loading } = this.state
-        const { viewOnly } = this.props
-
-        if (loading) {
-            return <div>Loading</div>
-        }
-
-        if (videoRequests.length <= 0)  {
-            return <div>No Videorequests found</div>
-        }
-
-        if (viewOnly) {
-            return ( <Row>
-                {videoRequests.map(vr => {
-                    return <Col><Request viewOnly data={vr}/></Col>
-                })}
-            </Row> );
+        const { viewOnly, videoRequests } = this.props
+        const { requests, status } = videoRequests;
+        const { youtubeLoaded } = this.state
+        
+        if (youtubeLoaded) {
+            return (
+                <Row>
+                <Col>
+                    <RequestsInfo status={status}/>
+                </Col>
+                    
+                    {requests.map(vr => {
+                        return <Col key={vr.request_id} style={{marginBottom : "20px"}}><Request viewOnly={viewOnly} data={vr}/></Col>
+                    })}
+                </Row> 
+            );
         }
 
         else {
-            return ( <Row>
-                {videoRequests.map(vr => {
-                    return <Col><Request data={vr}/></Col>
-                })}
-            </Row> );
+            return <div>Loading</div>
         }
+      
+
 
     }
 }

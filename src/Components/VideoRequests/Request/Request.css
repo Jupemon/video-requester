@@ -1,0 +1,14 @@
+.card-body {
+    padding: 3px;
+}
+
+.card {
+    width: 25rem;
+}
+
+.status {
+    text-align: center;
+    margin-bottom: 178px;
+    margin-top: 178px;
+    font-size: 25px;
+}

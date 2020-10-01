@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Jumbotron, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import LoginScreen from '../Components/LoginScreen/LoginScreen';
 import Profile from '../Components/Profile/Profile';
 import VideoRequests from '../Components/VideoRequests/VideoRequests';
@@ -7,42 +7,29 @@ import VideoRequests from '../Components/VideoRequests/VideoRequests';
 class ManageProfile extends Component {
 
     state = {
-        profile : null
+        profile : false
     }
 
-    localSignin = () => { // Loads profile from localstorage
-        
-        const profile = JSON.parse(localStorage.getItem('profile'))
-
-        if (profile !== null ) {
-            this.setState({ profile })
-        }
-    }
-
-    loadProfile = (profile) => { // Called by loginscreen component
-
-        window.localStorage.setItem('profile', JSON.stringify(profile)) // Used to verify user on some get requests
+    loadProfile = (profile) => { // Called once user signs in, loads the profile
         this.setState({ profile })
-    }
-
-    componentDidMount() {
-        this.localSignin()
     }
 
     render() { 
         const { profile } = this.state
-        console.log(profile, "DING")
-        if (profile !== null) {
+        const { videoRequests, user_id } = profile
+
+        if (profile) { // Load the user profile
 
             return ( 
             <Container>
                 <Profile profile={profile}/>
-                <VideoRequests user_id={profile.user_id}/>
+                <VideoRequests videoRequests={videoRequests} userId={user_id}/>
             </Container> 
             );
         }
 
-        else {
+        else { // User needs to sign in
+
             return ( 
             <Container>
                 <LoginScreen loadProfile={this.loadProfile}/>
