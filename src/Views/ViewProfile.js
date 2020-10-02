@@ -38,9 +38,10 @@ class ViewProfile extends Component {
         }
     }
 
-    updateVideorequests = (updatedVideorequests) => { // Re renders videorequests, called by createvideorequest component
+    updateRequests = (updatedVideorequests) => { // Re renders updated videorequests
         this.setState({videoRequests : updatedVideorequests})
     }
+
 
     componentDidMount() {
 
@@ -60,8 +61,8 @@ class ViewProfile extends Component {
         if (videoRequests) { // Render videorequests
             return (
                 <Container>
-                    <CreateVideoRequest updateVideorequests={this.updateVideorequests} userId={userId}/>
-                        <VideoRequests viewOnly videoRequests={videoRequests}/>
+                    <CreateVideoRequest updateRequests={this.updateRequests} userId={userId}/>
+                        <VideoRequests updateRequests={this.updateRequests} viewOnly videoRequests={videoRequests}/>
                 </Container>
             )
         }

@@ -23,7 +23,7 @@ class CreateVideoRequest extends Component {
         if (response.status === 201) {
             const updatedRequests = await response.json()
             this.setState({loading : false, infoMessage : "Videorequest Created", title : "", description : ""})
-            this.props.updateVideorequests(updatedRequests)
+            this.props.updateRequests(updatedRequests)
         }
 
         else {
@@ -36,9 +36,10 @@ class CreateVideoRequest extends Component {
 
         const { title, description } = this.state
 
-        if ( title.length > 0 && description.length > 0 ) {
+        if (title.length > 0 && description.length > 0) {
             return true
         }
+
 
         else {
             return false
@@ -65,7 +66,7 @@ class CreateVideoRequest extends Component {
         }
 
         else {
-            this.setState({infoMessage : "Invalid Input"})
+            this.setState({infoMessage : "Invalid input"})
         }
         
     }
@@ -86,14 +87,14 @@ class CreateVideoRequest extends Component {
                             <InputGroup.Append>
                                 <InputGroup.Text id="basic-addon2">Title</InputGroup.Text>
                             </InputGroup.Append>
-
-                            <FormControl                          
+                            <input 
+                            type="text"
                             disabled={loading}
                             onChange={(e) => {this.setState({title : e.target.value})}}
                             value={title}
-                            aria-label="Recipient's username"
-                            aria-describedby="basic-addon2"
+                            maxlength="25"
                             />
+
 
                         </InputGroup>
 
@@ -101,12 +102,12 @@ class CreateVideoRequest extends Component {
                             <InputGroup.Prepend>
                             <InputGroup.Text>Description</InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl 
+                            <textarea 
+                            type="textarea"
                             disabled={loading}
-                            onChange={(e) => {this.setState({description : e.target.value})}} value={description}
-                            as="textarea"
-                            placeholder="What kind of a video are you looking for?"
-                            aria-label="With textarea" 
+                            onChange={(e) => {this.setState({description : e.target.value})}}
+                            value={description}
+                            maxlength="250"
                             />
                         </InputGroup>
 
@@ -133,3 +134,13 @@ class CreateVideoRequest extends Component {
  
 export default CreateVideoRequest;
 
+
+
+/*
+                            <FormControl                          
+                            disabled={loading}
+                            onChange={(e) => {this.setState({title : e.target.value})}}
+                            value={title}
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                            />*/

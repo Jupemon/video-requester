@@ -32,16 +32,6 @@ class Request extends Component {
         }
     }
 
-    rejectVideo = () => { // Called by reject videorequest button
-
-        this.setState({status : "rejected"})
-    }
-
-    loadYoutubePlayer = (videoId) => { // Called by accept videorequest button
-
-        this.setState({status : "fulfilled", videoId : videoId})
-    }
-
     render() { 
         const {title, description, request_id } = this.props.data
         const { viewOnly } = this.props
@@ -54,7 +44,7 @@ class Request extends Component {
                 {videoId ? <YoutubePlayer requestId={request_id} videoId={videoId}/> : <Status status={status}/>}
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{description}</Card.Text>
-                {viewOnly || status !== "pending" ? null : <Buttons loadYoutubePlayer={this.loadYoutubePlayer} rejectVideo={this.rejectVideo} requestId={request_id}/>}
+                {viewOnly || status !== "pending" ? null : <Buttons updateRequests={this.props.updateRequests} requestId={request_id}/>}
             </Card.Body>
         </Card> );
 

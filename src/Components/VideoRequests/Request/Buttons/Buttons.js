@@ -14,13 +14,13 @@ class Buttons extends Component {
 
     render() { 
         const { accepted } = this.state
-
+        
         if (accepted === true) {
-            return <Accept loadYoutubePlayer={this.props.loadYoutubePlayer} cancel={this.cancel} requestId={this.props.requestId}/>
+            return <Accept updateRequests={this.props.updateRequests} cancel={this.cancel} requestId={this.props.requestId}/>
         }
 
         else if (accepted === false) {
-            return <Reject rejectVideo={this.props.rejectVideo} cancel={this.cancel} requestId={this.props.requestId}/>
+            return <Reject updateRequests={this.props.updateRequests} cancel={this.cancel} requestId={this.props.requestId}/>
         }
 
         else {

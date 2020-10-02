@@ -92,7 +92,13 @@ The frontend client is split into two seperate pages for two different users : O
 
     - **Profile** = Renders information about the profile
 
-    - **VideoRequests** = Renders videorequests, display status information about them.
+    - **VideoRequests Folder** = Contains component which renders videorequests
+
+        - *RequestsInfo* = Display status information about the videorequests
+
+        - *VideoRequests* = Renders Request components, ViewOnly property determines if user can edit their status
+
+            - *Request* = !viewOnly allows user to edit request status
 
 
 - ## Backend anatomy

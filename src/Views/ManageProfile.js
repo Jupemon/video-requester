@@ -14,6 +14,12 @@ class ManageProfile extends Component {
         this.setState({ profile })
     }
 
+    updateRequests = (updatedVideorequests) => { // Re renders updated videorequests
+        console.log("HQPPEN")
+        this.setState({videoRequests : updatedVideorequests})
+    }
+
+
     render() { 
         const { profile } = this.state
         const { videoRequests, user_id } = profile
@@ -23,7 +29,7 @@ class ManageProfile extends Component {
             return ( 
             <Container>
                 <Profile profile={profile}/>
-                <VideoRequests videoRequests={videoRequests} userId={user_id}/>
+                <VideoRequests updateRequests={this.updateRequests} videoRequests={videoRequests} userId={user_id}/>
             </Container> 
             );
         }

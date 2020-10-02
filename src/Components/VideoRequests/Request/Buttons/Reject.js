@@ -4,11 +4,12 @@ import { Button } from 'react-bootstrap';
 
 class Reject extends Component {
     state = { 
+        error : "",
         loading : false,
         rejected : false,
      }
 
-    fetchData = async (token_id, requestId) => {
+    fetchData = async (token_id, requestId) => { // Set videorequest status to rejected, update videorequests
 
         this.setState({ loading: true })
 
@@ -24,12 +25,16 @@ class Reject extends Component {
         })
 
         if (response.status===200) {
-            this.setState({ rejected: true, loading: false })
-            this.props.rejectVideo()
+
+            this.setState({ loading: false })
+
+            const updatedRequests = await response.json()
+
+            this.props.updateRequests(updatedRequests)
         }
 
         else {
-            this.setState({ loading: false })
+            this.setState({ loading: false, error : "Failed to update" })
         }
 
     }

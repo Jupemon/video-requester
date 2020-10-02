@@ -6,7 +6,6 @@ import RequestsInfo from './RequestsInfo';
 class VideoRequests extends Component {
 
     state = { 
-        videoRequests : [],
         errorMessage : "",
         youtubeLoaded : false
     }
@@ -44,7 +43,7 @@ class VideoRequests extends Component {
                 </Col>
                     
                     {requests.map(vr => {
-                        return <Col key={vr.request_id} style={{marginBottom : "20px"}}><Request viewOnly={viewOnly} data={vr}/></Col>
+                        return <Col key={vr.request_id} style={{marginBottom : "20px"}}><Request updateRequests={this.props.updateRequests} viewOnly={viewOnly} data={vr}/></Col>
                     })}
                 </Row> 
             );

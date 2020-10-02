@@ -25,8 +25,8 @@ class Accept extends Component {
         })
 
         if (response.status === 200) {
-            this.setState({input : "", loading: false})
-            this.props.loadYoutubePlayer(videoUrl)
+            const updatedRequests = await response.json()
+            this.props.updateRequests(updatedRequests)
         }
 
         else {
