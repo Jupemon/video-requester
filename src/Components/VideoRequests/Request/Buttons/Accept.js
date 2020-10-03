@@ -26,6 +26,7 @@ class Accept extends Component {
 
         if (response.status === 200) {
             const updatedRequests = await response.json()
+            this.setState({loading : false})
             this.props.updateRequests(updatedRequests)
         }
 

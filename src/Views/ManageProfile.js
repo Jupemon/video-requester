@@ -15,8 +15,12 @@ class ManageProfile extends Component {
     }
 
     updateRequests = (updatedVideorequests) => { // Re renders updated videorequests
-        console.log("HQPPEN")
-        this.setState({videoRequests : updatedVideorequests})
+
+        const { profile } = this.state
+
+        profile.videoRequests = updatedVideorequests
+
+        this.setState({ profile })
     }
 
 

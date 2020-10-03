@@ -37,7 +37,6 @@ class Request extends Component {
         const { viewOnly } = this.props
 
         const { status, videoId } = this.state
-        
         return (
         <Card bg={this.setBackground(status)}>
             <Card.Body>

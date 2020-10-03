@@ -10,14 +10,19 @@ class VideoRequests extends Component {
         youtubeLoaded : false
     }
 
-    youtubeLoaded = () => {
+    youtubeLoaded = () => { // Youtube I frame can now be used
+
         this.setState({youtubeLoaded : true})
     }
 
-    loadYoutubeScripts = () => {
+    loadYoutubeScripts = () => { // Load scripts needed to use youtube iframe
+
         var tag = document.createElement('script');
+
         tag.src = "https://www.youtube.com/iframe_api";
+
         var firstScriptTag = document.getElementsByTagName('script')[0];
+
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         window.onYouTubeIframeAPIReady = this.youtubeLoaded// Called after scripts have been loaded
@@ -25,6 +30,7 @@ class VideoRequests extends Component {
 
 
     componentDidMount() {
+
         this.loadYoutubeScripts()
     }
 
@@ -32,7 +38,9 @@ class VideoRequests extends Component {
 
     render() { 
         const { viewOnly, videoRequests } = this.props
+
         const { requests, status } = videoRequests;
+        
         const { youtubeLoaded } = this.state
         
         if (youtubeLoaded) {
