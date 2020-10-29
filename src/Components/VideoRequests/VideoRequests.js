@@ -41,6 +41,7 @@ class VideoRequests extends Component {
 
         const { requests, status } = videoRequests;
         
+        console.log(videoRequests, "THESE")
         const { youtubeLoaded } = this.state
         
         if (youtubeLoaded) {

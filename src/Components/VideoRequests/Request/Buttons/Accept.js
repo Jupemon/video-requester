@@ -37,31 +37,42 @@ class Accept extends Component {
 
 
     validateYoutubeUrl = (url) => { // validate youtube Url and return the video ID
+
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+
         var match = url.match(regExp);
 
         if (match && match[2].length === 11) {
+
           return match[2];
+
         }
 
         else {
+
           return false
+
         }
       }
 
 
     handleClick = () => { // called by fulfill button, validate input & send fetch request
+
         const input = this.state.input
+
         const validUrl = this.validateYoutubeUrl(input)
 
         if (validUrl) {
+
             const { requestId } = this.props
+
             const token_id =  window.localStorage.getItem('token_id')
 
             this.sendRequest(token_id, validUrl, requestId)
         }
 
         else {
+            
             this.setState({input : "", placeHolder : "Not a valid URL"})
         }
     }

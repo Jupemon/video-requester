@@ -9,10 +9,12 @@ class Buttons extends Component {
      }
 
     cancel = () => { // Called by Accepted component, sets accepted to undefined
+
         this.setState({accepted : undefined})
     }
 
     render() { 
+        
         const { accepted } = this.state
         
         if (accepted === true) {

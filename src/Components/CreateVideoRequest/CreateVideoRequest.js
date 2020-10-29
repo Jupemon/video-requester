@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Row, Col, Button, InputGroup, FormControl, Spinner } from 'react-bootstrap';
+import { Jumbotron, Row, Col, Button, InputGroup, Spinner } from 'react-bootstrap';
 
 class CreateVideoRequest extends Component {
 
@@ -11,24 +11,62 @@ class CreateVideoRequest extends Component {
     }
 
     sendVideoRequest = async (body) => { // Sends and creates a videorequest on the DB
-        const response = await fetch('http://localhost:3001/createrequest', {
-            method : "POST",
-            headers : {
-              'Content-Type' : "application/json"
-            },
-            body : JSON.stringify(body)
-          })
-        
 
-        if (response.status === 201) {
-            const updatedRequests = await response.json()
-            this.setState({loading : false, infoMessage : "Videorequest Created", title : "", description : ""})
-            this.props.updateRequests(updatedRequests)
+        try {
+            
+            const response = await fetch('http://localhost:3001/handle-checkout', {
+                method : "POST",
+                headers : {
+                  'Content-Type' : "application/json"
+                },
+                body : JSON.stringify(body)
+            })
+    
+
+            let checkoutSessionId
+
+            if (response.status === 201) { // New videorequest was created
+                
+                const updatedRequests = await response.json()
+
+                this.setState({loading : false, infoMessage : "New videorequest added"})
+                
+                this.props.updateRequests(updatedRequests)
+
+                
+
+            }
+
+            else if (response.status === 200) {
+                checkoutSessionId = await response.json()
+    
+                const stripe = window.Stripe(process.env.REACT_APP_PUBLIC_KEY)
+        
+                stripe.redirectToCheckout({
+    
+                    // Make the id field from the Checkout Session creation API response
+                    // available to this file, so you can provide it as argument here
+                    // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                    sessionId: checkoutSessionId
+                  })
+                  // If `redirectToCheckout` fails due to a browser or network
+                  // error, display the localized error message to your customer
+                  // using `error.message`.
+            }
+
+
+            else {
+                throw "Fetch failed"
+            }
+
+
         }
 
-        else {
+        catch (er){
+            console.log(er, "ERROR HERE")
             this.setState({loading : false, infoMessage : "Something went wrong"})
         }
+      
     }
 
 
@@ -37,11 +75,13 @@ class CreateVideoRequest extends Component {
         const { title, description } = this.state
 
         if (title.length > 0 && description.length > 0) {
+
             return true
         }
 
 
         else {
+
             return false
         }
 
@@ -49,7 +89,9 @@ class CreateVideoRequest extends Component {
 
 
     handleClick = () => {
+
         const { userId } = this.props
+
         const { title, description } = this.state
 
         const validInput = this.validateInput()
@@ -59,19 +101,23 @@ class CreateVideoRequest extends Component {
             const requestBody = {
                 title : title,
                 description : description,
-                user_id : userId,
+                user_id : Number.parseInt(userId),
             }
+
             this.setState({loading : true})
+
             this.sendVideoRequest(requestBody)
         }
 
         else {
+
             this.setState({infoMessage : "Invalid input"})
         }
         
     }
     
     render() { 
+
         const { loading, title, description, infoMessage } = this.state
 
         return(
@@ -79,6 +125,7 @@ class CreateVideoRequest extends Component {
                 <Row>
                     <Col>
                         <h1>Request a custom video :</h1>
+                        <p>Request Cost : 5 Eur</p>
                     </Col>
         
                     <Col>
@@ -94,7 +141,6 @@ class CreateVideoRequest extends Component {
                             value={title}
                             maxlength="25"
                             />
-
 
                         </InputGroup>
 
@@ -133,14 +179,3 @@ class CreateVideoRequest extends Component {
 }
  
 export default CreateVideoRequest;
-
-
-
-/*
-                            <FormControl                          
-                            disabled={loading}
-                            onChange={(e) => {this.setState({title : e.target.value})}}
-                            value={title}
-                            aria-label="Recipient's username"
-                            aria-describedby="basic-addon2"
-                            />*/

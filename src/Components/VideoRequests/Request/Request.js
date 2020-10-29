@@ -17,7 +17,7 @@ class Request extends Component {
          }
     }
 
-    setBackground = (status) => { // return the corresponding background color
+    setBackground = (status) => { // return the corresponding background color, based on request status
 
         if (status === "pending") {
             return "warning"
@@ -33,10 +33,13 @@ class Request extends Component {
     }
 
     render() { 
+
         const {title, description, request_id } = this.props.data
+
         const { viewOnly } = this.props
 
         const { status, videoId } = this.state
+        
         return (
         <Card bg={this.setBackground(status)}>
             <Card.Body>

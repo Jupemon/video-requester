@@ -14,6 +14,7 @@ class ViewProfile extends Component {
 
 
     getUserId = (location) => { // returns userID from href
+
         return location.split('viewprofile/')[1]
     }
 
@@ -24,21 +25,26 @@ class ViewProfile extends Component {
             const response = await fetch(`http://localhost:3001/videorequests/${user_id}`)
 
             if (response.status === 200) {
+
                 const videoRequests = await response.json()
+
                 this.setState({ videoRequests, loading : false })
             }
     
             else {
+
                 this.setState({error : true, errorMessage : "Profile doesn't exist", loading : false})
             }
         }
         
         catch {
+
             this.setState({error : true, errorMessage : "Could not get profile", loading : false})
         }
     }
 
     updateRequests = (updatedVideorequests) => { // Re renders updated videorequests
+
         this.setState({videoRequests : updatedVideorequests})
     }
 
@@ -46,12 +52,14 @@ class ViewProfile extends Component {
     componentDidMount() {
 
         const userId = this.getUserId(window.location.href)
+
         this.fetchVideoRequests(userId)
     }
 
 
     render() { 
         const userId = this.getUserId(window.location.href)
+        
         const { videoRequests, loading, errorMessage } = this.state
 
         if (loading) { // Loading

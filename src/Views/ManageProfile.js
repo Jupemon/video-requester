@@ -11,6 +11,7 @@ class ManageProfile extends Component {
     }
 
     loadProfile = (profile) => { // Called once user signs in, loads the profile
+
         this.setState({ profile })
     }
 
@@ -26,6 +27,7 @@ class ManageProfile extends Component {
 
     render() { 
         const { profile } = this.state
+        
         const { videoRequests, user_id } = profile
 
         if (profile) { // Load the user profile

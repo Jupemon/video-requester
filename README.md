@@ -76,7 +76,7 @@ The frontend client is split into two seperate pages for two different users : O
     - **Token_id** = gotten via google signin, used to verify user on certain backend routes
 
 
-- **Views Folder** = Renders different views for different users using the react components.
+- **Views Folder** = Renders different views for different cases using the react components.
 
     - ManageProfile = Allows creating a new profile, and managing it
     
@@ -92,34 +92,9 @@ The frontend client is split into two seperate pages for two different users : O
 
     - **Profile** = Renders information about the profile
 
-    - **VideoRequests Folder** = Contains component which renders videorequests
-
-        - *RequestsInfo* = Display status information about the videorequests
-
-        - *VideoRequests* = Renders Request components, ViewOnly property determines if user can edit their status
-
-            - *Request* = !viewOnly allows user to edit request status
-
-
-- ## Backend anatomy
-
-    - **Routes Folder**
-
-        - **CreateRequest** = Creates a new videorequest for a user, delete fulfilled/rejected videorequests
-
-        - **FulfillVideoRequest** = Set videorequest status to fulfilled and attach of youtube video link to it
-
-        - **RejectVideoRequest** = Set videorequest status to rejected
-
-        - **Signin** = Handle sign in / account creation on database
-
-
-    - **Transactions Folder** = hold functions which handle transactions with the database.
-
-
-    - **GoogleAuth** = Authenticate google tokens, pull data from google accounts
+    - **VideoRequests Folder** = Renders the created videorequests and all the info about them
 
 
 ## Future plans
 
-Stripe will be implemented once i have a greater working build
+I am currently adding Redux for state management
