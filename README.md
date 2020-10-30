@@ -11,13 +11,13 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 The frontend client is split into two seperate pages for two different users : One page for account creation/management and the other for sending video requests to those accounts. I made a list defining the project parts and seperate the functionalities they needed :
 
 - Page for creating/managing the user account. 
-    - Handle signin with Google.
+    - Asks for consent to access users youtube account.
     - Fetches account data from the database.
     - Fetches custom video requests from the database.
     - Allows stripe payout account creation.
     - Allows setting custom video prices.
     - Allows rejecting a video request which refunds the stripe payment.
-    - Allows accepting a video request which processes the stripe payment.
+    - Allows fulfilling a videorequest by uploading a video which is sent to the server. (The server uploads it to youtube via. google API)
     
 
 - Page for requesting custom videos
@@ -27,19 +27,19 @@ The frontend client is split into two seperate pages for two different users : O
 
 
 - NodeJS server
-    - Fetch google user data.
+    - Fetch youtube account data.
     - Initializes an account on the database.
     - Serve account data from the database.
     - Serve a list of custom video requests from the database.
-    - Handle stripe account creation.
+    - Handle stripe connected account creation.
     - Processes the stripe payments.
     - Handle refunding the stripe payments.
+    - Upload a youtube video gotten from client.
 
 
 - Postgres Database
     - Table of users and their account data.
     - Table of video requests.
-    - Holds stripe account data for processing payouts to connected accounts.
 
 
  ### Tools & Dependencies used: 
@@ -59,6 +59,8 @@ The frontend client is split into two seperate pages for two different users : O
 - **Heroku** Hosts the node server.
 
 - **GH-pages** Hosts the frontend client.
+
+- **Youtube DATA API** The app will be able to upload youtube videos to a specific channel, the API will perform this action
 
 
 
@@ -95,6 +97,6 @@ The frontend client is split into two seperate pages for two different users : O
     - **VideoRequests Folder** = Renders the created videorequests and all the info about them
 
 
-## Future plans
+## Current status
 
-I am currently adding Redux for state management
+I am building the Youtube API integration

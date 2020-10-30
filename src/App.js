@@ -5,7 +5,7 @@ import NotFound from './Views/NotFound';
 import ViewProfile from './Views/ViewProfile';
 
 
-function App() { // /viewprofile"
+function App() {
   return (
   <Router basename="/video-requester">
     <Switch>

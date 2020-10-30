@@ -5,7 +5,7 @@ class Profile extends Component {
     state = {  }
     render() {
         
-        const {user_id, onboarding_completed} = this.props.profile
+        const {channel_name, user_id, onboarding_completed} = this.props.profile
 
         const token_id = window.localStorage.getItem("token_id")
         
@@ -17,7 +17,7 @@ class Profile extends Component {
             </Col>
 
             <Col>
-                
+                <div>Channel name : {channel_name}</div>
                 <ul className="list-group">
                     <Button disabled={onboarding_completed} href={`http://localhost:3001/handle-onboarding/${token_id}`}>Integrade stripe</Button>
                     <li className="list-group-item">{`http://localhost:3000/viewprofile/${user_id}`}</li>

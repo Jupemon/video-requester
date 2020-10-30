@@ -24,8 +24,8 @@ class ManageProfile extends Component {
         this.setState({ profile })
     }
 
-
     render() { 
+
         const { profile } = this.state
         
         const { videoRequests, user_id } = profile
@@ -51,5 +51,6 @@ class ManageProfile extends Component {
 
     }
 }
+
  
-export default ManageProfile;
+export default ManageProfile
