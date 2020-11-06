@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const RequestsInfo = (props) => {
+const RequestsInfo = (props) => { // Render statuses of all videorequests
 
     const {pending, fulfilled, rejected, total} = props.status
 

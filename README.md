@@ -5,12 +5,14 @@
 ## The idea behind the project
 
 I noticed that youtubers need more ways to generate revenue from their audience. I decided to create a video requesting site for it. The idea was to create a web app where youtubers could receive custom video requests from their audience. (similiar to [Cameo](https://www.cameo.com) but specifically designed for youtubers) Youtubers can setup their own account and set a price for custom video requests. The app is only used for collecting payments and custom video requests, not for hosting videos.
+ 
 
 ## Project anatomy
 
 The frontend client is split into two seperate pages for two different users : One page for account creation/management and the other for sending video requests to those accounts. I made a list defining the project parts and seperate the functionalities they needed :
 
 - Page for creating/managing the user account. 
+    - Handle sign in with google (Generate a google auth token which is verified on the server)
     - Asks for consent to access users youtube account.
     - Fetches account data from the database.
     - Fetches custom video requests from the database.
@@ -27,7 +29,8 @@ The frontend client is split into two seperate pages for two different users : O
 
 
 - NodeJS server
-    - Fetch youtube account data.
+    - Verify google auth tokens
+    - Fetch google account data.
     - Initializes an account on the database.
     - Serve account data from the database.
     - Serve a list of custom video requests from the database.
@@ -60,8 +63,9 @@ The frontend client is split into two seperate pages for two different users : O
 
 - **GH-pages** Hosts the frontend client.
 
-- **Youtube DATA API** The app will be able to upload youtube videos to a specific channel, the API will perform this action
+- **Youtube DATA API** The app interacts with the google api and needs consent to perform actions on youtube accounts.
 
+- **Multer** Handle file uploads on the server, after user completes a videorequest a video is uploaded to their youtube channel.
 
 
 ## Links
@@ -75,7 +79,7 @@ The frontend client is split into two seperate pages for two different users : O
 
 - **localstorage** = Data stored on browser memory
 
-    - **Token_id** = gotten via google signin, used to verify user on certain backend routes
+    - **Token_id** = gotten with google signin, used to verify user on certain backend routes
 
 
 - **Views Folder** = Renders different views for different cases using the react components.

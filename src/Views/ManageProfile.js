@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import LoginScreen from '../Components/LoginScreen/LoginScreen';
 import Profile from '../Components/Profile/Profile';
+import SetupProfile from '../Components/Profile/SetupProfile';
 import VideoRequests from '../Components/VideoRequests/VideoRequests';
 
 class ManageProfile extends Component {
