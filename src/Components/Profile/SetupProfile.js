@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Jumbotron } from 'react-bootstrap';
 import './SetupProfile.css';
 
-class SetupProfile extends Component {
+class SetupProfile extends Component { // Force user to setup their profile before managing it
     state = {  }
 
     disableScrolling = () => { // Take a guess what this function does

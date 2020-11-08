@@ -5,7 +5,16 @@
 ## The idea behind the project
 
 I noticed that youtubers need more ways to generate revenue from their audience. I decided to create a video requesting site for it. The idea was to create a web app where youtubers could receive custom video requests from their audience. (similiar to [Cameo](https://www.cameo.com) but specifically designed for youtubers) Youtubers can setup their own account and set a price for custom video requests. The app is only used for collecting payments and custom video requests, not for hosting videos.
- 
+
+
+## Differences with Cameo
+
+Altought the app will offer the same functionality as cameo, here are some of the differences
+
+- **Google Signin** - This simplifies the sign in / sign up process.
+
+- **Youtube for video hosting** - All completed videorequests are uploaded on the connected youtube channel. No need to save the video files on disk since they are uploaded via the youtube API
+
 
 ## Project anatomy
 
