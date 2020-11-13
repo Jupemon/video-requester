@@ -58,6 +58,7 @@ class ViewProfile extends Component {
 
 
     render() { 
+        
         const userId = this.getUserId(window.location.href)
         
         const { videoRequests, loading, errorMessage } = this.state
@@ -67,9 +68,10 @@ class ViewProfile extends Component {
         }
         
         if (videoRequests) { // Render videorequests
+            const {videoPrice, currency} = videoRequests
             return (
                 <Container>
-                    <CreateVideoRequest updateRequests={this.updateRequests} userId={userId}/>
+                    <CreateVideoRequest updateRequests={this.updateRequests} userId={userId} currency={currency} videoPrice={videoPrice}/>
                         <VideoRequests updateRequests={this.updateRequests} viewOnly videoRequests={videoRequests}/>
                 </Container>
             )

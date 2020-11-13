@@ -117,7 +117,7 @@ class CreateVideoRequest extends Component {
     }
     
     render() { 
-
+        const { videoPrice, currency } = this.props
         const { loading, title, description, infoMessage } = this.state
 
         return(
@@ -125,7 +125,7 @@ class CreateVideoRequest extends Component {
                 <Row>
                     <Col>
                         <h1>Request a custom video :</h1>
-                        <p>Request Cost : 5 Eur</p>
+                        <p>Request Cost : {videoPrice} {currency}</p>
                     </Col>
         
                     <Col>
@@ -139,7 +139,7 @@ class CreateVideoRequest extends Component {
                             disabled={loading}
                             onChange={(e) => {this.setState({title : e.target.value})}}
                             value={title}
-                            maxlength="25"
+                            maxLength="25"
                             />
 
                         </InputGroup>
@@ -153,7 +153,7 @@ class CreateVideoRequest extends Component {
                             disabled={loading}
                             onChange={(e) => {this.setState({description : e.target.value})}}
                             value={description}
-                            maxlength="250"
+                            maxLength="250"
                             />
                         </InputGroup>
 

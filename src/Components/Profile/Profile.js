@@ -6,14 +6,13 @@ class Profile extends Component {
     state = {  }
     render() {
         
-        const {channel_name, user_id, onboarding_completed} = this.props.profile
-
+        const {channel_name, user_id, onboarding_completed, google_consent} = this.props.profile
+        console.log("PROOOOOOPS", this.props.profile)
         const token_id = window.localStorage.getItem("token_id")
-        console.log(token_id, "TOKEN BABY")
         
         return (
         <div>
-        <SetupProfile onboarding_completed={false} google_consent={false} token_id={token_id}/>
+        <SetupProfile onboarding_completed={onboarding_completed} google_consent={google_consent} token_id={token_id}/>
         
         <Row>
             <Col>
