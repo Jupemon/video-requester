@@ -42,7 +42,6 @@ class ManageProfile extends Component {
         }
 
         else { // User needs to sign in
-
             return ( 
             <Container>
                 <LoginScreen loadProfile={this.loadProfile}/>

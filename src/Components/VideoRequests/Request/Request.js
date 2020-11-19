@@ -30,11 +30,19 @@ class Request extends Component {
         if (status === "fulfilled") {
             return "success"
         }
+        
+        if (status === "uploading") {
+            return "info"
+        }
+
+        if (status === "failed") {
+            return "dark"
+        }
     }
 
     render() { 
 
-        const {title, description, request_id } = this.props.data
+        const {title, description, requester, request_id } = this.props.data
 
         const { viewOnly } = this.props
 
@@ -44,6 +52,7 @@ class Request extends Component {
         <Card bg={this.setBackground(status)}>
             <Card.Body>
                 {videoId ? <YoutubePlayer requestId={request_id} videoId={videoId}/> : <Status status={status}/>}
+                <Card.Text>FROM : {requester}</Card.Text>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{description}</Card.Text>
                 {viewOnly || status !== "pending" ? null : <Buttons updateRequests={this.props.updateRequests} requestId={request_id}/>}

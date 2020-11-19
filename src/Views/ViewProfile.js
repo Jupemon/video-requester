@@ -22,7 +22,7 @@ class ViewProfile extends Component {
 
         try {
             
-            const response = await fetch(`http://localhost:3001/videorequests/${user_id}`)
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/videorequests/${user_id}`)
 
             if (response.status === 200) {
 

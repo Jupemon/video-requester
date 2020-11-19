@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import Request from './Request/Request';
 import RequestsInfo from './RequestsInfo';
 
-class VideoRequests extends Component {
+class VideoRequests extends Component { // Renders videorequests passed as props
 
     state = { 
         errorMessage : "",

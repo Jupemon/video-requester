@@ -22,10 +22,11 @@ class LoginScreen extends Component {
 
       const token_id = googleUser.tokenId;
 
-      const response = await fetch('http://localhost:3001/signin', {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/signin`, {
         method : "POST",
         headers : {
           'Content-Type' : "application/json"
+
         },
         body : JSON.stringify({
           token_id : token_id

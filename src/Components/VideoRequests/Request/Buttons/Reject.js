@@ -13,7 +13,7 @@ class Reject extends Component {
 
         this.setState({ loading: true })
 
-        const response = await fetch("http://localhost:3001/rejectvideorequest", {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/rejectvideorequest`, {
             method : "POST",
             headers : {
             'Content-Type' : "application/json"

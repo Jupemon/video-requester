@@ -5,16 +5,19 @@ class CreateVideoRequest extends Component {
 
     state = { 
         infoMessage : "",
+        loading : false,
+
+        requester : "",
         title : "",
-        description : "",
-        loading : false
+        description : ""
+        
     }
 
     sendVideoRequest = async (body) => { // Sends and creates a videorequest on the DB
 
         try {
             
-            const response = await fetch('http://localhost:3001/handle-checkout', {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/handle-checkout`, {
                 method : "POST",
                 headers : {
                   'Content-Type' : "application/json"
@@ -22,7 +25,7 @@ class CreateVideoRequest extends Component {
                 body : JSON.stringify(body)
             })
     
-
+            this.clearInput()
             let checkoutSessionId
 
             if (response.status === 201) { // New videorequest was created
@@ -37,7 +40,7 @@ class CreateVideoRequest extends Component {
 
             }
 
-            else if (response.status === 200) {
+            else if (response.status === 200) { // Send user to payment screen
                 checkoutSessionId = await response.json()
     
                 const stripe = window.Stripe(process.env.REACT_APP_PUBLIC_KEY)
@@ -69,6 +72,13 @@ class CreateVideoRequest extends Component {
       
     }
 
+    clearInput = () => { // Clear user input
+        this.setState({
+            requester : "",
+            title : "",
+            description : ""
+        })
+    }
 
     validateInput = () => { // Validate user input, returns boolean
 
@@ -92,13 +102,14 @@ class CreateVideoRequest extends Component {
 
         const { userId } = this.props
 
-        const { title, description } = this.state
+        const { title, description, requester } = this.state
 
         const validInput = this.validateInput()
 
         if (validInput) {
 
             const requestBody = {
+                requester : requester,
                 title : title,
                 description : description,
                 user_id : Number.parseInt(userId),
@@ -118,17 +129,30 @@ class CreateVideoRequest extends Component {
     
     render() { 
         const { videoPrice, currency } = this.props
-        const { loading, title, description, infoMessage } = this.state
+        const { loading, title, description, requester, infoMessage } = this.state
 
         return(
             <Jumbotron>
                 <Row>
                     <Col>
                         <h1>Request a custom video :</h1>
-                        <p>Request Cost : {videoPrice} {currency}</p>
+                        <p>You can support <b>Jupemon</b> by requesting a custom youtube video from him for <b>{videoPrice} {currency}</b></p>
                     </Col>
         
                     <Col>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Append>
+                            <InputGroup.Text id="basic-addon2">Requester</InputGroup.Text>
+                        </InputGroup.Append>
+                        <input 
+                        type="text"
+                        placeholder="Enter your name/username"
+                        disabled={loading}
+                        onChange={(e) => {this.setState({requester : e.target.value})}}
+                        value={requester}
+                        maxLength="25"
+                        />
+                    </InputGroup>
                         <InputGroup className="mb-3">
 
                             <InputGroup.Append>
@@ -136,6 +160,7 @@ class CreateVideoRequest extends Component {
                             </InputGroup.Append>
                             <input 
                             type="text"
+                            placeholder="Title for your request"
                             disabled={loading}
                             onChange={(e) => {this.setState({title : e.target.value})}}
                             value={title}
@@ -149,6 +174,7 @@ class CreateVideoRequest extends Component {
                             <InputGroup.Text>Description</InputGroup.Text>
                             </InputGroup.Prepend>
                             <textarea 
+                            placeholder="Describe the custom video you would like.."
                             type="textarea"
                             disabled={loading}
                             onChange={(e) => {this.setState({description : e.target.value})}}

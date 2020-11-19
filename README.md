@@ -72,9 +72,9 @@ The frontend client is split into two seperate pages for two different users : O
 
 - **GH-pages** Hosts the frontend client.
 
-- **Youtube DATA API** The app interacts with the google api and needs consent to perform actions on youtube accounts.
+- **Google API** This allows programs to use google services and applications with API calls. It basically allows programs to use the same functionalities as users (create google documents, post blogger posts, **upload youtube videos**,  etc.) 
 
-- **Multer** Handle file uploads on the server, after user completes a videorequest a video is uploaded to their youtube channel.
+- **Multer** Handle file uploads on the server
 
 
 ## Links
