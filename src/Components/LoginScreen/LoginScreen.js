@@ -55,13 +55,13 @@ class LoginScreen extends Component {
     render() {
 
       const {errorMessage, isLoading, data} = this.state
-
+      console.log(process.env.REACT_APP_SECRET_NAME, "TESTING ENV VARIABLE")
       if (!data) {
         return ( 
           <div className="Content">
             <Container>
               <Jumbotron>
-                <h1 style={{fontSize:"85px"}} className="display-4">Vregs</h1>
+                <h1 style={{fontSize:"85px"}} className="display-4">Requestnium</h1>
                 <p className="lead">Allows youtubers to get video requests and sell custom video content</p>
                 <hr className="my-4" />
                 <LoginButton isLoading={isLoading} logInFailure={this.logInFailure} logIn={this.fetchData}/>
