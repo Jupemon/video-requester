@@ -128,7 +128,7 @@ class CreateVideoRequest extends Component {
     }
     
     render() { 
-        const { videoPrice, currency } = this.props
+        const { videoPrice, currency, channel_name } = this.props
         const { loading, title, description, requester, infoMessage } = this.state
 
         return(
@@ -136,7 +136,7 @@ class CreateVideoRequest extends Component {
                 <Row>
                     <Col>
                         <h1>Request a custom video :</h1>
-                        <p>You can support <b>Jupemon</b> by requesting a custom youtube video from him for <b>{videoPrice} {currency}</b></p>
+                        <p>You can support <b>{channel_name}</b> by requesting a custom youtube video from him for <b>{videoPrice} {currency}</b></p>
                     </Col>
         
                     <Col>

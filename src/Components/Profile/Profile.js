@@ -33,10 +33,10 @@ class Profile extends Component {
             <h1>Hello, {channel_name}</h1>
             <hr/>
             <p>
-                People can now request custom youtube videos from you using this shareable <a target="blank" href={`http://localhost:3000/viewprofile/${user_id}`}>link</a>
+                People can now request custom youtube videos from you using this shareable link : <a href={`http://localhost:3000/viewprofile/${user_id}`}>{`http://localhost:3000/viewprofile/${user_id}`}</a>
             </p>
              {<p>
-                the price for leaving a custom video request is currently : <Price video_price={video_price} currency={currency}/>
+                the price for leaving a custom video request is currently : <b>{video_price}{" "}{currency}</b><Button>Edit price</Button>
             </p>}
             {/*<p>
                 the price for leaving a custom video request is currently : <b>{video_price} {currency}</b> | Edit Price

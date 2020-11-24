@@ -68,10 +68,10 @@ class ViewProfile extends Component {
         }
         
         if (videoRequests) { // Render videorequests
-            const {videoPrice, currency} = videoRequests
+            const {videoPrice, currency, channel_name} = videoRequests
             return (
                 <Container>
-                    <CreateVideoRequest updateRequests={this.updateRequests} userId={userId} currency={currency} videoPrice={videoPrice}/>
+                    <CreateVideoRequest updateRequests={this.updateRequests} userId={userId} currency={currency} videoPrice={videoPrice} channel_name={channel_name}/>
                         <VideoRequests updateRequests={this.updateRequests} viewOnly videoRequests={videoRequests}/>
                 </Container>
             )

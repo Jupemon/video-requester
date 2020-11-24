@@ -50,7 +50,9 @@ class LoginScreen extends Component {
       }
     }
 
-      
+    logInFailure = (er) => {
+      console.log(er, "ERROR")
+    }
     
     render() {
 

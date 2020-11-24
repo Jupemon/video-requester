@@ -7,7 +7,7 @@ const LoginButton = (props) => { // handles the google login
         clientId={process.env.REACT_APP_CLIENT_ID}
         buttonText={props.isLoading ? "Loading..." : "Login"}
         onSuccess={(googleUser) => {props.logIn(googleUser)}}
-        onFailure={() => {props.logInFailure()}}
+        onFailure={(er) => {props.logInFailure(er)}}
         cookiePolicy={'single_host_origin'}
       />)
 }
