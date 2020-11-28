@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 const RequestsInfo = (props) => { // Renders info about videorequests
 
-    const maxAmount = 10 // Max amount of videorequests
+    const maxAmount = 10 // Max amount of videorequests (Set on the server)
 
     const {pending, fulfilled, rejected, uploading, failed, total} = props.status
 

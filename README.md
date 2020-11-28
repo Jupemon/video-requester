@@ -96,8 +96,6 @@ The frontend client is split into two seperate pages for two different users : O
 
 - **Components Folder**
 
-    - **CreateVideoRequest** = Allows creating new videorequests
-
     - **LoginScreen** = Allows user to create & sign in with their profile
 
     - **Profile** = Renders information about the profile

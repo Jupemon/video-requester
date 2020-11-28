@@ -30,11 +30,11 @@ class CreateVideoRequest extends Component {
 
             if (response.status === 201) { // New videorequest was created
                 
-                const updatedRequests = await response.json()
+                const updatedData = await response.json()
 
                 this.setState({loading : false, infoMessage : "New videorequest added"})
                 
-                this.props.updateRequests(updatedRequests)
+                this.props.updateVideoRequests(updatedData)
 
                 
 
@@ -174,6 +174,7 @@ class CreateVideoRequest extends Component {
                             <InputGroup.Text>Description</InputGroup.Text>
                             </InputGroup.Prepend>
                             <textarea 
+                            style={{height:"300px"}}
                             placeholder="Describe the custom video you would like.."
                             type="textarea"
                             disabled={loading}

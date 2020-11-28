@@ -1,0 +1,12 @@
+.handle-request-spinner {
+    height: 80px;
+    width: 80px;
+    margin-left: 151px;
+    margin-right: 151px;
+}
+
+.reject-request {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}

@@ -7,11 +7,26 @@
 .card {
     width: 25rem;
     margin: auto;
+    height: 520px;
 }
 
 .status {
     text-align: center;
-    margin-bottom: 178px;
-    margin-top: 178px;
     font-size: 25px;
+    float: right;
+}
+
+.title {
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+    height: 237px;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }

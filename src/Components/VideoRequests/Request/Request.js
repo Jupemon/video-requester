@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import './Request.css'
-import Buttons from './Buttons/Buttons';
 import YoutubePlayer from './YoutubePlayer';
-import Status from './Status';
+import HandleRequest from './HandleRequest/HandleRequest';
 
 class Request extends Component {
     constructor(props) {
@@ -14,7 +13,12 @@ class Request extends Component {
         this.state = { 
             status : status,
             videoId : video
-         }
+        }
+    }
+
+    updateRequestStatus = ( status ) => { // Set request status
+
+        this.setState({status : status})
     }
 
     setBackground = (status) => { // return the corresponding background color, based on request status
@@ -40,6 +44,7 @@ class Request extends Component {
         }
     }
 
+
     render() { 
 
         const {title, description, requester, request_id } = this.props.data
@@ -47,18 +52,56 @@ class Request extends Component {
         const { viewOnly } = this.props
 
         const { status, videoId } = this.state
-        
-        return (
-        <Card bg={this.setBackground(status)}>
-            <Card.Body>
-                {videoId ? <YoutubePlayer requestId={request_id} videoId={videoId}/> : <Status status={status}/>}
-                <Card.Text>FROM : {requester}</Card.Text>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>{description}</Card.Text>
-                {viewOnly || status !== "pending" ? null : <Buttons updateRequests={this.props.updateRequests} requestId={request_id}/>}
-            </Card.Body>
-        </Card> );
 
+        if (status === "pending" || status === "failed") {
+            return (
+                <Card bg="warning">
+                    <Card.Body>
+                        <div className="status">{status.toUpperCase()}</div>
+                        <Card.Text>From : {requester}</Card.Text>
+                        <Card.Title className="title">{title}</Card.Title>
+                        <Card.Text className="description">{description}</Card.Text>
+                        {viewOnly ? null : <HandleRequest updateRequestStatus={this.updateRequestStatus} updateVideoRequests={this.props.updateVideoRequests} requestId={request_id}/>}
+                    </Card.Body>
+                </Card> );
+        
+        }
+
+        if (status === "rejected") {
+            return (
+                <Card bg="danger">
+                    <Card.Body>
+                        <div className="status">{status.toUpperCase()}</div>
+                        <Card.Text>From : {requester}</Card.Text>
+                        <Card.Title className="title">{title}</Card.Title>
+                        <Card.Text className="description">{description}</Card.Text>
+                    </Card.Body>
+                </Card> );
+        
+        }
+
+        if (status === "fulfilled") {
+            return (
+                <Card bg="success">
+                    <Card.Body>
+                        <div className="status">{status.toUpperCase()}</div>
+                        <YoutubePlayer requestId={request_id} videoId={videoId}/>
+                    </Card.Body>
+                </Card> );
+        
+        }
+        if (status === "uploading") {
+            return (
+                <Card bg="info">
+                    <Card.Body>
+                        <div className="status">{status.toUpperCase()}</div>
+                        <Card.Text>From : {requester}</Card.Text>
+                        <Card.Title className="title">{title}</Card.Title>
+                        <Card.Text className="description">{description}</Card.Text>
+                    </Card.Body>
+                </Card> );
+        
+        }
         
     }
 }

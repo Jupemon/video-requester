@@ -1,0 +1,32 @@
+
+.dropzone-container p {
+    color: red;
+    text-align: center;
+}
+
+.dropzone-drop-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 392px;
+    height: 150px;
+    border: 4px dashed black;
+}
+
+.dropzone-upload-icon {
+    width: 50px;
+    height: 50px;
+    background: url(https://raw.githubusercontent.com/uzochukwueddie/react-dropzone/master/src/images/upload.png) no-repeat center center; 
+    background-size: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.dropzone-drop-message {
+    text-align: center;
+    color: black;
+    font-family: Arial;
+    font-size: 20px;
+}

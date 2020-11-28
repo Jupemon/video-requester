@@ -2,41 +2,44 @@ import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import LoginScreen from '../Components/LoginScreen/LoginScreen';
 import Profile from '../Components/Profile/Profile';
-import SetupProfile from '../Components/Profile/SetupProfile';
 import VideoRequests from '../Components/VideoRequests/VideoRequests';
 
 class ManageProfile extends Component {
 
     state = {
-        profile : false
+        profileData : false
     }
 
-    loadProfile = (profile) => { // Called once user signs in, loads the profile
+    loadProfile = (profileData) => { // Called once user gets profile with the login screen
 
-        this.setState({ profile })
+        this.setState({ profileData })
     }
 
-    updateRequests = (updatedVideorequests) => { // Re renders updated videorequests
+    updateProfileData = (updatedData) => { // Update profile data
+        console.log("UPDRAGE")
+        
+        const { profileData } = this.state
+        console.log(profileData, "EXISTING")   
+        console.log(updatedData, "UPDATED")
+        profileData.requests = updatedData.requests
 
-        const { profile } = this.state
+        profileData.status = updatedData.status
 
-        profile.videoRequests = updatedVideorequests
-
-        this.setState({ profile })
+        this.setState({ profileData })
     }
 
     render() { 
 
-        const { profile } = this.state
-        
-        const { videoRequests, user_id } = profile
+        const { profileData } = this.state
 
-        if (profile) { // Load the user profile
+        const { requests, status, user_id } = profileData
 
+        if (profileData) { // Load the user profile
+            console.log(profileData)
             return ( 
             <Container>
-                <Profile profile={profile}/>
-                <VideoRequests updateRequests={this.updateRequests} videoRequests={videoRequests} userId={user_id}/>
+                <Profile profile={profileData}/>
+                <VideoRequests updateProfileData={this.updateProfileData} profileData={profileData}/>
             </Container> 
             );
         }
