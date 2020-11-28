@@ -35,12 +35,7 @@ class Profile extends Component {
             <p>
                 People can now request custom youtube videos from you using this shareable link : <a href={`http://localhost:3000/viewprofile/${user_id}`}>{`http://localhost:3000/viewprofile/${user_id}`}</a>
             </p>
-             {<p>
-                the price for leaving a custom video request is currently : <b>{video_price}{" "}{currency}</b><Button>Edit price</Button>
-            </p>}
-            {/*<p>
-                the price for leaving a custom video request is currently : <b>{video_price} {currency}</b> | Edit Price
-            </p>*/}
+            <Price video_price={video_price} currency={currency}/>
         </Jumbotron>
         </div>
         );
