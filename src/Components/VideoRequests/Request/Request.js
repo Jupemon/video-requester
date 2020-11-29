@@ -21,30 +21,6 @@ class Request extends Component {
         this.setState({status : status})
     }
 
-    setBackground = (status) => { // return the corresponding background color, based on request status
-
-        if (status === "pending") {
-            return "warning"
-        }
-
-        if (status === "rejected") {
-            return "danger"
-        }
-
-        if (status === "fulfilled") {
-            return "success"
-        }
-        
-        if (status === "uploading") {
-            return "info"
-        }
-
-        if (status === "failed") {
-            return "dark"
-        }
-    }
-
-
     render() { 
 
         const {title, description, requester, request_id } = this.props.data
