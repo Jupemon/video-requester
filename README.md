@@ -9,7 +9,7 @@ I noticed that youtubers need more ways to generate revenue from their audience.
 
 ## Video Explonation
 
-Check [here](https://youtu.be/4wbQJKHAJ-A) for a visual explonation of the project
+Check [here](https://youtu.be/1M2Fy2L2koU) for a visual explonation of the project
 
 ## Project anatomy
 

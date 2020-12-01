@@ -71,9 +71,7 @@ class Request extends Component {
                 <Card bg="info">
                     <Card.Body>
                         <div className="status">{status.toUpperCase()}</div>
-                        <Card.Text>From : {requester}</Card.Text>
-                        <Card.Title className="title">{title}</Card.Title>
-                        <Card.Text className="description">{description}</Card.Text>
+                        <YoutubePlayer requestId={request_id} videoId={videoId}/>
                     </Card.Body>
                 </Card> );
         
