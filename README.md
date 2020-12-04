@@ -49,60 +49,8 @@ The frontend client is split into two seperate pages for two different users : O
     - Table of video requests.
 
 
- ### Tools & Dependencies used: 
-
-- Built with **React** & **Node**
-
-- **Express** For creating the API.
-
-- **Bootstrap** For easy responsive design and cool components.
-
-- **Google-auth-library** Handles sign in / account creation with google
-
-- **Stripe** For accepting online payments, creating connected accounts and making payouts to those accounts.
-
-- **Knex** Handle database transactions.
-
-- **Heroku** Hosts the node server.
-
-- **GH-pages** Hosts the frontend client.
-
-- **Google API** This allows programs to use google services and applications with API calls. It basically allows programs to use the same functionalities as users (create google documents, post blogger posts, **upload youtube videos**,  etc.) 
-
-- **Multer** Handle file uploads on the server
-
 
 ## Links
 
-- [Backend code](https://github.com/Jupemon/Video-Requester-Backend)
+- Backend code is made private
 - [Frontend code](https://github.com/Jupemon/video-requester)
-
-
-
-- ## Frontend Anatomy
-
-- **localstorage** = Data stored on browser memory
-
-    - **Token_id** = gotten with google signin, used to verify user on certain backend routes
-
-
-- **Views Folder** = Renders different views for different cases using the react components.
-
-    - ManageProfile = Allows creating a new profile, and managing it
-    
-    - ViewProfile = Allows sending videorequests to a profile.
-
-    - NotFound = Served if route wasn't valid
-
-- **Components Folder**
-
-    - **LoginScreen** = Allows user to create & sign in with their profile
-
-    - **Profile** = Renders information about the profile
-
-    - **VideoRequests Folder** = Renders the created videorequests and all the info about them
-
-
-## Current status
-
-I am building the Youtube API integration
