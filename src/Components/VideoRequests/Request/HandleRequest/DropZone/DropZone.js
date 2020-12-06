@@ -43,8 +43,6 @@ class DropZone extends Component {
 
         const file = e.dataTransfer.files[0];
 
-        console.log(file);
-
         this.validateFile(file) ? handleFileUpload(file) : this.fileError()
     }
 

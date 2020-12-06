@@ -57,7 +57,7 @@ class LoginScreen extends Component {
     render() {
 
       const {errorMessage, isLoading, data} = this.state
-      console.log(process.env.REACT_APP_SECRET_NAME, "TESTING ENV VARIABLE")
+
       if (!data) {
         return ( 
           <div className="Content">

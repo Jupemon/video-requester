@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
+import Footer from '../Components/Footer/Footer';
+import TopNav from '../Components/TopNav/TopNav';
 import VideoRequests from '../Components/VideoRequests/VideoRequests';
 
 
@@ -26,7 +28,7 @@ class ViewProfile extends Component {
             if (response.status === 200) {
 
                 const profileData = await response.json()
-                console.log("FETCH")
+
                 this.setState({ profileData, loading : false })
             }
     
@@ -44,8 +46,6 @@ class ViewProfile extends Component {
 
     updateProfileData = (updatedData) => { // Update profile data
         let { profileData } = this.state
-        console.log(profileData, "EXISTING")   
-        console.log(updatedData, "UPDATED")
 
         profileData.requests = updatedData.requests
         
@@ -85,8 +85,9 @@ class ViewProfile extends Component {
 
             return (
                 <div>
-                    {/*<CreateVideoRequest updateProfileData={this.updateProfileData} userId={userId} currency={currency} videoPrice={videoPrice} channel_name={channel_name}/>*/}
+                        <TopNav/>
                         <VideoRequests viewOnly profileData={profileData} updateProfileData={this.updateProfileData}/>
+                        <Footer/>
                 </div>
             )
         }

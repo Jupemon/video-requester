@@ -66,7 +66,7 @@ class CreateVideoRequest extends Component {
         }
 
         catch (er){
-            console.log(er, "ERROR HERE")
+            alert(er)
             this.setState({loading : false, infoMessage : "Something went wrong"})
         }
       

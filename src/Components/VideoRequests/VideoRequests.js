@@ -27,8 +27,6 @@ class VideoRequests extends Component { // Handles everything to do with videore
 
     updateVideoRequests = (updatedData) => { // Update videorequests data
 
-        console.log("UPDATING")
-        console.log(updatedData)
         const { status, requests } = updatedData
 
         this.setState({ status, requests })
@@ -65,7 +63,7 @@ class VideoRequests extends Component { // Handles everything to do with videore
         if (youtubeLoaded) {
             
             const { viewOnly } = this.props
-            console.log(this.props.profileData, "WITNESS ME")
+
             const {video_price, currency, channel_name, user_id } = this.props.profileData
             return (<Container>
                 { !viewOnly ? null : <Row>

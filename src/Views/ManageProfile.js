@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
+import Footer from '../Components/Footer/Footer';
 import LoginScreen from '../Components/LoginScreen/LoginScreen';
 import Profile from '../Components/Profile/Profile';
+import TopNav from '../Components/TopNav/TopNav';
 import VideoRequests from '../Components/VideoRequests/VideoRequests';
 
 class ManageProfile extends Component {
@@ -16,11 +18,9 @@ class ManageProfile extends Component {
     }
 
     updateProfileData = (updatedData) => { // Update profile data
-        console.log("UPDRAGE")
         
         const { profileData } = this.state
-        console.log(profileData, "EXISTING")   
-        console.log(updatedData, "UPDATED")
+
         profileData.requests = updatedData.requests
 
         profileData.status = updatedData.status
@@ -35,21 +35,27 @@ class ManageProfile extends Component {
         const { requests, status, user_id } = profileData
 
         if (profileData) { // Load the user profile
-            console.log(profileData)
-            return ( 
+
+            return (<div>
+            <TopNav/>
             <Container>
                 <Profile profile={profileData}/>
                 <VideoRequests updateProfileData={this.updateProfileData} profileData={profileData}/>
             </Container> 
+            <Footer/>
+            </div>
             );
         }
 
         else { // User needs to sign in
-            return ( 
+            return (<div>
+            <TopNav/>
+            
             <Container>
                 <LoginScreen loadProfile={this.loadProfile}/>
             </Container>
-            );
+            <Footer/>
+            </div>);
         }
 
     }

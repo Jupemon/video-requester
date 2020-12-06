@@ -27,7 +27,7 @@ class HandleRequest extends Component { // Allows fulfilling / rejecting a reque
 
 
             const updatedData = await response.json()
-            console.log(updatedData, "DUAPT")
+
             this.props.updateVideoRequests(updatedData)
             this.props.updateRequestStatus("rejected")
 

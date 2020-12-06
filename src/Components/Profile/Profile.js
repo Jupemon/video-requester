@@ -10,7 +10,6 @@ class Profile extends Component {
         
         const {channel_name, user_id, onboarding_completed, google_consent, video_price, currency} = this.props.profile
         const token_id = window.localStorage.getItem("token_id")
-        console.log("PROOOOOOPS", this.props.profile)
         if (!onboarding_completed || !google_consent) {
             return (
                 <SetupProfile onboarding_completed={onboarding_completed} google_consent={google_consent} token_id={token_id}/>
@@ -22,7 +21,7 @@ class Profile extends Component {
                         <h1>Hello, {channel_name}</h1>
                         <hr/>
                         <p>
-                            People can now request custom youtube videos from you using this shareable link : <a href={`http://localhost:3000/viewprofile/${user_id}`}>{`http://localhost:3000/viewprofile/${user_id}`}</a>
+                            People can now request custom youtube videos from you using this shareable link : <a href={`${process.env.REACT_APP_CLIENT_URL}/viewprofile/${user_id}`}>{`${process.env.REACT_APP_CLIENT_URL}/viewprofile/${user_id}`}</a>
                         </p>
                         <Price video_price={video_price} user_id={user_id} currency={currency}/>
                     </Jumbotron>
