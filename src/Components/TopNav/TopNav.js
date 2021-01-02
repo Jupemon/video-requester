@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
+import logo from '../../Media/logo.jpg'
 
 const TopNav = () => {
     return (
@@ -7,7 +8,7 @@ const TopNav = () => {
             <Navbar.Brand>
       <img
         alt=""
-        src=".Media/logo.jpg"
+        src={logo}
         width="30"
         height="30"
         className="d-inline-block align-top"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
+import Featured from '../Components/Featured/Featured';
 import Footer from '../Components/Footer/Footer';
 import LoginScreen from '../Components/LoginScreen/LoginScreen';
 import Profile from '../Components/Profile/Profile';
